@@ -15,28 +15,16 @@ export const MainPage = () => {
 				<S.MainPageMain>
 					<S.MainPageMainSearch>
 						<S.MainPageMainLogoMobLink>
-							<img className='search__logo-img' src='img/logo.png' alt='logo' />
+							<svg src='@public/imgs/Logo.svg' alt='logo' />
 						</S.MainPageMainLogoMobLink>
-						<S.MainPageMainLogoMobLink>
-							<img
-								className='search__logo-mob-img'
-								src='img/logo-mob.png'
-								alt='logo'
-							/>
-						</S.MainPageMainLogoMobLink>
+
 						<S.MainPageMainForm action='#'>
 							<S.MainPageText
-								className='search__text'
 								type='search'
 								placeholder='Поиск по объявлениям'
 								name='search'
 							/>
-							<input
-								className='search__text-mob'
-								type='search'
-								placeholder='Поиск'
-								name='search-mob'
-							/>
+
 							<S.MainPageSearchBtn className='btn-hov02'>
 								Найти
 							</S.MainPageSearchBtn>
@@ -45,9 +33,9 @@ export const MainPage = () => {
 					<S.MainPageMainContainer>
 						<S.MainPageMainH2>Объявления</S.MainPageMainH2>
 						<S.MainPageMainContent>
-							<S.MainPageMainContentCards className=' cards'>
+							<S.MainPageMainContentCards>
 								<S.MainPageMainCardsItem>
-									<S.MainPageMainCardsCard className=' card'>
+									<S.MainPageMainCardsCard>
 										<S.MainPageMainCardImg>
 											<S.MainPageA></S.MainPageA>
 										</S.MainPageMainCardImg>

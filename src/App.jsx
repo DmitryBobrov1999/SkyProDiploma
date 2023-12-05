@@ -3,10 +3,10 @@ import { AppRoutes } from './routes'
 
 export const  App = () => {
 	return (
-		<>
+		<div>
 			<GlobalStyle />
 			<AppRoutes />
-		</>
+		</div>
 	);
 }
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MainPageWrapper = styled.div`
 	width: 100%;
-	min-height: 100vh;
+	min-height: 100%;
 
 	background-color: #f1f1f1;
 	display: flex;
@@ -10,7 +10,6 @@ export const MainPageWrapper = styled.div`
 `;
 
 export const MainPageContainer = styled.div`
-	max-width: 1440px;
 	width: 100%;
 	margin: 0 auto;
 	background-color: #ffffff;
@@ -21,12 +20,11 @@ export const MainPageHeader = styled.header`
 `;
 
 export const MainPageHeaderNav = styled.nav`
-	max-width: 1178px;
 	margin: 0 auto;
-	padding: 0 10px;
 	height: 79px;
 	display: flex;
 	align-items: center;
+	max-width: 1158px;
 	justify-content: end;
 `;
 
@@ -49,14 +47,17 @@ export const MainPageMainSearch = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding: 11px 0;
-	max-width: 1178px;
+	max-width: 1158px;
 	margin: 0 auto;
-	padding: 31px 10px 0px;
+	padding: 43px 0 43px;
 `;
 
 export const MainPageMainLogoMobLink = styled.a`
-	display: none;
-`;
+
+`
+
+export const MainPageMainLogoSvg = styled.svg`
+`
 
 export const MainPageMainLogoImg = styled.img`
 	width: 54px;
@@ -108,9 +109,9 @@ export const MainPageSearchBtn = styled.button`
 `;
 
 export const MainPageMainContainer = styled.div`
-	max-width: 1178px;
+	max-width: 1158px;
 	margin: 0 auto;
-	padding: 52px 10px 37px;
+	padding: 0 0 37px 0;
 `;
 
 export const MainPageMainH2 = styled.h2`
@@ -119,7 +120,24 @@ export const MainPageMainH2 = styled.h2`
 	font-size: 40px;
 	line-height: 42px;
 	color: #000000;
-	margin-bottom: 30px;
+	height: 88px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	&::before {
+		content: '';
+		display: block;
+		width: 12px;
+		height: 12px;
+		background-color: transparent;
+		border-top: 2px solid #000000;
+		border-left: 2px solid #000000;
+		transform: rotate(-45deg);
+		position: absolute;
+		top: 9px;
+		left: 13px;
+		cursor: pointer;
+	}
 `;
 
 export const MainPageMainContent = styled.div`
@@ -130,6 +148,7 @@ export const MainPageMainContent = styled.div`
 export const MainPageMainContentCards = styled.div`
 	max-width: 1158px;
 	width: 100%;
+	height: 441px;
 	display: grid;
 	grid-template-columns: repeat(4, 270px);
 	grid-auto-rows: 441px;
