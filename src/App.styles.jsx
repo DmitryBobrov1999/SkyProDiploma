@@ -3,8 +3,10 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
 
 @font-face {
-	font-family: 'Roboto', sans-serif;
-	src: url("../public/fonts/Roboto-Black.ttf"),
+	font-family: 'StratosSkyeng';
+    src: local('StratosSkyeng'), local('StratosSkyeng'),
+        url('../public/fonts/StratosSkyeng.woff2') format('woff2'),
+        url('../public/fonts/StratosSkyeng.woff') format('woff'),
 }
 
 	* {
@@ -37,7 +39,7 @@ ul li {
 html,
 body {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     font-family: 'Roboto', sans-serif;
     color: #000000;
 

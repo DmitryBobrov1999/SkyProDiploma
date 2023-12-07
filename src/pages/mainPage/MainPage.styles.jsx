@@ -17,6 +17,8 @@ export const MainPageContainer = styled.div`
 
 export const MainPageHeader = styled.header`
 	background-color: #009ee4;
+	position: sticky;
+	top: 0;
 `;
 
 export const MainPageHeaderNav = styled.nav`
@@ -37,6 +39,10 @@ export const MainPageHeaderBtnMainEnter = styled.button`
 	color: #ffffff;
 	font-size: 16px;
 	line-height: 1;
+	&:hover {
+		background: rgba(255, 255, 255, 0.15);
+		border: 1px solid #ffffff;
+	}
 `;
 
 export const MainPageMain = styled.main``;
@@ -50,14 +56,13 @@ export const MainPageMainSearch = styled.div`
 	max-width: 1158px;
 	margin: 0 auto;
 	padding: 43px 0 43px;
+	position: sticky;
+	top: 79px;
+	background: white;
+	opacity: 0.97
 `;
 
-export const MainPageMainLogoMobLink = styled.a`
 
-`
-
-export const MainPageMainLogoSvg = styled.svg`
-`
 
 export const MainPageMainLogoImg = styled.img`
 	width: 54px;
@@ -78,7 +83,6 @@ export const MainPageText = styled.input`
 	border-style: solid;
 	border-color: rgba(0, 0, 0, 0.2);
 	border-radius: 6px;
-
 	background-color: transparent;
 	padding: 13px 19px;
 	font-style: normal;
@@ -106,6 +110,9 @@ export const MainPageSearchBtn = styled.button`
 	font-size: 16px;
 	line-height: 24px;
 	color: #ffffff;
+	&:hover {
+		background: rgba(0, 128, 193, 1);
+	}
 `;
 
 export const MainPageMainContainer = styled.div`
@@ -124,7 +131,7 @@ export const MainPageMainH2 = styled.h2`
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
-	&::before {
+	${'' /* &::before {
 		content: '';
 		display: block;
 		width: 12px;
@@ -137,7 +144,7 @@ export const MainPageMainH2 = styled.h2`
 		top: 9px;
 		left: 13px;
 		cursor: pointer;
-	}
+	} */}
 `;
 
 export const MainPageMainContent = styled.div`
@@ -150,12 +157,11 @@ export const MainPageMainContentCards = styled.div`
 	width: 100%;
 	height: 441px;
 	display: grid;
-	grid-template-columns: repeat(4, 270px);
+	grid-template-columns: repeat(auto-fit, 270px);
 	grid-auto-rows: 441px;
 	grid-gap: 40px 26px;
 	justify-content: center;
 
-	overflow-y: auto;
 	scrollbar-color: #ffffff #2e2e2e; // Firefox
 	scrollbar-width: thin; // Firefox
 	scrollbar-width: 0px; // Firefox
@@ -187,7 +193,7 @@ export const MainPageMainCardImg = styled.div`
 	width: 270px;
 	height: 270px;
 	background-color: #f0f0f0;
-
+	margin-bottom: 20px;
 	& img {
 		width: 100%;
 		height: 100%;
@@ -197,3 +203,38 @@ export const MainPageMainCardImg = styled.div`
 `;
 
 export const MainPageA = styled.a``;
+
+export const MainPageCardPrice = styled.p`
+	margin-bottom: 10px;
+	margin-top: 10px;
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 33px;
+	letter-spacing: 0em;
+	text-align: left;
+`;
+
+export const MainPageCardTitle = styled.h3`
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 26px;
+	letter-spacing: 0em;
+	text-align: left;
+	
+`;
+
+export const MainPageCardPlace = styled.p`
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 21px;
+	letter-spacing: 0em;
+	text-align: left;
+`;
+
+export const MainPageCardDate = styled.p`
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 21px;
+	letter-spacing: 0em;
+	text-align: left;
+`;
