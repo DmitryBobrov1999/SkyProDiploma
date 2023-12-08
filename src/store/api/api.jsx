@@ -45,18 +45,35 @@ export const loginUser = async ({ email, password }) => {
 	return data
 };
 
-export const getUser = async ({tokens}) => {
-	
+export const getUser = async ({ getToken }) => {
 	const getUrl = 'http://localhost:8090/user';
 
 	const response = await fetch(getUrl, {
 		method: 'GET',
 		headers: {
-			Authorization: `Bearer ${tokens.access_token}`,
-			
+			Authorization: `Bearer ${getToken}`,
 		},
 	});
 
-	const userInfo = await response.json()
+	const userInfo = await response.json();
 	return userInfo;
+};
+
+export const updateUser = async ({ refreshToken, getToken }) => {
+	const updateUrl = 'http://localhost:8090/auth/login';
+
+	const response = await fetch(updateUrl, {
+		method: 'PUT',
+		body: JSON.stringify({
+			access_token: `${getToken}`,
+			refresh_token: `${refreshToken}`,
+		}),
+		headers: {
+			'content-type': 'application/json',
+		},
+	});
+
+	const data = await response.json();
+	
+	return data;
 };

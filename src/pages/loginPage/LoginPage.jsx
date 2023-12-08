@@ -1,28 +1,36 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { NavLink, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../store/api/api';
-import { setTokens } from '../../store/slices/loginSlice';
+import { sendToken } from '../../store/slices/loginSlice';
+
 import * as S from './LoginPage.styles';
 
 export const LoginPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const handleLogin = async event => {
 		event.preventDefault();
-
+		const data = await loginUser({ email, password });
 		try {
-			const data = await loginUser({ email, password });
 			if (data.access_token) {
-				dispatch(setTokens(data));
+				localStorage.setItem('access_token', data.access_token);
+				localStorage.setItem('refresh_token', data.refresh_token);
+				dispatch(sendToken(data));
 			}
 		} catch (error) {
 			console.log(error);
+		} finally {
+			if (data.access_token) {
+				navigate('/');
+			}
 		}
 	};
+
 	return (
 		<S.LoginPageWrapper>
 			<S.LoginPageContainerEnter>

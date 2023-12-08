@@ -1,18 +1,45 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { logOut } from '../../store/slices/loginSlice';
 import * as S from './MainPage.styles';
 
 export const MainPage = () => {
+	const { userInfo } = useSelector(state => state.user);
+	const dispatch = useDispatch()
+	const removeToken = () => {
+		dispatch(logOut());
+		localStorage.removeItem('access_token');
+		localStorage.removeItem('refresh_token');
+	}
 	return (
 		<S.MainPageWrapper>
 			<S.MainPageContainer>
 				<S.MainPageHeader>
 					<S.MainPageHeaderNav>
-						<NavLink to='/login'>
-							<S.MainPageHeaderBtnMainEnter>
-								Вход в личный кабинет
-							</S.MainPageHeaderBtnMainEnter>
-						</NavLink>
+						{userInfo ? (
+							<>
+								<NavLink to='/login'>
+									<S.MainPageHeaderBtnMainEnter
+										onClick={removeToken}
+										style={{ marginRight: '10px' }}
+									>
+										Выйти
+									</S.MainPageHeaderBtnMainEnter>
+								</NavLink>
+								<NavLink to='/profile'>
+									<S.MainPageHeaderBtnMainEnter>
+										Личный кабинет
+									</S.MainPageHeaderBtnMainEnter>
+								</NavLink>
+							</>
+						) : (
+							<NavLink to='/login'>
+								<S.MainPageHeaderBtnMainEnter>
+									Вход в личный кабинет
+								</S.MainPageHeaderBtnMainEnter>
+							</NavLink>
+						)}
 					</S.MainPageHeaderNav>
 				</S.MainPageHeader>
 				<S.MainPageMain>
