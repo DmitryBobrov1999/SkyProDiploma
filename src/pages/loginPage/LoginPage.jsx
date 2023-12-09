@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 
 import { NavLink, useNavigate } from 'react-router-dom';
-import { loginUser } from '../../store/api/api';
-import { sendToken } from '../../store/slices/loginSlice';
+import { getUser, loginUser } from '../../store/api/api';
+import { getInfo } from '../../store/slices/loginSlice';
+
 
 import * as S from './LoginPage.styles';
 
@@ -11,7 +13,7 @@ export const LoginPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 
 	const handleLogin = async event => {
 		event.preventDefault();
@@ -20,7 +22,9 @@ export const LoginPage = () => {
 			if (data.access_token) {
 				localStorage.setItem('access_token', data.access_token);
 				localStorage.setItem('refresh_token', data.refresh_token);
-				dispatch(sendToken(data));
+				const getToken = localStorage.getItem('access_token');
+				const userInfo = await getUser({ getToken });
+				dispatch(getInfo(userInfo));
 			}
 		} catch (error) {
 			console.log(error);

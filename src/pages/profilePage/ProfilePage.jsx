@@ -1,7 +1,11 @@
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as S from './ProfilePage.styles';
 
 export const ProfilePage = () => {
+
+	const { userInfo } = useSelector(state => state.user);
+	
 	return (
 		<S.ProfilePageWrapper>
 			<S.ProfilePageContainer>
@@ -88,7 +92,9 @@ export const ProfilePage = () => {
 								</NavLink>
 							</S.ProfilePageMainMenu>
 
-							<S.ProfilePageMainH2>Здравствуйте, Антон!</S.ProfilePageMainH2>
+							<S.ProfilePageMainH2>
+								Здравствуйте, {userInfo?.name}!
+							</S.ProfilePageMainH2>
 
 							<S.ProfilePageMainProfile>
 								<S.ProfilePageProfileContent>
@@ -110,6 +116,7 @@ export const ProfilePage = () => {
 														name='fname'
 														type='text'
 														placeholder=''
+														defaultValue={userInfo?.name ? userInfo?.name : ''}
 													/>
 													<label htmlFor='fname'>Имя</label>
 												</S.ProfilePageSettingsDiv>
@@ -120,6 +127,9 @@ export const ProfilePage = () => {
 														name='lname'
 														type='text'
 														placeholder=''
+														defaultValue={
+															userInfo?.surname ? userInfo?.surname : ''
+														}
 													/>
 													<label htmlFor='lname'>Фамилия</label>
 												</S.ProfilePageSettingsDiv>
@@ -130,6 +140,7 @@ export const ProfilePage = () => {
 														name='city'
 														type='text'
 														placeholder=''
+														defaultValue={userInfo?.city ? userInfo?.city : ''}
 													/>
 													<label htmlFor='city'>Город</label>
 												</S.ProfilePageSettingsDiv>
@@ -138,7 +149,8 @@ export const ProfilePage = () => {
 													<S.ProfilePageSettingsPhone
 														name='phone'
 														type='tel'
-														placeholder='+79161234567'
+														defaultValue={userInfo?.number ? userInfo?.number : ''}
+														placeholder={userInfo?.number ? '' : '+79161234567'}
 													/>
 													<label htmlFor='phone'>Телефон</label>
 												</S.ProfilePageSettingsDiv>

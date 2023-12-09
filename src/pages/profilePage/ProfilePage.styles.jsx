@@ -155,9 +155,13 @@ export const ProfilePageSettingsForm = styled.form`
 		background-color: #ffffff;
 		border: 1px solid rgba(0, 0, 0, 0.2);
 		border-radius: 6px;
-		padding: 13px 19px;
+		padding: 12px 19px;
 		color: rgba(0, 0, 0, 1);
 		outline: none;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
 		&:focus {
 			border: 1px solid rgba(0, 158, 228, 1);
 		}
@@ -171,7 +175,6 @@ export const ProfilePageSettingsForm = styled.form`
 	}
 	& input:focus ~ label,
 	label:focus {
-		
 		color: rgba(0, 158, 228, 1);
 	}
 

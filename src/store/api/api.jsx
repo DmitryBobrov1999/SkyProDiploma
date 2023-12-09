@@ -6,23 +6,27 @@ export const regUser = async (
 	password,
 	repeatPassword,
 	name,
-	lastName,
+	surname,
 	city
 ) => {
 	const regUrl = 'http://localhost:8090/auth/register';
 
-	axios
-		.post(regUrl, {
+	const response = await fetch(regUrl, {
+		body: JSON.stringify({
 			email: email,
 			password: password,
 			repeatPassword: repeatPassword,
 			name: name,
-			lastName: lastName,
+			surname: surname,
 			city: city,
-		})
-		.then(response => {
-			return response;
-		});
+		}),
+		headers: {
+			'content-type': 'application/json',
+		},
+	});
+	const data = await response.json();
+
+	return data;
 };
 
 export const loginUser = async ({ email, password }) => {
@@ -41,7 +45,7 @@ export const loginUser = async ({ email, password }) => {
 	});
 
 	const data = await response.json();
-
+	
 	return data
 };
 
@@ -59,21 +63,20 @@ export const getUser = async ({ getToken }) => {
 	return userInfo;
 };
 
-export const updateUser = async ({ refreshToken, getToken }) => {
+export const updateUser = async ({ getToken, refreshToken }) => {
 	const updateUrl = 'http://localhost:8090/auth/login';
 
+	
 	const response = await fetch(updateUrl, {
 		method: 'PUT',
 		body: JSON.stringify({
-			access_token: `${getToken}`,
-			refresh_token: `${refreshToken}`,
+			access_token: getToken,
+			refresh_token: refreshToken,
 		}),
 		headers: {
 			'content-type': 'application/json',
 		},
 	});
-
 	const data = await response.json();
-	
 	return data;
 };

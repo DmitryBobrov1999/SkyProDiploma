@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import {  NavLink, useNavigate } from 'react-router-dom';
 import * as S from './RegPage.styles';
 import { regUser } from '../../store/api/api';
 
@@ -8,22 +8,30 @@ export const RegPage = () => {
 	const [password, setPassword] = useState('');
 	const [repeatPassword, setRepeatPassword] = useState('');
 	const [name, setName] = useState('');
-	const [lastName, setLastName] = useState('');
+	const [surname, setSurname] = useState('');
 	const [city, setCity] = useState('');
+	const [data, setData] = useState(null)
+
+	const navigate = useNavigate();
 
 	const handleRegistration = async event => {
 		event.preventDefault();
 		try {
-			const userData = await regUser(
+			const data = await regUser(
 				email,
 				password,
 				repeatPassword,
 				name,
-				lastName,
+				surname,
 				city
 			);
+			setData(data)
 		} catch (error) {
 			console.log(error);
+		} finally {
+			if(data) {
+				navigate('/login')
+			}
 		}
 	};
 
@@ -150,10 +158,10 @@ export const RegPage = () => {
 							placeholder='Имя (необязательно)'
 						/>
 						<S.RegPageModalInput
-							onChange={e => setLastName(e.target.value)}
+							onChange={e => setSurname(e.target.value)}
 							className=' password'
 							type='text'
-							name='lastName'
+							name='surName'
 							placeholder='Фамилия (необязательно)'
 						/>
 						<S.RegPageModalInput

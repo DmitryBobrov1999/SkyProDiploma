@@ -21,7 +21,7 @@ export const MainPage = () => {
 							<>
 								<NavLink to='/login'>
 									<S.MainPageHeaderBtnMainEnter
-										onClick={removeToken}
+										onClick={() => removeToken()}
 										style={{ marginRight: '10px' }}
 									>
 										Выйти
