@@ -1,17 +1,28 @@
-import React from 'react';
+import moment from 'moment/moment';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { getAllAds } from '../../store/api/api';
 import { logOut } from '../../store/slices/loginSlice';
 import * as S from './MainPage.styles';
 
 export const MainPage = () => {
 	const { userInfo } = useSelector(state => state.user);
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
+	const [adsArray, setAdsArray] = useState('');
+
 	const removeToken = () => {
-		dispatch(logOut());
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
-	}
+		dispatch(logOut());
+	};
+	useEffect(() => {
+		(async () => {
+			const data = await getAllAds();
+			setAdsArray(data);
+		})();
+	}, []);
+
 	return (
 		<S.MainPageWrapper>
 			<S.MainPageContainer>
@@ -122,216 +133,36 @@ export const MainPage = () => {
 						<S.MainPageMainH2>Объявления</S.MainPageMainH2>
 						<S.MainPageMainContent>
 							<S.MainPageMainContentCards>
-								<S.MainPageMainCardsItem>
-									<S.MainPageMainCardsCard>
-										<S.MainPageMainCardImg>
-											<S.MainPageA></S.MainPageA>
-										</S.MainPageMainCardImg>
-										<div className='card__content'>
-											<S.MainPageA>
-												<S.MainPageCardTitle>
-													Ракетка для большого тенниса Triumph Pro ST
-												</S.MainPageCardTitle>
-											</S.MainPageA>
-											<S.MainPageCardPrice>
-												2&nbsp;200&nbsp;₽
-											</S.MainPageCardPrice>
-											<S.MainPageCardPlace>Санкт Петербург</S.MainPageCardPlace>
-											<S.MainPageCardDate>
-												Сегодня в&nbsp;10:45
-											</S.MainPageCardDate>
-										</div>
-									</S.MainPageMainCardsCard>
-								</S.MainPageMainCardsItem>
-								<S.MainPageMainCardsItem>
-									<div className='cards__card card'>
-										<S.MainPageMainCardImg>
-											<S.MainPageA></S.MainPageA>
-										</S.MainPageMainCardImg>
-										<div className='card__content'>
-											<S.MainPageA target='_blank'>
-												<S.MainPageCardTitle>
-													Ракетка для большого тенниса Triumph Pro ST
-												</S.MainPageCardTitle>
-											</S.MainPageA>
-											<S.MainPageCardPrice>
-												2&nbsp;200&nbsp;₽
-											</S.MainPageCardPrice>
-											<S.MainPageCardPlace>Санкт Петербург</S.MainPageCardPlace>
-											<S.MainPageCardDate>
-												Сегодня в&nbsp;10:45
-											</S.MainPageCardDate>
-										</div>
-									</div>
-								</S.MainPageMainCardsItem>
-								<S.MainPageMainCardsItem>
-									<div className='cards__card card'>
-										<S.MainPageMainCardImg>
-											<S.MainPageA></S.MainPageA>
-										</S.MainPageMainCardImg>
-										<div className='card__content'>
-											<S.MainPageA>
-												<S.MainPageCardTitle>
-													Ракетка для большого тенниса Triumph Pro ST
-												</S.MainPageCardTitle>
-											</S.MainPageA>
-											<S.MainPageCardPrice>
-												2&nbsp;200&nbsp;₽
-											</S.MainPageCardPrice>
-											<S.MainPageCardPlace>Санкт Петербург</S.MainPageCardPlace>
-											<S.MainPageCardDate>
-												Сегодня в&nbsp;10:45
-											</S.MainPageCardDate>
-										</div>
-									</div>
-								</S.MainPageMainCardsItem>
-								<S.MainPageMainCardsItem>
-									<div className='cards__card card'>
-										<S.MainPageMainCardImg>
-											<S.MainPageA></S.MainPageA>
-										</S.MainPageMainCardImg>
-										<div className='card__content'>
-											<S.MainPageA>
-												<S.MainPageCardTitle>
-													Ракетка для большого тенниса Triumph Pro ST
-												</S.MainPageCardTitle>
-											</S.MainPageA>
-											<S.MainPageCardPrice>
-												2&nbsp;200&nbsp;₽
-											</S.MainPageCardPrice>
-											<S.MainPageCardPlace>Санкт Петербург</S.MainPageCardPlace>
-											<S.MainPageCardDate>
-												Сегодня в&nbsp;10:45
-											</S.MainPageCardDate>
-										</div>
-									</div>
-								</S.MainPageMainCardsItem>
-								<S.MainPageMainCardsItem>
-									<div className='cards__card card'>
-										<S.MainPageMainCardImg>
-											<S.MainPageA></S.MainPageA>
-										</S.MainPageMainCardImg>
-										<div className='card__content'>
-											<S.MainPageA>
-												<S.MainPageCardTitle>
-													Ракетка для большого тенниса Triumph Pro ST
-												</S.MainPageCardTitle>
-											</S.MainPageA>
-											<S.MainPageCardPrice>
-												2&nbsp;200&nbsp;₽
-											</S.MainPageCardPrice>
-											<S.MainPageCardPlace>Санкт Петербург</S.MainPageCardPlace>
-											<S.MainPageCardDate>
-												Сегодня в&nbsp;10:45
-											</S.MainPageCardDate>
-										</div>
-									</div>
-								</S.MainPageMainCardsItem>
-								<S.MainPageMainCardsItem>
-									<div className='cards__card card'>
-										<S.MainPageMainCardImg>
-											<S.MainPageA></S.MainPageA>
-										</S.MainPageMainCardImg>
-										<div className='card__content'>
-											<S.MainPageA>
-												<S.MainPageCardTitle>
-													Ракетка для большого тенниса Triumph Pro ST
-												</S.MainPageCardTitle>
-											</S.MainPageA>
-											<S.MainPageCardPrice>
-												2&nbsp;200&nbsp;₽
-											</S.MainPageCardPrice>
-											<S.MainPageCardPlace>Санкт Петербург</S.MainPageCardPlace>
-											<S.MainPageCardDate>
-												Сегодня в&nbsp;10:45
-											</S.MainPageCardDate>
-										</div>
-									</div>
-								</S.MainPageMainCardsItem>
-								<S.MainPageMainCardsItem>
-									<div className='cards__card card'>
-										<S.MainPageMainCardImg>
-											<S.MainPageA></S.MainPageA>
-										</S.MainPageMainCardImg>
-										<div className='card__content'>
-											<S.MainPageA>
-												<S.MainPageCardTitle>
-													Ракетка для большого тенниса Triumph Pro ST
-												</S.MainPageCardTitle>
-											</S.MainPageA>
-											<S.MainPageCardPrice>
-												2&nbsp;200&nbsp;₽
-											</S.MainPageCardPrice>
-											<S.MainPageCardPlace>Санкт Петербург</S.MainPageCardPlace>
-											<S.MainPageCardDate>
-												Сегодня в&nbsp;10:45
-											</S.MainPageCardDate>
-										</div>
-									</div>
-								</S.MainPageMainCardsItem>
-								<S.MainPageMainCardsItem>
-									<div className='cards__card card'>
-										<S.MainPageMainCardImg>
-											<S.MainPageA></S.MainPageA>
-										</S.MainPageMainCardImg>
-										<div className='card__content'>
-											<S.MainPageA>
-												<S.MainPageCardTitle>
-													Ракетка для большого тенниса Triumph Pro ST
-												</S.MainPageCardTitle>
-											</S.MainPageA>
-											<S.MainPageCardPrice>
-												2&nbsp;200&nbsp;₽
-											</S.MainPageCardPrice>
-											<S.MainPageCardPlace>Санкт Петербург</S.MainPageCardPlace>
-											<S.MainPageCardDate>
-												Сегодня в&nbsp;10:45
-											</S.MainPageCardDate>
-										</div>
-									</div>
-								</S.MainPageMainCardsItem>
-								<S.MainPageMainCardsItem>
-									<div className='cards__card card'>
-										<S.MainPageMainCardImg>
-											<S.MainPageA></S.MainPageA>
-										</S.MainPageMainCardImg>
-										<div className='card__content'>
-											<S.MainPageA>
-												<S.MainPageCardTitle>
-													Ракетка для большого тенниса Triumph Pro ST
-												</S.MainPageCardTitle>
-											</S.MainPageA>
-											<S.MainPageCardPrice>
-												2&nbsp;200&nbsp;₽
-											</S.MainPageCardPrice>
-											<S.MainPageCardPlace>Санкт Петербург</S.MainPageCardPlace>
-											<S.MainPageCardDate>
-												Сегодня в&nbsp;10:45
-											</S.MainPageCardDate>
-										</div>
-									</div>
-								</S.MainPageMainCardsItem>
-								<S.MainPageMainCardsItem>
-									<div className='cards__card card'>
-										<S.MainPageMainCardImg>
-											<S.MainPageA></S.MainPageA>
-										</S.MainPageMainCardImg>
-										<div className='card__content'>
-											<S.MainPageA>
-												<S.MainPageCardTitle>
-													Ракетка для большого тенниса Triumph Pro ST
-												</S.MainPageCardTitle>
-											</S.MainPageA>
-											<S.MainPageCardPrice>
-												2&nbsp;200&nbsp;₽
-											</S.MainPageCardPrice>
-											<S.MainPageCardPlace>Санкт Петербург</S.MainPageCardPlace>
-											<S.MainPageCardDate>
-												Сегодня в&nbsp;10:45
-											</S.MainPageCardDate>
-										</div>
-									</div>
-								</S.MainPageMainCardsItem>
+								{adsArray &&
+									adsArray.map(ads => (
+										<S.MainPageMainCardsItem key={ads.id}>
+											<S.MainPageMainCardsCard>
+												<S.MainPageMainCardImg>
+													<S.MainPageCardImg
+														src={`http://localhost:8090/${ads.images[0]?.url}`}
+													/>
+												</S.MainPageMainCardImg>
+
+												<S.MainPageCardContent>
+													<S.MainPageCardTitle>{ads.title}</S.MainPageCardTitle>
+													<S.MainPageCardPrice>
+														{ads.price
+															.toString()
+															.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
+														₽
+													</S.MainPageCardPrice>
+													<S.MainPageCardPlaceDate>
+														<S.MainPageCardPlace>
+															{ads.user?.city}
+														</S.MainPageCardPlace>
+														<S.MainPageCardDate>
+															{moment(ads.created_on).format('MMM Do YY')}
+														</S.MainPageCardDate>
+													</S.MainPageCardPlaceDate>
+												</S.MainPageCardContent>
+											</S.MainPageMainCardsCard>
+										</S.MainPageMainCardsItem>
+									))}
 							</S.MainPageMainContentCards>
 						</S.MainPageMainContent>
 					</S.MainPageMainContainer>

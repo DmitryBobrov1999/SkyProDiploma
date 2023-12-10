@@ -59,10 +59,8 @@ export const MainPageMainSearch = styled.div`
 	position: sticky;
 	top: 79px;
 	background: white;
-	opacity: 0.97
+	opacity: 0.99;
 `;
-
-
 
 export const MainPageMainLogoImg = styled.img`
 	width: 54px;
@@ -131,20 +129,7 @@ export const MainPageMainH2 = styled.h2`
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
-	${'' /* &::before {
-		content: '';
-		display: block;
-		width: 12px;
-		height: 12px;
-		background-color: transparent;
-		border-top: 2px solid #000000;
-		border-left: 2px solid #000000;
-		transform: rotate(-45deg);
-		position: absolute;
-		top: 9px;
-		left: 13px;
-		cursor: pointer;
-	} */}
+	
 `;
 
 export const MainPageMainContent = styled.div`
@@ -155,9 +140,8 @@ export const MainPageMainContent = styled.div`
 export const MainPageMainContentCards = styled.div`
 	max-width: 1158px;
 	width: 100%;
-	height: 441px;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, 270px);
+	grid-template-columns: repeat(4, 270px);
 	grid-auto-rows: 441px;
 	grid-gap: 40px 26px;
 	justify-content: center;
@@ -165,7 +149,6 @@ export const MainPageMainContentCards = styled.div`
 	scrollbar-color: #ffffff #2e2e2e; // Firefox
 	scrollbar-width: thin; // Firefox
 	scrollbar-width: 0px; // Firefox
-	height: 922px;
 
 	&::-webkit-scrollbar {
 		width: 0px;
@@ -194,24 +177,25 @@ export const MainPageMainCardImg = styled.div`
 	height: 270px;
 	background-color: #f0f0f0;
 	margin-bottom: 20px;
-	& img {
-		width: 100%;
-		height: 100%;
-		display: block;
-		object-fit: cover;
-	}
+	
+`;
+
+export const MainPageCardImg = styled.img`
+	width: 100%;
+	height: 100%;
+	
 `;
 
 export const MainPageA = styled.a``;
 
 export const MainPageCardPrice = styled.p`
-	margin-bottom: 10px;
-	margin-top: 10px;
 	font-size: 22px;
 	font-weight: 500;
 	line-height: 33px;
 	letter-spacing: 0em;
 	text-align: left;
+	padding-top: 10px;
+	padding-bottom: 10px;
 `;
 
 export const MainPageCardTitle = styled.h3`
@@ -220,10 +204,20 @@ export const MainPageCardTitle = styled.h3`
 	line-height: 26px;
 	letter-spacing: 0em;
 	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+`;
+
+export const MainPageCardContent = styled.div`
+	height: 151px;
+`;
+
+export const MainPageCardPlaceDate = styled.div`
 	
 `;
 
-export const MainPageCardPlace = styled.p`
+export const MainPageCardDate = styled.p`
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 21px;
@@ -231,7 +225,7 @@ export const MainPageCardPlace = styled.p`
 	text-align: left;
 `;
 
-export const MainPageCardDate = styled.p`
+export const MainPageCardPlace = styled.p`
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 21px;

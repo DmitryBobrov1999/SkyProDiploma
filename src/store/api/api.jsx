@@ -32,7 +32,6 @@ export const regUser = async (
 export const loginUser = async ({ email, password }) => {
 	const logUrl = 'http://localhost:8090/auth/login';
 
-	
 	const response = await fetch(logUrl, {
 		method: 'POST',
 		body: JSON.stringify({
@@ -45,8 +44,8 @@ export const loginUser = async ({ email, password }) => {
 	});
 
 	const data = await response.json();
-	
-	return data
+
+	return data;
 };
 
 export const getUser = async ({ getToken }) => {
@@ -66,7 +65,6 @@ export const getUser = async ({ getToken }) => {
 export const updateUser = async ({ getToken, refreshToken }) => {
 	const updateUrl = 'http://localhost:8090/auth/login';
 
-	
 	const response = await fetch(updateUrl, {
 		method: 'PUT',
 		body: JSON.stringify({
@@ -80,3 +78,18 @@ export const updateUser = async ({ getToken, refreshToken }) => {
 	const data = await response.json();
 	return data;
 };
+
+export const getAllAds = async () => {
+	const allAdsUrl = 'http://localhost:8090/ads';
+
+	const response = await fetch(allAdsUrl, {
+		method: 'GET',
+		headers: {
+			'content-type': 'application/json',
+		},
+	});
+	const data = await response.json();
+	return data;
+};
+
+
