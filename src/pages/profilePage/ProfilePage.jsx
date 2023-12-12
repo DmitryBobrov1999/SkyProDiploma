@@ -1,11 +1,69 @@
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { changeInfo, getUser } from '../../store/api/api';
+import { getInfo } from '../../store/slices/loginSlice';
 import * as S from './ProfilePage.styles';
 
 export const ProfilePage = () => {
-
 	const { userInfo } = useSelector(state => state.user);
-	
+	const [user, setUser] = useState(null);
+	const [name, setName] = useState(null);
+	const [surname, setSurname] = useState(null);
+	const [phone, setPhone] = useState(null);
+	const [city, setCity] = useState(null);
+	const [changer, setChanger] = useState(false);
+	const dispatch = useDispatch();
+
+	const nameInput = document.getElementById('fname');
+	const surnameInput = document.getElementById('lname');
+	const cityInput = document.getElementById('city');
+	const phoneInput = document.getElementById('phone');
+
+	useEffect(() => {
+		(async () => {
+			const getToken = localStorage.getItem('access_token');
+			const userInfo = await getUser({ getToken });
+			setUser(userInfo);
+			setName(userInfo.name);
+			setSurname(userInfo.surname);
+			setPhone(userInfo.phone);
+			setCity(userInfo.city);
+		})();
+	}, []);
+
+	useEffect(() => {
+		if (
+			nameInput?.defaultValue === name &&
+			surnameInput?.defaultValue === surname &&
+			cityInput?.defaultValue === city &&
+			phoneInput?.defaultValue === phone
+		) {
+			setChanger(false);
+		} else {
+			setChanger(true);
+		}
+	}, [
+		nameInput?.defaultValue,
+		name,
+		surnameInput?.defaultValue,
+		surname,
+		cityInput?.defaultValue,
+		city,
+		phoneInput?.defaultValue,
+		phone,
+	]);
+
+	const handleClick = async event => {
+		event.preventDefault();
+		const getToken = localStorage.getItem('access_token');
+
+		const data = await changeInfo({ name, surname, phone, city, getToken });
+		dispatch(getInfo(data));
+		setUser(data);
+		setChanger(false);
+	};
+
 	return (
 		<S.ProfilePageWrapper>
 			<S.ProfilePageContainer>
@@ -115,8 +173,10 @@ export const ProfilePage = () => {
 														id='fname'
 														name='fname'
 														type='text'
-														placeholder=''
-														defaultValue={userInfo?.name ? userInfo?.name : ''}
+														onChange={e => {
+															setName(e.target.value);
+														}}
+														defaultValue={user?.name ? user?.name : ''}
 													/>
 													<label htmlFor='fname'>Имя</label>
 												</S.ProfilePageSettingsDiv>
@@ -126,10 +186,10 @@ export const ProfilePage = () => {
 														id='lname'
 														name='lname'
 														type='text'
-														placeholder=''
-														defaultValue={
-															userInfo?.surname ? userInfo?.surname : ''
-														}
+														onChange={e => {
+															setSurname(e.target.value);
+														}}
+														defaultValue={user?.surname ? user?.surname : ''}
 													/>
 													<label htmlFor='lname'>Фамилия</label>
 												</S.ProfilePageSettingsDiv>
@@ -139,23 +199,43 @@ export const ProfilePage = () => {
 														id='city'
 														name='city'
 														type='text'
-														placeholder=''
-														defaultValue={userInfo?.city ? userInfo?.city : ''}
+														onChange={e => {
+															setCity(e.target.value);
+														}}
+														defaultValue={user?.city ? user?.city : ''}
 													/>
 													<label htmlFor='city'>Город</label>
 												</S.ProfilePageSettingsDiv>
 
 												<S.ProfilePageSettingsDiv>
 													<S.ProfilePageSettingsPhone
+														id='phone'
 														name='phone'
 														type='tel'
-														defaultValue={userInfo?.number ? userInfo?.number : ''}
-														placeholder={userInfo?.number ? '' : '+79161234567'}
+														onChange={e => {
+															setPhone(e.target.value);
+														}}
+														defaultValue={user?.phone ? user?.phone : ''}
+														placeholder={user?.phone ? '' : '+79161234567'}
 													/>
 													<label htmlFor='phone'>Телефон</label>
 												</S.ProfilePageSettingsDiv>
 
-												<S.ProfilePageSettingsBtn>
+												<S.ProfilePageSettingsBtn
+													style={
+														changer
+															? {
+																	background: '#009ee4',
+																	border: '#009ee4',
+															  }
+															: {
+																	background: 'rgba(217, 217, 217, 1)',
+																	border: 'rgba(217, 217, 217, 1)',
+															  }
+													}
+													disabled={changer ? false : true}
+													onClick={handleClick}
+												>
 													Сохранить
 												</S.ProfilePageSettingsBtn>
 											</S.ProfilePageSettingsForm>

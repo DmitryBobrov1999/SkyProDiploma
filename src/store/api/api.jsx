@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+const baseUrl = 'http://localhost:8090/';
 
 export const regUser = async (
 	email,
@@ -9,7 +8,7 @@ export const regUser = async (
 	surname,
 	city
 ) => {
-	const regUrl = 'http://localhost:8090/auth/register';
+	const regUrl = `${baseUrl}auth/register`;
 
 	const response = await fetch(regUrl, {
 		body: JSON.stringify({
@@ -30,7 +29,7 @@ export const regUser = async (
 };
 
 export const loginUser = async ({ email, password }) => {
-	const logUrl = 'http://localhost:8090/auth/login';
+	const logUrl = `${baseUrl}auth/login`;
 
 	const response = await fetch(logUrl, {
 		method: 'POST',
@@ -49,7 +48,7 @@ export const loginUser = async ({ email, password }) => {
 };
 
 export const getUser = async ({ getToken }) => {
-	const getUrl = 'http://localhost:8090/user';
+	const getUrl = `${baseUrl}user`;
 
 	const response = await fetch(getUrl, {
 		method: 'GET',
@@ -63,7 +62,7 @@ export const getUser = async ({ getToken }) => {
 };
 
 export const updateUser = async ({ getToken, refreshToken }) => {
-	const updateUrl = 'http://localhost:8090/auth/login';
+	const updateUrl = `${baseUrl}auth/login`;
 
 	const response = await fetch(updateUrl, {
 		method: 'PUT',
@@ -80,7 +79,7 @@ export const updateUser = async ({ getToken, refreshToken }) => {
 };
 
 export const getAllAds = async () => {
-	const allAdsUrl = 'http://localhost:8090/ads';
+	const allAdsUrl = `${baseUrl}ads`;
 
 	const response = await fetch(allAdsUrl, {
 		method: 'GET',
@@ -92,4 +91,22 @@ export const getAllAds = async () => {
 	return data;
 };
 
-
+export const changeInfo = async ({ name, surname, phone, city, getToken }) => {
+	const changeUrl = `${baseUrl}user`;
+	phone = phone.toString()
+	const response = await fetch(changeUrl, {
+		method: 'PATCH',
+		body: JSON.stringify({
+			name: name,
+			surname: surname,
+			phone: phone,
+			city: city,
+		}),
+		headers: {
+			Authorization: `Bearer ${getToken}`,
+			'content-type': 'application/json',
+		},
+	});
+	const data = await response.json();
+	return data;
+};

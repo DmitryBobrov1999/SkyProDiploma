@@ -1,4 +1,5 @@
 import moment from 'moment/moment';
+import 'moment/locale/ru';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -9,7 +10,8 @@ import * as S from './MainPage.styles';
 export const MainPage = () => {
 	const { userInfo } = useSelector(state => state.user);
 	const dispatch = useDispatch();
-	const [adsArray, setAdsArray] = useState('');
+	const [adsArray, setAdsArray] = useState([]);
+	const [filteredWords, setFilteredWords] = useState('');
 
 	const removeToken = () => {
 		localStorage.removeItem('access_token');
@@ -22,6 +24,26 @@ export const MainPage = () => {
 			setAdsArray(data);
 		})();
 	}, []);
+
+	const handleChange = event => {
+		setFilteredWords(event.target.value);
+	};
+
+	const handleSubmit = event => {
+		event.preventDefault();
+
+		if (filteredWords) {
+			const filteredAdsArray = adsArray.filter(ads => {
+				return ads.title.toLowerCase().includes(filteredWords.toLowerCase());
+			});
+			setAdsArray(filteredAdsArray);
+		} else {
+			(async () => {
+				const data = await getAllAds();
+				setAdsArray(data);
+			})();
+		}
+	};
 
 	return (
 		<S.MainPageWrapper>
@@ -119,14 +141,15 @@ export const MainPage = () => {
 							</svg>
 						</NavLink>
 
-						<S.MainPageMainForm action='#'>
+						<S.MainPageMainForm onSubmit={handleSubmit}>
 							<S.MainPageText
-								type='search'
+								type='text'
 								placeholder='Поиск по объявлениям'
 								name='search'
+								onChange={handleChange}
 							/>
 
-							<S.MainPageSearchBtn>Найти</S.MainPageSearchBtn>
+							<S.MainPageSearchBtn type='submit'>Найти</S.MainPageSearchBtn>
 						</S.MainPageMainForm>
 					</S.MainPageMainSearch>
 					<S.MainPageMainContainer>
@@ -134,35 +157,41 @@ export const MainPage = () => {
 						<S.MainPageMainContent>
 							<S.MainPageMainContentCards>
 								{adsArray &&
-									adsArray.map(ads => (
-										<S.MainPageMainCardsItem key={ads.id}>
-											<S.MainPageMainCardsCard>
-												<S.MainPageMainCardImg>
-													<S.MainPageCardImg
-														src={`http://localhost:8090/${ads.images[0]?.url}`}
-													/>
-												</S.MainPageMainCardImg>
+									adsArray.map(ads => {
+										const img = ads.images[0]?.url;
 
-												<S.MainPageCardContent>
-													<S.MainPageCardTitle>{ads.title}</S.MainPageCardTitle>
-													<S.MainPageCardPrice>
-														{ads.price
-															.toString()
-															.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
-														₽
-													</S.MainPageCardPrice>
-													<S.MainPageCardPlaceDate>
-														<S.MainPageCardPlace>
-															{ads.user?.city}
-														</S.MainPageCardPlace>
-														<S.MainPageCardDate>
-															{moment(ads.created_on).format('MMM Do YY')}
-														</S.MainPageCardDate>
-													</S.MainPageCardPlaceDate>
-												</S.MainPageCardContent>
-											</S.MainPageMainCardsCard>
-										</S.MainPageMainCardsItem>
-									))}
+										return (
+											<S.MainPageMainCardsItem key={ads.id}>
+												<S.MainPageMainCardsCard>
+													<S.MainPageMainCardImg>
+														<S.MainPageCardImg
+															src={`http://localhost:8090/${img}`}
+														/>
+													</S.MainPageMainCardImg>
+
+													<S.MainPageCardContent>
+														<S.MainPageCardTitle>
+															{ads.title}
+														</S.MainPageCardTitle>
+														<S.MainPageCardPrice>
+															{ads.price
+																.toString()
+																.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
+															₽
+														</S.MainPageCardPrice>
+														<S.MainPageCardPlaceDate>
+															<S.MainPageCardPlace>
+																{ads.user?.city}
+															</S.MainPageCardPlace>
+															<S.MainPageCardDate>
+																{moment(ads.created_on).format('LLL')}
+															</S.MainPageCardDate>
+														</S.MainPageCardPlaceDate>
+													</S.MainPageCardContent>
+												</S.MainPageMainCardsCard>
+											</S.MainPageMainCardsItem>
+										);
+									})}
 							</S.MainPageMainContentCards>
 						</S.MainPageMainContent>
 					</S.MainPageMainContainer>

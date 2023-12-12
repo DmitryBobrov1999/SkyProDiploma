@@ -218,8 +218,7 @@ export const ProfilePageSettingsBtn = styled.button`
 	height: 50px;
 	margin: 10px 7px 0;
 	border-radius: 6px;
-	background: #009ee4;
-	border: 1px solid #009ee4;
+	border: 1px solid;
 	&:hover {
 		background-color: #0080c1;
 	}

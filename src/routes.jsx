@@ -13,7 +13,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 export const AppRoutes = () => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector(state => state.user);
-
+	const getToken = localStorage.getItem('access_token');
 	useEffect(() => {
 		if (userInfo) {
 			const timer = setInterval(async () => {
@@ -45,7 +45,7 @@ export const AppRoutes = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route element={<ProtectedRoute userInfo={userInfo} />}>
+				<Route element={<ProtectedRoute getToken={getToken} />}>
 					<Route path='/profile' element={<ProfilePage />} />
 				</Route>
 
