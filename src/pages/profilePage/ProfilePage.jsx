@@ -1,22 +1,39 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { NavLink } from 'react-router-dom';
 import { changeInfo } from '../../store/api/api';
+import { getUser } from '../../store/slices/authSlice';
+import { useChangeAvatarMutation } from '../../store/slices/avatarApiSlice';
 
 import * as S from './ProfilePage.styles';
 
-export const ProfilePage = ({ userInfo }) => {
+export const ProfilePage = () => {
+	const { user } = useSelector(state => state.auth);
 	const [name, setName] = useState(null);
 	const [surname, setSurname] = useState(null);
 	const [phone, setPhone] = useState(null);
 	const [city, setCity] = useState(null);
 	const [changer, setChanger] = useState(false);
+
+	const [changeAvatar] = useChangeAvatarMutation();
+	const dispatch = useDispatch();
+
 	const nameInput = document.getElementById('fname');
 	const surnameInput = document.getElementById('lname');
 	const cityInput = document.getElementById('city');
 	const phoneInput = document.getElementById('phone');
-
-
+	useEffect(() => {
+		// const getToken = localStorage.getItem('access_token');
+		// const userInfo = await getUser({ getToken });
+		// setUser(userInfo);
+	(async() => {
+		await	setName(user?.name);
+		await	setSurname(user?.surname);
+		await	setPhone(user?.phone);
+		await	setCity(user?.city);
+	})()
+	}, [user?.name, user?.surname, user?.phone, user?.city]);
 
 	useEffect(() => {
 		if (
@@ -49,10 +66,13 @@ export const ProfilePage = ({ userInfo }) => {
 		setChanger(false);
 	};
 
-	function changeAvHandler(e) {
-		const getToken = localStorage.getItem('access_token');
+	const changeAvHandler = async e => {
+		// const getToken = localStorage.getItem('access_token');
 		const file = e.target.files[0];
-	}
+		const dataWithAvatar = await changeAvatar({ file });
+		console.log(dataWithAvatar.data);
+		dispatch(getUser(dataWithAvatar.data));
+	};
 
 	return (
 		<S.ProfilePageWrapper>
@@ -141,7 +161,7 @@ export const ProfilePage = ({ userInfo }) => {
 							</S.ProfilePageMainMenu>
 
 							<S.ProfilePageMainH2>
-								Здравствуйте, {userInfo?.name}!
+								Здравствуйте, {user?.name}!
 							</S.ProfilePageMainH2>
 
 							<S.ProfilePageMainProfile>
@@ -154,7 +174,7 @@ export const ProfilePage = ({ userInfo }) => {
 											<S.ProfilePageSettingDiv>
 												<S.ProfilePageSettingsImg
 													alt='avatar'
-													src={`http://localhost:8090/${userInfo?.avatar}`}
+													src={`http://localhost:8090/${user?.avatar}`}
 												/>
 											</S.ProfilePageSettingDiv>
 											<S.ProfilePageChangePhotoDiv>
@@ -182,7 +202,7 @@ export const ProfilePage = ({ userInfo }) => {
 														onChange={e => {
 															setName(e.target.value);
 														}}
-														defaultValue={userInfo?.name ? userInfo?.name : ''}
+														defaultValue={user?.name ? user?.name : ''}
 													/>
 													<label htmlFor='fname'>Имя</label>
 												</S.ProfilePageSettingsDiv>
@@ -195,9 +215,7 @@ export const ProfilePage = ({ userInfo }) => {
 														onChange={e => {
 															setSurname(e.target.value);
 														}}
-														defaultValue={
-															userInfo?.surname ? userInfo?.surname : ''
-														}
+														defaultValue={user?.surname ? user?.surname : ''}
 													/>
 													<label htmlFor='lname'>Фамилия</label>
 												</S.ProfilePageSettingsDiv>
@@ -210,7 +228,7 @@ export const ProfilePage = ({ userInfo }) => {
 														onChange={e => {
 															setCity(e.target.value);
 														}}
-														defaultValue={userInfo?.city ? userInfo?.city : ''}
+														defaultValue={user?.city ? user?.city : ''}
 													/>
 													<label htmlFor='city'>Город</label>
 												</S.ProfilePageSettingsDiv>
@@ -223,10 +241,8 @@ export const ProfilePage = ({ userInfo }) => {
 														onChange={e => {
 															setPhone(e.target.value);
 														}}
-														defaultValue={
-															userInfo?.phone ? userInfo?.phone : ''
-														}
-														placeholder={userInfo?.phone ? '' : '+79161234567'}
+														defaultValue={user?.phone ? user?.phone : ''}
+														placeholder={user?.phone ? '' : '+79161234567'}
 													/>
 													<label htmlFor='phone'>Телефон</label>
 												</S.ProfilePageSettingsDiv>

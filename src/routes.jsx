@@ -5,18 +5,21 @@ import { LoginPage } from './pages/loginPage/LoginPage';
 import { RegPage } from './pages/regPage/RegPage';
 import { ProfilePage } from './pages/profilePage/ProfilePage';
 import { ProtectedRoute } from './components/ProtectedRoute';
-import userApi from './store/slices/userApiSlice';
+import myApi from './store/slices/userApiSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from './store/slices/authSlice';
 
 export const AppRoutes = () => {
 	const [userInfo, setUserInfo] = useState(null);
 	const token = localStorage.getItem('access_token');
-
-	const [getLazyFunction, { data: info, isSuccess }] =
-		userApi.useLazyGetUserQuery();
-	console.log(info);
+	const dispatch = useDispatch()
+	
+	const { data: info } = myApi.useGetUserQuery();
+	
 	useEffect(() => {
-		getLazyFunction();
-	}, [getLazyFunction]);
+		setUserInfo(info);
+		dispatch(getUser(info));
+	}, [info, dispatch]);
 
 	return (
 		<BrowserRouter>
