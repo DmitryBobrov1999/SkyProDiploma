@@ -135,6 +135,8 @@ export const MainPageMainH2 = styled.h2`
 export const MainPageMainContent = styled.div`
 	width: 100%;
 	margin: 0 auto;
+	display: flex;
+	justify-content: center
 `;
 
 export const MainPageMainContentCards = styled.div`
@@ -232,3 +234,4 @@ export const MainPageCardPlace = styled.p`
 	letter-spacing: 0em;
 	text-align: left;
 `;
+

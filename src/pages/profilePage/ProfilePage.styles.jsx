@@ -120,26 +120,50 @@ export const ProfilePageSettingsLeft = styled.div`
 	margin-right: 43px;
 `;
 
-export const ProfilePageSettingsImg = styled.div`
+export const ProfilePageSettingDiv = styled.div`
 	width: 170px;
 	height: 170px;
 	border-radius: 50%;
 	background-color: #f0f0f0;
-	& img {
-		width: 100%;
-		height: auto;
-		display: block;
-		object-fit: cover;
-	}
+	
 `;
 
-export const ProfilePageChangePhoto = styled.a`
+export const ProfilePageSettingsImg = styled.img`
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: 50%;
+	object-fit: cover;
+`;
+
+export const ProfilePageChangePhotoDiv = styled.div`
+	text-align: center;
+	position: relative;
 	margin-top: 10px;
-	margin-bottom: 30px;
-	text-decoration: none;
-	font-size: 16px;
-	line-height: 24px;
+	display: flex;
+	flex-direction: column;
+	height: 24px;
+`;
+
+export const ProfilePageChangePhoto = styled.input`
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	width: 74px;
+	height: inherit;
+`;
+
+export const ProfilePageChangePhotoLabel = styled.label`
+	cursor: pointer;
+	width: 74px;
+`;
+
+export const PageProfileChangePhotoSpan = styled.span`
 	color: #009ee4;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	letter-spacing: 0em;
 `;
 
 export const ProfilePageSettingsRight = styled.div`

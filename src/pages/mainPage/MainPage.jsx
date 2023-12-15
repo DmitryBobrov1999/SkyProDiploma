@@ -1,29 +1,36 @@
 import moment from 'moment/moment';
 import 'moment/locale/ru';
+import './spinner.css';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { getAllAds } from '../../store/api/api';
-import { logOut } from '../../store/slices/loginSlice';
-import * as S from './MainPage.styles';
 
-export const MainPage = () => {
-	const { userInfo } = useSelector(state => state.user);
-	const dispatch = useDispatch();
-	const [adsArray, setAdsArray] = useState([]);
+import { NavLink } from 'react-router-dom';
+
+import * as S from './MainPage.styles';
+import { useDispatch } from 'react-redux';
+import { useAllAdsQuery } from '../../store/slices/adsApiSlice';
+import { useGetUserQuery } from '../../store/slices/userApiSlice';
+
+export const MainPage = ({ setUserInfo, token }) => {
 	const [filteredWords, setFilteredWords] = useState('');
 
-	const removeToken = () => {
+	const [filteredAds, setFilteredAds] = useState(null);
+
+	const { data: allAds, isLoading } = useAllAdsQuery();
+
+	useEffect(() => {
+		setFilteredAds(allAds);
+	}, [allAds]);
+
+	// const { data: info } = useGetUserQuery();
+	// console.log(info);
+	// useEffect(() => {
+	// 	setUserInfo(info);
+	// }, [info]);
+
+	const exit = () => {
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
-		dispatch(logOut());
 	};
-	useEffect(() => {
-		(async () => {
-			const data = await getAllAds();
-			setAdsArray(data);
-		})();
-	}, []);
 
 	const handleChange = event => {
 		setFilteredWords(event.target.value);
@@ -33,15 +40,12 @@ export const MainPage = () => {
 		event.preventDefault();
 
 		if (filteredWords) {
-			const filteredAdsArray = adsArray.filter(ads => {
+			const filteredAdsArray = allAds.filter(ads => {
 				return ads.title.toLowerCase().includes(filteredWords.toLowerCase());
 			});
-			setAdsArray(filteredAdsArray);
+			setFilteredAds(filteredAdsArray);
 		} else {
-			(async () => {
-				const data = await getAllAds();
-				setAdsArray(data);
-			})();
+			setFilteredAds(allAds);
 		}
 	};
 
@@ -50,11 +54,11 @@ export const MainPage = () => {
 			<S.MainPageContainer>
 				<S.MainPageHeader>
 					<S.MainPageHeaderNav>
-						{userInfo ? (
+						{token ? (
 							<>
 								<NavLink to='/login'>
 									<S.MainPageHeaderBtnMainEnter
-										onClick={() => removeToken()}
+										onClick={() => exit()}
 										style={{ marginRight: '10px' }}
 									>
 										Выйти
@@ -155,44 +159,61 @@ export const MainPage = () => {
 					<S.MainPageMainContainer>
 						<S.MainPageMainH2>Объявления</S.MainPageMainH2>
 						<S.MainPageMainContent>
-							<S.MainPageMainContentCards>
-								{adsArray &&
-									adsArray.map(ads => {
-										const img = ads.images[0]?.url;
+							{isLoading ? (
+								<div className='lds-spinner'>
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+								</div>
+							) : (
+								<S.MainPageMainContentCards>
+									{filteredAds &&
+										filteredAds.map(ads => {
+											const img = ads.images[0]?.url;
 
-										return (
-											<S.MainPageMainCardsItem key={ads.id}>
-												<S.MainPageMainCardsCard>
-													<S.MainPageMainCardImg>
-														<S.MainPageCardImg
-															src={`http://localhost:8090/${img}`}
-														/>
-													</S.MainPageMainCardImg>
+											return (
+												<S.MainPageMainCardsItem key={ads.id}>
+													<S.MainPageMainCardsCard>
+														<S.MainPageMainCardImg>
+															<S.MainPageCardImg
+																src={`http://localhost:8090/${img}`}
+															/>
+														</S.MainPageMainCardImg>
 
-													<S.MainPageCardContent>
-														<S.MainPageCardTitle>
-															{ads.title}
-														</S.MainPageCardTitle>
-														<S.MainPageCardPrice>
-															{ads.price
-																.toString()
-																.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
-															₽
-														</S.MainPageCardPrice>
-														<S.MainPageCardPlaceDate>
-															<S.MainPageCardPlace>
-																{ads.user?.city}
-															</S.MainPageCardPlace>
-															<S.MainPageCardDate>
-																{moment(ads.created_on).format('LLL')}
-															</S.MainPageCardDate>
-														</S.MainPageCardPlaceDate>
-													</S.MainPageCardContent>
-												</S.MainPageMainCardsCard>
-											</S.MainPageMainCardsItem>
-										);
-									})}
-							</S.MainPageMainContentCards>
+														<S.MainPageCardContent>
+															<S.MainPageCardTitle>
+																{ads.title}
+															</S.MainPageCardTitle>
+															<S.MainPageCardPrice>
+																{ads.price
+																	.toString()
+																	.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
+																₽
+															</S.MainPageCardPrice>
+															<S.MainPageCardPlaceDate>
+																<S.MainPageCardPlace>
+																	{ads.user?.city}
+																</S.MainPageCardPlace>
+																<S.MainPageCardDate>
+																	{moment(ads.created_on).format('LLL')}
+																</S.MainPageCardDate>
+															</S.MainPageCardPlaceDate>
+														</S.MainPageCardContent>
+													</S.MainPageMainCardsCard>
+												</S.MainPageMainCardsItem>
+											);
+										})}
+								</S.MainPageMainContentCards>
+							)}
 						</S.MainPageMainContent>
 					</S.MainPageMainContainer>
 				</S.MainPageMain>

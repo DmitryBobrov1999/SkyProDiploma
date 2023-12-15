@@ -1,36 +1,44 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-
-
 import { NavLink, useNavigate } from 'react-router-dom';
-import { getUser, loginUser } from '../../store/api/api';
-import { getInfo } from '../../store/slices/loginSlice';
-
+import { useLoginMutation } from '../../store/slices/authApiSlice';
+import { setCredentials } from '../../store/slices/authSlice';
 
 import * as S from './LoginPage.styles';
 
 export const LoginPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const navigate = useNavigate();
-	const dispatch = useDispatch()
+	const [errMsg, setErrMsg] = useState('');
+	
+	const [login, { isError, isSuccess }] = useLoginMutation();
 
-	const handleLogin = async event => {
-		event.preventDefault();
-		const data = await loginUser({ email, password });
-		try {
-			if (data.access_token) {
-				localStorage.setItem('access_token', data.access_token);
-				localStorage.setItem('refresh_token', data.refresh_token);
-				const getToken = localStorage.getItem('access_token');
-				const userInfo = await getUser({ getToken });
-				dispatch(getInfo(userInfo));
-			}
-		} catch (error) {
-			console.log(error);
-		} finally {
-			if (data.access_token) {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		setErrMsg('');
+	}, [email, password]);
+
+	const handleLogin = async e => {
+		e.preventDefault();
+		if (email && password) {
+			try {
+				const userData = await login({ email, password }).unwrap();
+				dispatch(setCredentials({ userData }));
+				localStorage.setItem('access_token', userData.access_token);
+				localStorage.setItem('refresh_token', userData.refresh_token);
+				setEmail('');
+				setPassword('');
 				navigate('/');
+			} catch (error) {
+				if (!error?.response) {
+					setErrMsg('No Server Response');
+				} else if (error.response?.status === 400) {
+					setErrMsg('Missing Username or Password');
+				} else if (error.response?.status === 401) {
+					setErrMsg('Login Failed');
+				}
 			}
 		}
 	};
@@ -143,6 +151,7 @@ export const LoginPage = () => {
 							name='password'
 							placeholder='Пароль'
 						/>
+						{isError && <h3 style={{ color: 'red' }}>ошибка</h3>}
 						<S.LoginPageModalBtnEnter onClick={event => handleLogin(event)}>
 							Войти
 						</S.LoginPageModalBtnEnter>
