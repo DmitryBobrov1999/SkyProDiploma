@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const MainPageWrapper = styled.div`
@@ -8,6 +9,8 @@ export const MainPageWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
+
+
 
 export const MainPageContainer = styled.div`
 	width: 100%;
@@ -129,14 +132,13 @@ export const MainPageMainH2 = styled.h2`
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
-	
 `;
 
 export const MainPageMainContent = styled.div`
 	width: 100%;
 	margin: 0 auto;
 	display: flex;
-	justify-content: center
+	justify-content: center;
 `;
 
 export const MainPageMainContentCards = styled.div`
@@ -163,6 +165,11 @@ export const MainPageMainContentCards = styled.div`
 	}
 `;
 
+export const MainPageMainCardsItemNav = styled(NavLink)`
+	color: rgba(0, 158, 228, 1);
+	text-decoration: none
+`;
+
 export const MainPageMainCardsItem = styled.div`
 	margin: 0;
 `;
@@ -179,13 +186,11 @@ export const MainPageMainCardImg = styled.div`
 	height: 270px;
 	background-color: #f0f0f0;
 	margin-bottom: 20px;
-	
 `;
 
 export const MainPageCardImg = styled.img`
 	width: 100%;
 	height: 100%;
-	
 `;
 
 export const MainPageA = styled.a``;
@@ -215,9 +220,7 @@ export const MainPageCardContent = styled.div`
 	height: 151px;
 `;
 
-export const MainPageCardPlaceDate = styled.div`
-	
-`;
+export const MainPageCardPlaceDate = styled.div``;
 
 export const MainPageCardDate = styled.p`
 	font-size: 16px;
@@ -234,4 +237,3 @@ export const MainPageCardPlace = styled.p`
 	letter-spacing: 0em;
 	text-align: left;
 `;
-

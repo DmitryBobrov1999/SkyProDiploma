@@ -47,53 +47,8 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const apiSlice = createApi({
 	baseQuery: baseQueryWithReauth,
-	endpoints: builder => ({}),
+	endpoints: () => ({
+		
+	}),
 });
 
-
-
-// export const skyProApi = createApi({
-// 	reducerPath: 'skyProApi',
-// 	tagTypes: ['Ads', 'User'],
-// 	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8090/' }),
-// 	prepareHeaders: (headers, { getState }) => {
-// 		const token = getState().auth.token
-// 		if(token) {
-// 			headers.set('Authorization', `Bearer ${token}`)
-// 		}
-// 		return headers
-// 	},
-// 	endpoints: build => ({
-// 		getAllAds: build.query({
-// 			query: () => `ads`,
-// 			providesTags: result =>
-// 				result
-// 					? [
-// 							...result.map(({ id }) => ({ type: 'Ads', id })),
-// 							{ type: 'Ads', id: 'LIST' },
-// 					  ]
-// 					: [{ type: 'Ads', id: 'LIST' }],
-// 		}),
-// 		getUser: build.mutation({
-// 			query: ({ accessToken }) => ({
-// 				url: 'user',
-// 				method: 'GET',
-// 				headers: {
-// 					Authorization: `Bearer ${accessToken}`,
-// 				},
-// 			}),
-// 		}),
-
-// 		login: build.mutation({
-// 			query: body => ({
-// 				url: 'auth/login',
-// 				method: 'POST',
-// 				body,
-// 			}),
-
-// 		}),
-// 	}),
-// });
-
-// export const { useGetAllAdsQuery, useLoginMutation, useGetUserMutation } =
-// 	skyProApi;

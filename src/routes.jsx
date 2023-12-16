@@ -8,6 +8,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import myApi from './store/slices/userApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from './store/slices/authSlice';
+import { AdPage } from './pages/AdPage/AdPage';
 
 export const AppRoutes = () => {
 	const [userInfo, setUserInfo] = useState(null);
@@ -31,10 +32,8 @@ export const AppRoutes = () => {
 					/>
 				</Route>
 
-				<Route
-					path='/'
-					element={<MainPage setUserInfo={setUserInfo} token={token} />}
-				/>
+				<Route path='/' element={<MainPage token={token} />} />
+				<Route path='/ad/:id' element={<AdPage token={token} />} />
 				<Route path='/login' element={<LoginPage />} />
 				<Route path='/reg' element={<RegPage />} />
 			</Routes>

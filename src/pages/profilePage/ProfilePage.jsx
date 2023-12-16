@@ -23,6 +23,7 @@ export const ProfilePage = () => {
 	const surnameInput = document.getElementById('lname');
 	const cityInput = document.getElementById('city');
 	const phoneInput = document.getElementById('phone');
+	
 	useEffect(() => {
 		// const getToken = localStorage.getItem('access_token');
 		// const userInfo = await getUser({ getToken });

@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../store/slices/authApiSlice';
 import { setCredentials } from '../../store/slices/authSlice';
 import myApi from '../../store/slices/userApiSlice';
-// import { useLazyGetUserQuery } from '../../store/slices/userApiSlice';
+
 import * as S from './LoginPage.styles';
 
 export const LoginPage = () => {

@@ -6,11 +6,10 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import * as S from './MainPage.styles';
-import { useDispatch } from 'react-redux';
-import { useAllAdsQuery } from '../../store/slices/adsApiSlice';
-import { useGetUserQuery } from '../../store/slices/userApiSlice';
 
-export const MainPage = ({ setUserInfo, token }) => {
+import { useAllAdsQuery } from '../../store/slices/adsApiSlice';
+
+export const MainPage = ({ token }) => {
 	const [filteredWords, setFilteredWords] = useState('');
 
 	const [filteredAds, setFilteredAds] = useState(null);
@@ -20,12 +19,6 @@ export const MainPage = ({ setUserInfo, token }) => {
 	useEffect(() => {
 		setFilteredAds(allAds);
 	}, [allAds]);
-
-	// const { data: info } = useGetUserQuery();
-	// console.log(info);
-	// useEffect(() => {
-	// 	setUserInfo(info);
-	// }, [info]);
 
 	const exit = () => {
 		localStorage.removeItem('access_token');
@@ -181,35 +174,40 @@ export const MainPage = ({ setUserInfo, token }) => {
 											const img = ads.images[0]?.url;
 
 											return (
-												<S.MainPageMainCardsItem key={ads.id}>
-													<S.MainPageMainCardsCard>
-														<S.MainPageMainCardImg>
-															<S.MainPageCardImg
-																src={`http://localhost:8090/${img}`}
-															/>
-														</S.MainPageMainCardImg>
+												<S.MainPageMainCardsItemNav
+													key={ads.id}
+													to={`/ad/${ads.id}`}
+												>
+													<S.MainPageMainCardsItem>
+														<S.MainPageMainCardsCard>
+															<S.MainPageMainCardImg>
+																<S.MainPageCardImg
+																	src={`http://localhost:8090/${img}`}
+																/>
+															</S.MainPageMainCardImg>
 
-														<S.MainPageCardContent>
-															<S.MainPageCardTitle>
-																{ads.title}
-															</S.MainPageCardTitle>
-															<S.MainPageCardPrice>
-																{ads.price
-																	.toString()
-																	.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
-																₽
-															</S.MainPageCardPrice>
-															<S.MainPageCardPlaceDate>
-																<S.MainPageCardPlace>
-																	{ads.user?.city}
-																</S.MainPageCardPlace>
-																<S.MainPageCardDate>
-																	{moment(ads.created_on).format('LLL')}
-																</S.MainPageCardDate>
-															</S.MainPageCardPlaceDate>
-														</S.MainPageCardContent>
-													</S.MainPageMainCardsCard>
-												</S.MainPageMainCardsItem>
+															<S.MainPageCardContent>
+																<S.MainPageCardTitle>
+																	{ads.title}
+																</S.MainPageCardTitle>
+																<S.MainPageCardPrice>
+																	{ads.price
+																		.toString()
+																		.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
+																	₽
+																</S.MainPageCardPrice>
+																<S.MainPageCardPlaceDate>
+																	<S.MainPageCardPlace>
+																		{ads.user?.city}
+																	</S.MainPageCardPlace>
+																	<S.MainPageCardDate>
+																		{moment(ads.created_on).format('LLL')}
+																	</S.MainPageCardDate>
+																</S.MainPageCardPlaceDate>
+															</S.MainPageCardContent>
+														</S.MainPageMainCardsCard>
+													</S.MainPageMainCardsItem>
+												</S.MainPageMainCardsItemNav>
 											);
 										})}
 								</S.MainPageMainContentCards>
