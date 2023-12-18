@@ -8,6 +8,8 @@ export const MainPageWrapper = styled.div`
 	background-color: #f1f1f1;
 	display: flex;
 	flex-direction: column;
+	
+
 `;
 
 
@@ -15,7 +17,7 @@ export const MainPageWrapper = styled.div`
 export const MainPageContainer = styled.div`
 	width: 100%;
 	margin: 0 auto;
-	background-color: #ffffff;
+	background-color: #ffffff;backdrop-filter: blur(2px);
 `;
 
 export const MainPageHeader = styled.header`

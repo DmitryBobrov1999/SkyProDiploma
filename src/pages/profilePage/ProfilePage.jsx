@@ -25,9 +25,7 @@ export const ProfilePage = () => {
 	const phoneInput = document.getElementById('phone');
 	
 	useEffect(() => {
-		// const getToken = localStorage.getItem('access_token');
-		// const userInfo = await getUser({ getToken });
-		// setUser(userInfo);
+
 	(async() => {
 		await	setName(user?.name);
 		await	setSurname(user?.surname);
@@ -62,16 +60,15 @@ export const ProfilePage = () => {
 		event.preventDefault();
 		const getToken = localStorage.getItem('access_token');
 
-		const data = await changeInfo({ name, surname, phone, city, getToken });
+		 await changeInfo({ name, surname, phone, city, getToken });
 
 		setChanger(false);
 	};
 
 	const changeAvHandler = async e => {
-		// const getToken = localStorage.getItem('access_token');
+		
 		const file = e.target.files[0];
 		const dataWithAvatar = await changeAvatar({ file });
-		console.log(dataWithAvatar.data);
 		dispatch(getUser(dataWithAvatar.data));
 	};
 

@@ -8,6 +8,8 @@ import { NavLink } from 'react-router-dom';
 import * as S from './MainPage.styles';
 
 import { useAllAdsQuery } from '../../store/slices/adsApiSlice';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../store/slices/authSlice';
 
 export const MainPage = ({ token }) => {
 	const [filteredWords, setFilteredWords] = useState('');
@@ -16,6 +18,8 @@ export const MainPage = ({ token }) => {
 
 	const { data: allAds, isLoading } = useAllAdsQuery();
 
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		setFilteredAds(allAds);
 	}, [allAds]);
@@ -23,6 +27,7 @@ export const MainPage = ({ token }) => {
 	const exit = () => {
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
+		dispatch(logOut());
 	};
 
 	const handleChange = event => {

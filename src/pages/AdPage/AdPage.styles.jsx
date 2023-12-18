@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+	
+
 export const AdPageWrapper = styled.div`
 	width: 100%;
 	min-height: 100%;
@@ -28,6 +30,21 @@ export const AdPageHeaderNav = styled.nav`
 	display: flex;
 	align-items: center;
 	justify-content: end;
+`;
+
+export const AdPageHeaderBtnMainEnter = styled.button`
+	width: 224px;
+	height: 40px;
+	border: 1px solid #ffffff;
+	border-radius: 6px;
+	background-color: transparent;
+	color: #ffffff;
+	font-size: 16px;
+	line-height: 1;
+	&:hover {
+		background: rgba(255, 255, 255, 0.15);
+		border: 1px solid #ffffff;
+	}
 `;
 
 export const AdPageHeaderBtnPutAd = styled.button`
@@ -161,6 +178,7 @@ export const AdPageArticleFillImg = styled.div`
 	& img {
 		width: 480px;
 		height: 480px;
+		${'' /* border: 2px solid rgba(0, 158, 228, 1); */}
 	}
 `;
 
@@ -174,6 +192,12 @@ export const AdPageArticleBlock = styled.div`
 `;
 
 export const AdPageArticleTitle = styled.h3`
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 45px;
+	letter-spacing: 0em;
+	text-align: left;
+
 	margin-bottom: 10px;
 `;
 
@@ -182,10 +206,13 @@ export const AdPageArticleInfo = styled.div`
 `;
 
 export const AdPageArticleDate = styled.p`
-	font-size: 16px;
-	line-height: 21px;
 	color: #5f5f5f;
 	margin-bottom: 4px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 21px;
+	letter-spacing: 0em;
+	text-align: left;
 `;
 export const AdPageArticleCity = styled.p`
 	font-size: 16px;
@@ -194,8 +221,13 @@ export const AdPageArticleCity = styled.p`
 	margin-bottom: 4px;
 `;
 export const AdPageArticleLink = styled.a`
+	font-family: 'Noto Sans', sans-serif;
 	font-size: 16px;
+	font-weight: 400;
 	line-height: 21px;
+	letter-spacing: 0em;
+	text-align: left;
+
 	color: #009ee4;
 `;
 
@@ -264,9 +296,39 @@ export const AdPageAuthorAbout = styled.p`
 	color: #5f5f5f;
 `;
 
-// ================== footer ====================================
+
 export const AdPageFooter = styled.footer`
 	display: none;
 `;
 
-// ================== Медиа ====================================
+export const AdPageArticleImgBar = styled.div`
+	margin-top: 30px;
+	width: 490px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: left;
+	overflow: hidden;
+	margin-left: -5px;
+`;
+
+
+export const AdPageArticleImgBarDiv = styled.div`
+	width: 88px;
+	min-width: 88px;
+	height: 88px;
+	background-color: #f0f0f0;
+	margin: 0 5px;
+	border: 2px solid rgba(0, 158, 228, 1) ;
+	cursor: pointer;
+	& img {
+		width: 100%;
+		height: 100%;
+		display: block;
+		object-fit: cover;
+	}
+`;
+
+export const AdPageArticleImgBarMob = styled.div`
+	display: none;
+`;

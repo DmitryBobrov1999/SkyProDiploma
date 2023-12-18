@@ -35,8 +35,8 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 		
 		if (refreshResult?.data) {
 			api.dispatch(setCredentials(refreshResult.data));
-			localStorage.setItem('access_token', refreshResult.data.access_token);
-			localStorage.setItem('refresh_token', refreshResult.data.refresh_token);
+			localStorage.setItem('access_token', refreshResult?.data.access_token);
+			localStorage.setItem('refresh_token', refreshResult?.data.refresh_token);
 			result = await baseQuery(args, api, extraOptions);
 		} else {
 			api.dispatch(logOut());

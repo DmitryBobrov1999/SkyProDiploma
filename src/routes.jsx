@@ -7,20 +7,24 @@ import { ProfilePage } from './pages/profilePage/ProfilePage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import myApi from './store/slices/userApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from './store/slices/authSlice';
+import { getUser, setCredentials } from './store/slices/authSlice';
 import { AdPage } from './pages/AdPage/AdPage';
 
 export const AppRoutes = () => {
 	const [userInfo, setUserInfo] = useState(null);
-	const token = localStorage.getItem('access_token');
-	const dispatch = useDispatch()
+	const [token, setToken] = useState(localStorage.getItem('access_token'));
 	
+	const dispatch = useDispatch();
+
 	const { data: info } = myApi.useGetUserQuery();
-	
+	const {token: selectorToken } = useSelector(state => state.auth)
 	useEffect(() => {
+		const token = localStorage.getItem('access_token');
+		setToken(selectorToken);
+		dispatch(setCredentials(token));
 		setUserInfo(info);
 		dispatch(getUser(info));
-	}, [info, dispatch]);
+	}, [info, dispatch, selectorToken]);
 
 	return (
 		<BrowserRouter>

@@ -2,12 +2,16 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 
+
+
 @font-face {
 	font-family: 'StratosSkyeng';
     src: local('StratosSkyeng'), local('StratosSkyeng'),
         url('../public/fonts/StratosSkyeng.woff2') format('woff2'),
         url('../public/fonts/StratosSkyeng.woff') format('woff'),
+        
 }
+
 
 	* {
     margin: 0;
