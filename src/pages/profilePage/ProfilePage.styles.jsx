@@ -243,9 +243,7 @@ export const ProfilePageSettingsBtn = styled.button`
 	margin: 10px 7px 0;
 	border-radius: 6px;
 	border: 1px solid;
-	&:hover {
-		background-color: #0080c1;
-	}
+	
 `;
 
 export const ProfilePageCards = styled.div`

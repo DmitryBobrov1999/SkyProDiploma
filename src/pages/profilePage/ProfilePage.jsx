@@ -1,37 +1,31 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
 import { NavLink } from 'react-router-dom';
-import { changeInfo } from '../../store/api/api';
-import { getUser } from '../../store/slices/authSlice';
-import { useChangeAvatarMutation } from '../../store/slices/avatarApiSlice';
 
+import { useChangeAvatarMutation, useChangeInfoMutation } from '../../store/slices/userApiSlice';
 import * as S from './ProfilePage.styles';
 
-export const ProfilePage = () => {
-	const { user } = useSelector(state => state.auth);
+export const ProfilePage = ({ user }) => {
 	const [name, setName] = useState(null);
 	const [surname, setSurname] = useState(null);
 	const [phone, setPhone] = useState(null);
 	const [city, setCity] = useState(null);
 	const [changer, setChanger] = useState(false);
-
-	const [changeAvatar] = useChangeAvatarMutation();
-	const dispatch = useDispatch();
+	const [hover, setHover] = useState(false);
 
 	const nameInput = document.getElementById('fname');
 	const surnameInput = document.getElementById('lname');
 	const cityInput = document.getElementById('city');
 	const phoneInput = document.getElementById('phone');
-	
-	useEffect(() => {
+	const [changeInfo] = useChangeInfoMutation();
+	const [changeAvatar] = useChangeAvatarMutation();
 
-	(async() => {
-		await	setName(user?.name);
-		await	setSurname(user?.surname);
-		await	setPhone(user?.phone);
-		await	setCity(user?.city);
-	})()
+	useEffect(() => {
+		(async () => {
+			await setName(user?.name);
+			await setSurname(user?.surname);
+			await setPhone(user?.phone);
+			await setCity(user?.city);
+		})();
 	}, [user?.name, user?.surname, user?.phone, user?.city]);
 
 	useEffect(() => {
@@ -58,18 +52,15 @@ export const ProfilePage = () => {
 
 	const handleClick = async event => {
 		event.preventDefault();
-		const getToken = localStorage.getItem('access_token');
 
-		 await changeInfo({ name, surname, phone, city, getToken });
+		await changeInfo({ name, surname, phone, city });
 
 		setChanger(false);
 	};
 
 	const changeAvHandler = async e => {
-		
 		const file = e.target.files[0];
-		const dataWithAvatar = await changeAvatar({ file });
-		dispatch(getUser(dataWithAvatar.data));
+		await changeAvatar({ file });
 	};
 
 	return (
@@ -246,10 +237,14 @@ export const ProfilePage = () => {
 												</S.ProfilePageSettingsDiv>
 
 												<S.ProfilePageSettingsBtn
+													onMouseEnter={() => {
+														setHover(true);
+													}}
+													onMouseLeave={() => setHover(false)}
 													style={
 														changer
 															? {
-																	background: '#009ee4',
+																	background: hover ? '#0080c1' : '#009ee4',
 																	border: '#009ee4',
 															  }
 															: {

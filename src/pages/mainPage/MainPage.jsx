@@ -18,8 +18,6 @@ export const MainPage = ({ token }) => {
 
 	const { data: allAds, isLoading } = useAllAdsQuery();
 
-	const dispatch = useDispatch();
-
 	useEffect(() => {
 		setFilteredAds(allAds);
 	}, [allAds]);
@@ -27,7 +25,6 @@ export const MainPage = ({ token }) => {
 	const exit = () => {
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
-		dispatch(logOut());
 	};
 
 	const handleChange = event => {

@@ -8,18 +8,19 @@ export const CommentsPageWrapper = styled.div`
 
 export const CommentsPageContainer = styled.div`
 	max-width: 100%;
-	min-height: 100%;
 	margin: 0 auto;
 	background-color: #f4f5f6;
+	position: absolute;
+	top: 0;
+	left: 50%;
 `;
 
 export const CommentsPageModalBlock = styled.div`
-	position: absolute;
-	z-index: 5;
+	position: fixed;
+	z-index: 10;
 	left: calc(50% - (800px / 2));
 	top: 60px;
 	opacity: 1;
-	
 `;
 
 export const CommentsPageModalContent = styled.div`
@@ -27,12 +28,12 @@ export const CommentsPageModalContent = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	width: 800px;
-	height: 100vh;
+	height: auto;
 	padding: 20px 92px 57px 50px;
 	background-color: #ffffff;
 	border-radius: 12px;
-	position: relative;
 	border: 1px solid grey;
+	height: calc(100vh - 60px);
 `;
 
 export const CommentsPageModalTitle = styled.h3`
@@ -43,9 +44,9 @@ export const CommentsPageModalTitle = styled.h3`
 	margin-bottom: 15px;
 `;
 
-export const CommentsPageModalBtnClose = styled.button`
-	
-	
+export const CommentsPageModalBtnClose = styled.div`
+	width: 23px;
+	height: 23px;
 	position: absolute;
 	top: 47px;
 	right: 50px;
@@ -68,6 +69,12 @@ export const CommentsPageModalBtnCloseLine = styled.div`
 		background-color: #d9d9d9;
 		top: 47%;
 		right: -4px;
+	}
+	&:hover {
+		&::after,
+		&::before {
+			background-color: #0080c1;
+		}
 	}
 
 	&::before {
@@ -147,12 +154,15 @@ export const CommentsPageFormNewAreaTextArea = styled.textarea`
 export const CommentsPageFormBtnPub = styled.button`
 	width: 181px;
 	height: 50px;
-	background: #d9d9d9;
 	border: 1px solid #d9d9d9;
 	border-radius: 6px;
 	font-size: 16px;
 	line-height: 24px;
 	color: #ffffff;
+
+	&:hover {
+		background: #0080c1;
+	}
 `;
 
 export const CommentsPageModalReviews = styled.div`

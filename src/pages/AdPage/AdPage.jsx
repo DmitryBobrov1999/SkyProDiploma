@@ -9,11 +9,13 @@ import * as S from './AdPage.styles';
 export const AdPage = ({ token }) => {
 	let { id } = useParams();
 	const [specificAdInfo, setSpecificInfo] = useState(null);
-	const { data: specificAd } = useSpecificAdQuery({ id });
-	const { data: comments } = useCommentsQuery({ id });
 	const [showNumber, setShowNumber] = useState(false);
 	const [image, setImage] = useState(0);
 	const [activeModal, setActiveModal] = useState(null);
+	const { data: specificAd } = useSpecificAdQuery({ id });
+	const { data: comments } = useCommentsQuery({ id });
+
+	
 	useEffect(() => {
 		setSpecificInfo(specificAd);
 	}, [specificAd]);
@@ -242,7 +244,11 @@ export const AdPage = ({ token }) => {
 				</S.AdPageContainer>
 			</S.AdPageWrapper>
 			{activeModal && (
-				<CommentsPage comments={comments} setActiveModal={setActiveModal} />
+				<CommentsPage
+					specificAdInfo={specificAdInfo}
+					comments={comments}
+					setActiveModal={setActiveModal}
+				/>
 			)}
 		</>
 	);
