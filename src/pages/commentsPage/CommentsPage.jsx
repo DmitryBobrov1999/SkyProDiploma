@@ -5,7 +5,7 @@ import { useAddCommentMutation } from '../../store/slices/commentsSlice';
 import {  useSelector } from 'react-redux';
 
 
-export const CommentsPage = ({ setActiveModal, specificAdInfo, comments }) => {
+export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 	const [text, setText] = useState('');
 
 	const [addComment] = useAddCommentMutation();
@@ -18,7 +18,7 @@ export const CommentsPage = ({ setActiveModal, specificAdInfo, comments }) => {
 		e.preventDefault();
 		if (text) {
 			try {
-				await addComment({ text, specificAdInfo });
+				await addComment({ text, specificAd });
 			} catch (error) {
 				console.log(error);
 			}

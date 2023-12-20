@@ -3,12 +3,13 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { MainPage } from '@pages/mainPage/MainPage';
 import { LoginPage } from './pages/loginPage/LoginPage';
 import { RegPage } from './pages/regPage/RegPage';
-import { ProfilePage } from './pages/profilePage/ProfilePage';
+import { ProfilePage } from './pages/profilePage/MyProfilePage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import myApi from './store/slices/userApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import {  setCredentials } from './store/slices/authSlice';
 import { AdPage } from './pages/AdPage/AdPage';
+import { SellerProfilePage } from './pages/sellerProfilePage/SellerProfilePage';
 
 export const AppRoutes = () => {
 
@@ -34,7 +35,8 @@ export const AppRoutes = () => {
 				</Route>
 
 				<Route path='/' element={<MainPage token={token} />} />
-				<Route path='/ad/:id' element={<AdPage token={token} />} />
+				<Route path='/seller/:id' element={<AdPage token={token} />} />
+				<Route path='/seller/:id/:user_id' element={<SellerProfilePage token={token}/>}/>
 				<Route path='/login' element={<LoginPage />} />
 				<Route path='/reg' element={<RegPage />} />
 			</Routes>

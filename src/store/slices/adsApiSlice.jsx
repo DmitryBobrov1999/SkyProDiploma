@@ -1,10 +1,18 @@
 import { apiSlice } from '../api/rtkQueryApi';
 
 export const authApiSlice = apiSlice.injectEndpoints({
+	tagTypes: ['AllAds'],
 	endpoints: builder => ({
 		allAds: builder.query({
-			query: () => `ads`,
+			query: () => `/ads`,
 		}),
+		providesTags: result =>
+			result
+				? [
+						...result.map(({ id }) => ({ type: 'AllAds', id })),
+						{ type: 'AllAds', id: 'LIST' },
+				  ]
+				: [{ type: 'AllAds', id: 'LIST' }],
 	}),
 });
 

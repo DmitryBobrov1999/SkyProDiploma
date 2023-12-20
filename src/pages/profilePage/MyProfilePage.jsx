@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useChangeAvatarMutation, useChangeInfoMutation } from '../../store/slices/userApiSlice';
-import * as S from './ProfilePage.styles';
+import * as S from './MyProfilePage.styles';
 
 export const ProfilePage = ({ user }) => {
 	const [name, setName] = useState(null);

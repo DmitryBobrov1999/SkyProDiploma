@@ -8,8 +8,8 @@ import { NavLink } from 'react-router-dom';
 import * as S from './MainPage.styles';
 
 import { useAllAdsQuery } from '../../store/slices/adsApiSlice';
-import { useDispatch } from 'react-redux';
-import { logOut } from '../../store/slices/authSlice';
+
+
 
 export const MainPage = ({ token }) => {
 	const [filteredWords, setFilteredWords] = useState('');
@@ -174,11 +174,11 @@ export const MainPage = ({ token }) => {
 									{filteredAds &&
 										filteredAds.map(ads => {
 											const img = ads.images[0]?.url;
-
+											
 											return (
 												<S.MainPageMainCardsItemNav
 													key={ads.id}
-													to={`/ad/${ads.id}`}
+													to={`/seller/${ads.id}`}
 												>
 													<S.MainPageMainCardsItem>
 														<S.MainPageMainCardsCard>

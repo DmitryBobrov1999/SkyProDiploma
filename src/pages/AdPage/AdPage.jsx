@@ -1,5 +1,5 @@
 import moment from 'moment/moment';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useCommentsQuery } from '../../store/slices/commentsSlice';
 import { useSpecificAdQuery } from '../../store/slices/specificAd';
@@ -8,17 +8,11 @@ import * as S from './AdPage.styles';
 
 export const AdPage = ({ token }) => {
 	let { id } = useParams();
-	const [specificAdInfo, setSpecificInfo] = useState(null);
 	const [showNumber, setShowNumber] = useState(false);
 	const [image, setImage] = useState(0);
 	const [activeModal, setActiveModal] = useState(null);
 	const { data: specificAd } = useSpecificAdQuery({ id });
 	const { data: comments } = useCommentsQuery({ id });
-
-	
-	useEffect(() => {
-		setSpecificInfo(specificAd);
-	}, [specificAd]);
 
 	return (
 		<>
@@ -128,15 +122,15 @@ export const AdPage = ({ token }) => {
 									<S.AdPageArticleImg>
 										<S.AdPageArticleFillImg>
 											<img
-												src={`http://localhost:8090/${specificAdInfo?.images[image]?.url}`}
+												src={`http://localhost:8090/${specificAd?.images[image]?.url}`}
 												alt='firstImg'
 											/>
 										</S.AdPageArticleFillImg>
 										<S.AdPageArticleImgBar>
-											{specificAdInfo?.images.slice(0, 5).map(img => (
+											{specificAd?.images.slice(0, 5).map(img => (
 												<S.AdPageArticleImgBarDiv
 													onClick={() =>
-														setImage(specificAdInfo?.images.indexOf(img))
+														setImage(specificAd?.images.indexOf(img))
 													}
 													key={img.id}
 												>
@@ -159,14 +153,14 @@ export const AdPage = ({ token }) => {
 								<S.AdPageArticleRight>
 									<S.AdPageArticleBlock>
 										<S.AdPageArticleTitle>
-											{specificAdInfo?.title}
+											{specificAd?.title}
 										</S.AdPageArticleTitle>
 										<S.AdPageArticleInfo>
 											<S.AdPageArticleDate>
-												{moment(specificAdInfo?.created_on).format('LLL')}
+												{moment(specificAd?.created_on).format('LLL')}
 											</S.AdPageArticleDate>
 											<S.AdPageArticleCity>
-												{specificAdInfo?.user?.city}
+												{specificAd?.user?.city}
 											</S.AdPageArticleCity>
 											<S.AdPageArticleLink
 												onClick={e => {
@@ -180,7 +174,7 @@ export const AdPage = ({ token }) => {
 											</S.AdPageArticleLink>
 										</S.AdPageArticleInfo>
 										<S.AdPageArticlePrice>
-											{specificAdInfo?.price
+											{specificAd?.price
 												.toString()
 												.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
 											₽
@@ -189,27 +183,29 @@ export const AdPage = ({ token }) => {
 											Показать&nbsp;телефон
 											<span>
 												{showNumber
-													? specificAdInfo?.user?.phone
-													: specificAdInfo?.user?.phone.slice(0, -9) +
-													  `ХХХ ХХ ХХ`}
+													? specificAd?.user?.phone
+													: specificAd?.user?.phone.slice(0, -9) + `ХХХ ХХ ХХ`}
 											</span>
 										</S.AdPageArticleBtn>
 										<S.AdPageArticleAuthor>
 											<S.AdPageAuthorImg>
 												<img
-													src={`http://localhost:8090/${specificAdInfo?.user?.avatar}`}
+													src={`http://localhost:8090/${specificAd?.user?.avatar}`}
 													alt='avatar'
 												/>
 											</S.AdPageAuthorImg>
 											<S.AdPageAuthorCont>
-												<S.AdPageAuthorName>
-													{specificAdInfo?.user?.name}
-												</S.AdPageAuthorName>
+												<NavLink
+													to={`/seller/${specificAd?.id}/${specificAd?.user_id}`}
+												>
+													<S.AdPageAuthorName>
+														{specificAd?.user?.name}
+													</S.AdPageAuthorName>
+												</NavLink>
+
 												<S.AdPageAuthorAbout>
 													Продает товары c{' '}
-													{moment(specificAdInfo?.user?.sells_from).format(
-														'LL'
-													)}
+													{moment(specificAd?.user?.sells_from).format('LL')}
 												</S.AdPageAuthorAbout>
 											</S.AdPageAuthorCont>
 										</S.AdPageArticleAuthor>
@@ -222,7 +218,7 @@ export const AdPage = ({ token }) => {
 							<S.AdPageArcticleTitle>Описание товара</S.AdPageArcticleTitle>
 							<S.AdPageMainContent>
 								<S.AdPageArcticleText>
-									{specificAdInfo?.description}
+									{specificAd?.description}
 								</S.AdPageArcticleText>
 							</S.AdPageMainContent>
 						</S.AdPageMainContainer>
@@ -245,7 +241,7 @@ export const AdPage = ({ token }) => {
 			</S.AdPageWrapper>
 			{activeModal && (
 				<CommentsPage
-					specificAdInfo={specificAdInfo}
+					specificAd={specificAd}
 					comments={comments}
 					setActiveModal={setActiveModal}
 				/>

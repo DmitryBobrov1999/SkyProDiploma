@@ -4,7 +4,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 	tagTypes: ['Comments'],
 	endpoints: builder => ({
 		comments: builder.query({
-			query: ({ id }) => `ads/${id}/comments`,
+			query: ({ id }) => `/ads/${id}/comments`,
 			providesTags: result =>
 				result
 					? [
@@ -14,8 +14,8 @@ export const authApiSlice = apiSlice.injectEndpoints({
 					: [{ type: 'Comments', id: 'LIST' }],
 		}),
 		addComment: builder.mutation({
-			query: ({ specificAdInfo, text }) => ({
-				url: `/ads/${specificAdInfo?.id}/comments`,
+			query: ({ specificAd, text }) => ({
+				url: `/ads/${specificAd?.id}/comments`,
 				method: 'POST',
 				body: {
 					text: text,
