@@ -4,20 +4,18 @@ import styled from 'styled-components';
 export const MainPageWrapper = styled.div`
 	width: 100%;
 	min-height: 100%;
-
 	background-color: #f1f1f1;
 	display: flex;
 	flex-direction: column;
-	
-
+	align-items: center;
+	justify-content: center;
 `;
-
-
 
 export const MainPageContainer = styled.div`
 	width: 100%;
 	margin: 0 auto;
-	background-color: #ffffff;backdrop-filter: blur(2px);
+	background-color: #ffffff;
+	backdrop-filter: blur(2px);
 `;
 
 export const MainPageHeader = styled.header`
@@ -169,7 +167,7 @@ export const MainPageMainContentCards = styled.div`
 
 export const MainPageMainCardsItemNav = styled(NavLink)`
 	color: rgba(0, 158, 228, 1);
-	text-decoration: none
+	text-decoration: none;
 `;
 
 export const MainPageMainCardsItem = styled.div`

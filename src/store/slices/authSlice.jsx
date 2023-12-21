@@ -4,14 +4,20 @@ const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
 		token: null,
+		urlFiles: [],
+	
 	},
 	reducers: {
 		setCredentials: (state, action) => {
 			state.token = action.payload;
 		},
+		setUrlImages: (state, action) => {
+			state.urlFiles.push(action.payload);
+		},
+	
 	},
 });
 
-export const { setCredentials, logOut } = authSlice.actions;
+export const { setCredentials, setUrlImages } = authSlice.actions;
 
 export default authSlice.reducer;

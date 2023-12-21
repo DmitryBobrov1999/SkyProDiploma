@@ -2,8 +2,7 @@ import * as S from './CommentsPage.styles';
 import moment from 'moment/moment';
 import { useState } from 'react';
 import { useAddCommentMutation } from '../../store/slices/commentsSlice';
-import {  useSelector } from 'react-redux';
-
+import { useSelector } from 'react-redux';
 
 export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 	const [text, setText] = useState('');
@@ -26,8 +25,7 @@ export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 	};
 
 	return (
-		<S.CommentsPageWrapper>
-			<S.CommentsPageContainer>
+	
 				<S.CommentsPageModalBlock>
 					<S.CommentsPageModalContent>
 						<S.CommentsPageModalTitle>Отзывы о товаре</S.CommentsPageModalTitle>
@@ -69,7 +67,7 @@ export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 							</S.CommentsPageModalFormNewArt>
 
 							<S.CommentsPageModalReviews>
-								<div className='reviews__review review'>
+							
 									{comments &&
 										comments.map(comment => (
 											<S.CommentsPageReviewsItem key={comment.id}>
@@ -95,12 +93,11 @@ export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 												</S.CommentsPageReviewRight>
 											</S.CommentsPageReviewsItem>
 										))}
-								</div>
+						
 							</S.CommentsPageModalReviews>
 						</S.CommentsPageModalScroll>
 					</S.CommentsPageModalContent>
 				</S.CommentsPageModalBlock>
-			</S.CommentsPageContainer>
-		</S.CommentsPageWrapper>
+			
 	);
 };

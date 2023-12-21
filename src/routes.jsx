@@ -17,7 +17,7 @@ export const AppRoutes = () => {
 
 	const dispatch = useDispatch();
 
-	const { data: user } = myApi.useGetUserQuery();
+	const { data: user, isLoading } = myApi.useGetUserQuery();
 	const { token: selectorToken } = useSelector(state => state.auth);
 	
 	useEffect(() => {
@@ -31,12 +31,18 @@ export const AppRoutes = () => {
 		<BrowserRouter>
 			<Routes>
 				<Route element={<ProtectedRoute token={token} />}>
-					<Route path='/profile' element={<ProfilePage user={user} />} />
+					<Route
+						path='/profile'
+						element={<ProfilePage user={user} isLoading={isLoading} />}
+					/>
 				</Route>
 
 				<Route path='/' element={<MainPage token={token} />} />
 				<Route path='/seller/:id' element={<AdPage token={token} />} />
-				<Route path='/seller/:id/:user_id' element={<SellerProfilePage token={token}/>}/>
+				<Route
+					path='/seller/:id/:user_id'
+					element={<SellerProfilePage token={token} />}
+				/>
 				<Route path='/login' element={<LoginPage />} />
 				<Route path='/reg' element={<RegPage />} />
 			</Routes>

@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 
-	
-
 export const AdPageWrapper = styled.div`
 	width: 100%;
 	min-height: 100%;
-	
 	background-color: #f1f1f1;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	justify-content: center
 `;
 
 export const AdPageContainer = styled.div`
-	${'' /* max-width: 1440px; */}
 	width: 100%;
 	margin: 0 auto;
 	background-color: #ffffff;
@@ -79,7 +77,7 @@ export const AdPageHeaderBtnLk = styled.button`
 `;
 
 export const AdPageHeaderLogo = styled.div`
-	display: block
+	display: block;
 `;
 
 export const AdPageHeaderBtn = styled.button`
@@ -138,7 +136,6 @@ export const AdPageArcticleTitle = styled.h3`
 	line-height: 45px;
 	letter-spacing: 0em;
 	text-align: left;
-	
 `;
 export const AdPageArcticleText = styled.p`
 	font-size: 16px;
@@ -164,7 +161,7 @@ export const AdPageArticleLeft = styled.div`
 
 export const AdPageArticleImg = styled.div`
 	width: 100%;
-	
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -175,10 +172,11 @@ export const AdPageArticleFillImg = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	background-color: #f0f0f0;
 	& img {
 		width: 480px;
 		height: 480px;
-		${'' /* border: 2px solid rgba(0, 158, 228, 1); */}
 	}
 `;
 
@@ -296,7 +294,6 @@ export const AdPageAuthorAbout = styled.p`
 	color: #5f5f5f;
 `;
 
-
 export const AdPageFooter = styled.footer`
 	display: none;
 `;
@@ -312,14 +309,13 @@ export const AdPageArticleImgBar = styled.div`
 	margin-left: -5px;
 `;
 
-
 export const AdPageArticleImgBarDiv = styled.div`
 	width: 88px;
 	min-width: 88px;
 	height: 88px;
 	background-color: #f0f0f0;
 	margin: 0 5px;
-	border: 2px solid rgba(0, 158, 228, 1) ;
+	border: 2px solid rgba(0, 158, 228, 1);
 	cursor: pointer;
 	& img {
 		width: 100%;

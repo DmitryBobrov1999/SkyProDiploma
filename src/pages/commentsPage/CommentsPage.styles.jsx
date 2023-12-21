@@ -4,6 +4,10 @@ export const CommentsPageWrapper = styled.div`
 	width: 100%;
 	min-height: 100%;
 	background: rgba(255, 255, 255, 1);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 `;
 
 export const CommentsPageContainer = styled.div`
@@ -33,7 +37,6 @@ export const CommentsPageModalContent = styled.div`
 	background-color: #ffffff;
 	border-radius: 12px;
 	border: 1px solid grey;
-	height: calc(100vh - 60px);
 `;
 
 export const CommentsPageModalTitle = styled.h3`
@@ -88,10 +91,11 @@ export const CommentsPageModalBtnCloseLine = styled.div`
 
 export const CommentsPageModalScroll = styled.div`
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
 	flex-direction: column;
 	align-items: flex-start;
 	width: 100%;
-
 	overflow-y: auto;
 	scrollbar-color: #ffffff #2e2e2e; // Firefox
 	scrollbar-width: thin; // Firefox
@@ -166,9 +170,8 @@ export const CommentsPageFormBtnPub = styled.button`
 `;
 
 export const CommentsPageModalReviews = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	width: 100%;
+	height: 495px;
 `;
 
 export const CommentsPageReviewsItem = styled.div`

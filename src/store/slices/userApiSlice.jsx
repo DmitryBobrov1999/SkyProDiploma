@@ -26,7 +26,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				},
 				body: { ...credentials },
 			}),
-			invalidatesTags: [{ type: 'User', id: 'LIST' }],
+			invalidatesTags: [
+				{ type: 'User', id: 'LIST' },
+				{ type: 'SpecificAd', id: 'LIST' },
+			],
 		}),
 		changeAvatar: builder.mutation({
 			query: ({ file }) => {
@@ -45,5 +48,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
 		}),
 	}),
 });
+
 export const { useChangeInfoMutation, useChangeAvatarMutation } = authApiSlice;
 export default authApiSlice;
