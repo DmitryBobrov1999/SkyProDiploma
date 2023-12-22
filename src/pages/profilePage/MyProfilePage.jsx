@@ -1,6 +1,11 @@
+import moment from 'moment/moment';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/Spinner';
+import {
+	useLazyMyAdsQuery,
+	useMyAdsQuery,
+} from '../../store/api/rtkQueryApi';
 
 import {
 	useChangeAvatarMutation,
@@ -9,7 +14,7 @@ import {
 import { AddAdPage } from '../addAd/AddAdPage';
 import * as S from './MyProfilePage.styles';
 
-export const ProfilePage = ({ user, isLoading }) => {
+export const ProfilePage = ({ user, isLoading, isSuccess }) => {
 	const [name, setName] = useState(null);
 	const [surname, setSurname] = useState(null);
 	const [phone, setPhone] = useState(null);
@@ -22,7 +27,14 @@ export const ProfilePage = ({ user, isLoading }) => {
 	const phoneInput = document.getElementById('phone');
 	const [changeInfo] = useChangeInfoMutation();
 	const [changeAvatar] = useChangeAvatarMutation();
+	const { data: dataAds } = useMyAdsQuery();
+	const [personalAds, setPersonalAds] = useState(null);
 	const [activeAddAd, setActiveAddAd] = useState(null);
+
+	// useEffect(() => {
+	// 	myAds();
+	// 	setPersonalAds(dataAds);
+	// }, [dataAds, myAds]);
 
 	useEffect(() => {
 		(async () => {
@@ -57,9 +69,7 @@ export const ProfilePage = ({ user, isLoading }) => {
 
 	const handleClick = async e => {
 		e.preventDefault();
-
 		await changeInfo({ name, surname, phone, city });
-
 		setChanger(false);
 	};
 
@@ -291,28 +301,45 @@ export const ProfilePage = ({ user, isLoading }) => {
 								</div>
 								<S.ProfilePageProfileContent>
 									<S.ProfilePageCards>
-										<S.ProfilePageCardsItem>
-											<S.ProfilePageCardsCard>
-												<S.ProfilePageCardsImg>
-													<img src='#' alt='picture' />
-												</S.ProfilePageCardsImg>
-												<div>
-													<S.ProfilePageCardsTitle>
-														Ракетка для большого тенниса Triumph Pro ST
-													</S.ProfilePageCardsTitle>
+										{dataAds &&
+											dataAds.map(myAd => {
+												const img = dataAds?.images?.[0]?.url;
+												return (
+													<NavLink to={`/seller/${myAd?.id}`} key={myAd?.id}>
+														<S.ProfilePageCardsItem>
+															<S.ProfilePageCardsCard>
+																<S.ProfilePageCardsImg>
+																	<img
+																		src={`http://localhost:8090/${img}`}
+																		alt='myAd'
+																	/>
+																</S.ProfilePageCardsImg>
+																<div>
+																	<S.ProfilePageCardsTitle>
+																		{myAd?.title}
+																	</S.ProfilePageCardsTitle>
 
-													<S.ProfilePageCardsPrice>
-														2&nbsp;200&nbsp;₽
-													</S.ProfilePageCardsPrice>
-													<S.ProfilePageCardsPlace>
-														Санкт Петербург
-													</S.ProfilePageCardsPlace>
-													<S.ProfilePageCardsDate>
-														Сегодня в&nbsp;10:45
-													</S.ProfilePageCardsDate>
-												</div>
-											</S.ProfilePageCardsCard>
-										</S.ProfilePageCardsItem>
+																	<S.ProfilePageCardsPrice>
+																		{myAd.price
+																			.toString()
+																			.replace(
+																				/(\d)(?=(\d{3})+$)/g,
+																				'$1 '
+																			)}{' '}
+																		₽
+																	</S.ProfilePageCardsPrice>
+																	<S.ProfilePageCardsPlace>
+																		{myAd?.user?.city}
+																	</S.ProfilePageCardsPlace>
+																	<S.ProfilePageCardsDate>
+																		{moment(myAd?.created_on).format('LLL')}
+																	</S.ProfilePageCardsDate>
+																</div>
+															</S.ProfilePageCardsCard>
+														</S.ProfilePageCardsItem>
+													</NavLink>
+												);
+											})}
 									</S.ProfilePageCards>
 								</S.ProfilePageProfileContent>
 							</S.ProfilePageMainContainer>

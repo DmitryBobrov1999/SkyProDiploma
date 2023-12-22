@@ -1,28 +1,25 @@
-import {  useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUrlImages } from '../../store/slices/authSlice';
-import { usePostAdMutation } from '../../store/slices/postAdSlice';
+import { usePostAdMutation } from '../../store/api/rtkQueryApi';
 import * as S from './AddAdPage.styles';
 
 export const AddAdPage = ({ setActiveAddAd }) => {
 	const [title, setTitle] = useState(null);
 	const [description, setDescription] = useState(null);
 	const [price, setPrice] = useState(null);
-	const [postAd, { isSuccess }] = usePostAdMutation();
+	const [postAd] = usePostAdMutation();
 	const { urlFiles } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 	const [files, setFiles] = useState([]);
-	const navigate = useNavigate();
 
 	const handlePost = async e => {
 		e.preventDefault();
-		await postAd({ title, description, price, files });
-		if (isSuccess) {
-			navigate('/');
-		}
+		await postAd({ title, description, price, files })
+			.unwrap()
+			.then(() => setActiveAddAd(null));
 	};
-	console.log(files);
 
 	const imageUpload = e => {
 		files.push(e.target.files[0]);
@@ -67,7 +64,7 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 								<S.AddAdPageLabel htmlFor='adImg'>
 									<S.AddAdPageImgCover
 										onChange={e => imageUpload(e)}
-										accept='image/*'
+										accept='*/*'
 										id='adImg'
 										type='file'
 										multiple

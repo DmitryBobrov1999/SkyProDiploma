@@ -1,13 +1,13 @@
 import * as S from './AdPage.styles';
 import moment from 'moment/moment';
-import { useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useCommentsQuery } from '../../store/slices/commentsSlice';
 import { useSpecificAdQuery } from '../../store/slices/specificAd';
 import { CommentsPage } from '../commentsPage/CommentsPage';
 import { Spinner } from '../../components/spinner/Spinner';
 import { AddAdPage } from '../addAd/AddAdPage';
-
+import { useDeleteAdMutation } from '../../store/slices/postAdSlice';
 
 export const AdPage = ({ token }) => {
 	let { id } = useParams();
@@ -17,6 +17,15 @@ export const AdPage = ({ token }) => {
 	const { data: specificAd, isLoading } = useSpecificAdQuery({ id });
 	const { data: comments } = useCommentsQuery({ id });
 	const [activeAddAd, setActiveAddAd] = useState(null);
+	const [deleteAd] = useDeleteAdMutation();
+	const navigate = useNavigate();
+
+	const handleDeleteAd = async e => {
+		e.preventDefault();
+		await deleteAd({ specificAd }).then(() => {
+			navigate('/');
+		});
+	};
 
 	return (
 		<>
@@ -191,15 +200,29 @@ export const AdPage = ({ token }) => {
 													.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
 												₽
 											</S.AdPageArticlePrice>
-											<S.AdPageArticleBtn onClick={() => setShowNumber(true)}>
-												Показать&nbsp;телефон
-												<span>
-													{showNumber
-														? specificAd?.user?.phone
-														: specificAd?.user?.phone?.slice(0, -9) +
-														  `ХХХ ХХ ХХ`}
-												</span>
-											</S.AdPageArticleBtn>
+											<S.AdPageBtnDiv>
+												{specificAd?.user?.id ==
+												localStorage.getItem('myId') ? (
+													<>
+														<S.AdPageEditBtn>Редактировать</S.AdPageEditBtn>
+														<S.AdPageDeleteBtn onClick={handleDeleteAd}>
+															Снять с публикации
+														</S.AdPageDeleteBtn>
+													</>
+												) : (
+													<S.AdPageArticleBtn
+														onClick={() => setShowNumber(true)}
+													>
+														Показать&nbsp;телефон
+														<span>
+															{showNumber
+																? specificAd?.user?.phone
+																: specificAd?.user?.phone?.slice(0, -9) +
+																  `ХХХ ХХ ХХ`}
+														</span>
+													</S.AdPageArticleBtn>
+												)}
+											</S.AdPageBtnDiv>
 											<S.AdPageArticleAuthor>
 												<S.AdPageAuthorImg>
 													<img

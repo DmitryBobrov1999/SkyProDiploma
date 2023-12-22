@@ -261,7 +261,7 @@ export const ProfilePageCards = styled.div`
 	scrollbar-color: #ffffff #2e2e2e; // Firefox
 	scrollbar-width: thin; // Firefox
 	scrollbar-width: 0px; // Firefox
-	height: 441px;
+	${'' /* height: 441px; */}
 
 	&::-webkit-scrollbar {
 		width: 0px;

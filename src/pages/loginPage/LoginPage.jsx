@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../store/slices/authApiSlice';
-import { setCredentials } from '../../store/slices/authSlice';
+
 import myApi from '../../store/slices/userApiSlice';
 
 import * as S from './LoginPage.styles';
@@ -12,9 +12,9 @@ export const LoginPage = () => {
 	const [password, setPassword] = useState('');
 	const [errMsg, setErrMsg] = useState('');
 
-	const [login, { isError, isSuccess }] = useLoginMutation();
+	const [login, { isError }] = useLoginMutation();
 	const [getLazyInfo] = myApi.useLazyGetUserQuery();
-	const dispatch = useDispatch();
+
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -26,7 +26,7 @@ export const LoginPage = () => {
 		if (email && password) {
 			try {
 				const userData = await login({ email, password }).unwrap();
-				dispatch(setCredentials({ userData }));
+
 				localStorage.setItem('access_token', userData.access_token);
 				localStorage.setItem('refresh_token', userData.refresh_token);
 				getLazyInfo();

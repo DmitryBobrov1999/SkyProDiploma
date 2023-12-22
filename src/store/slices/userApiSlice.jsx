@@ -28,7 +28,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: [
 				{ type: 'User', id: 'LIST' },
-				{ type: 'SpecificAd', id: 'LIST' },
 			],
 		}),
 		changeAvatar: builder.mutation({

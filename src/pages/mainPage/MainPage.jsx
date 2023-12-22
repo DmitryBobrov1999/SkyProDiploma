@@ -7,22 +7,24 @@ import { NavLink } from 'react-router-dom';
 
 import * as S from './MainPage.styles';
 
-import { useAllAdsQuery } from '../../store/slices/adsApiSlice';
+import {
+	useGetAdsQuery
+} from '../../store/api/rtkQueryApi'
 
 export const MainPage = ({ token }) => {
+	const  { data = [], isLoading, isSuccess } = useGetAdsQuery();
 	const [filteredWords, setFilteredWords] = useState('');
-
 	const [filteredAds, setFilteredAds] = useState(null);
 
-	const { data: allAds, isLoading } = useAllAdsQuery();
-
-	useEffect(() => {
-		setFilteredAds(allAds);
-	}, [allAds]);
+	// useEffect(() => {
+	// 	getAds();
+	// 	setFilteredAds(allAds);
+	// }, [allAds, getAds]);
 
 	const exit = () => {
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
+		localStorage.removeItem('myId');
 	};
 
 	const handleChange = event => {
@@ -33,12 +35,12 @@ export const MainPage = ({ token }) => {
 		event.preventDefault();
 
 		if (filteredWords) {
-			const filteredAdsArray = allAds.filter(ads => {
+			const filteredAdsArray = data.filter(ads => {
 				return ads.title.toLowerCase().includes(filteredWords.toLowerCase());
 			});
 			setFilteredAds(filteredAdsArray);
 		} else {
-			setFilteredAds(allAds);
+			setFilteredAds(data);
 		}
 	};
 
@@ -156,8 +158,8 @@ export const MainPage = ({ token }) => {
 							<S.MainPageMainH2>Объявления</S.MainPageMainH2>
 							<S.MainPageMainContent>
 								<S.MainPageMainContentCards>
-									{filteredAds &&
-										filteredAds.map(ads => {
+									{
+										data.map(ads => {
 											const img = ads.images[0]?.url;
 
 											return (

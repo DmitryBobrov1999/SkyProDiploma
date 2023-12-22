@@ -7,7 +7,7 @@ export const AdPageWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center
+	justify-content: center;
 `;
 
 export const AdPageContainer = styled.div`
@@ -256,6 +256,50 @@ export const AdPageArticleBtn = styled.button`
 		font-weight: 400;
 	}
 `;
+
+export const AdPageEditBtn = styled.button`
+	margin-right: 10px;
+	width: 189px;
+	height: 50px;
+	background-color: #009ee4;
+	border-radius: 6px;
+	border: 1px solid #009ee4;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 22px;
+	color: #ffffff;
+	font-family: 'Roboto', sans-serif;
+	&:hover {
+		background-color: #0080c1;
+	}
+	& span {
+		display: block;
+		font-size: 14px;
+		font-weight: 400;
+	}
+`;
+
+export const AdPageDeleteBtn = styled.button`
+	width: 225px;
+	height: 50px;
+	background-color: #009ee4;
+	border-radius: 6px;
+	border: 1px solid #009ee4;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 22px;
+	color: #ffffff;
+	font-family: 'Roboto', sans-serif;
+	&:hover {
+		background-color: #0080c1;
+	}
+	& span {
+		display: block;
+		font-size: 14px;
+		font-weight: 400;
+	}
+`;
+
 export const AdPageArticleAuthor = styled.div`
 	margin-top: 34px;
 	margin-bottom: 20px;
@@ -327,4 +371,8 @@ export const AdPageArticleImgBarDiv = styled.div`
 
 export const AdPageArticleImgBarMob = styled.div`
 	display: none;
+`;
+
+export const AdPageBtnDiv = styled.div`
+	display: flex;
 `;
