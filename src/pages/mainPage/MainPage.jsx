@@ -2,25 +2,21 @@ import moment from 'moment/moment';
 import 'moment/locale/ru';
 import { Spinner } from '../../components/spinner/Spinner';
 import React, { useEffect, useState } from 'react';
-
 import { NavLink } from 'react-router-dom';
-
 import * as S from './MainPage.styles';
-
 import {
 	useGetAdsQuery
 } from '../../store/api/rtkQueryApi'
 
 export const MainPage = ({ token }) => {
-	const  { data = [], isLoading, isSuccess } = useGetAdsQuery();
+	const  { data: allAds, isLoading, isSuccess } = useGetAdsQuery();
 	const [filteredWords, setFilteredWords] = useState('');
 	const [filteredAds, setFilteredAds] = useState(null);
 
-	// useEffect(() => {
-	// 	getAds();
-	// 	setFilteredAds(allAds);
-	// }, [allAds, getAds]);
-
+	useEffect(() => {
+		setFilteredAds(allAds);
+	}, [allAds]);
+	
 	const exit = () => {
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
@@ -35,12 +31,12 @@ export const MainPage = ({ token }) => {
 		event.preventDefault();
 
 		if (filteredWords) {
-			const filteredAdsArray = data.filter(ads => {
+			const filteredAdsArray = allAds.filter(ads => {
 				return ads.title.toLowerCase().includes(filteredWords.toLowerCase());
 			});
 			setFilteredAds(filteredAdsArray);
 		} else {
-			setFilteredAds(data);
+			setFilteredAds(allAds);
 		}
 	};
 
@@ -158,47 +154,46 @@ export const MainPage = ({ token }) => {
 							<S.MainPageMainH2>Объявления</S.MainPageMainH2>
 							<S.MainPageMainContent>
 								<S.MainPageMainContentCards>
-									{
-										data.map(ads => {
-											const img = ads.images[0]?.url;
+									{filteredAds && filteredAds.map(ads => {
+										const img = ads.images[0]?.url;
 
-											return (
-												<S.MainPageMainCardsItemNav
-													key={ads.id}
-													to={`/seller/${ads?.id}`}
-												>
-													<S.MainPageMainCardsItem>
-														<S.MainPageMainCardsCard>
-															<S.MainPageMainCardImg>
-																<S.MainPageCardImg
-																	src={`http://localhost:8090/${img}`}
-																/>
-															</S.MainPageMainCardImg>
+										return (
+											<S.MainPageMainCardsItemNav
+												key={ads.id}
+												to={`/seller/${ads?.id}`}
+											>
+												<S.MainPageMainCardsItem>
+													<S.MainPageMainCardsCard>
+														<S.MainPageMainCardImg>
+															<S.MainPageCardImg
+																src={`http://localhost:8090/${img}`}
+															/>
+														</S.MainPageMainCardImg>
 
-															<S.MainPageCardContent>
-																<S.MainPageCardTitle>
-																	{ads.title}
-																</S.MainPageCardTitle>
-																<S.MainPageCardPrice>
-																	{ads.price
-																		.toString()
-																		.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
-																	₽
-																</S.MainPageCardPrice>
-																<S.MainPageCardPlaceDate>
-																	<S.MainPageCardPlace>
-																		{ads.user?.city}
-																	</S.MainPageCardPlace>
-																	<S.MainPageCardDate>
-																		{moment(ads.created_on).format('LLL')}
-																	</S.MainPageCardDate>
-																</S.MainPageCardPlaceDate>
-															</S.MainPageCardContent>
-														</S.MainPageMainCardsCard>
-													</S.MainPageMainCardsItem>
-												</S.MainPageMainCardsItemNav>
-											);
-										})}
+														<S.MainPageCardContent>
+															<S.MainPageCardTitle>
+																{ads.title}
+															</S.MainPageCardTitle>
+															<S.MainPageCardPrice>
+																{ads.price
+																	.toString()
+																	.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
+																₽
+															</S.MainPageCardPrice>
+															<S.MainPageCardPlaceDate>
+																<S.MainPageCardPlace>
+																	{ads.user?.city}
+																</S.MainPageCardPlace>
+																<S.MainPageCardDate>
+																	{moment(ads.created_on).format('LLL')}
+																</S.MainPageCardDate>
+															</S.MainPageCardPlaceDate>
+														</S.MainPageCardContent>
+													</S.MainPageMainCardsCard>
+												</S.MainPageMainCardsItem>
+											</S.MainPageMainCardsItemNav>
+										);
+									})}
 								</S.MainPageMainContentCards>
 							</S.MainPageMainContent>
 						</S.MainPageMainContainer>

@@ -26,14 +26,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				},
 				body: { ...credentials },
 			}),
-			invalidatesTags: [
-				{ type: 'User', id: 'LIST' },
-			],
+			invalidatesTags: [{ type: 'User', id: 'LIST' }],
 		}),
 		changeAvatar: builder.mutation({
 			query: ({ file }) => {
 				const formData = new FormData();
 				formData.append('file', file);
+				console.log(file)
 				return {
 					url: '/user/avatar',
 					method: 'POST',
@@ -45,8 +44,9 @@ export const authApiSlice = apiSlice.injectEndpoints({
 			},
 			invalidatesTags: [{ type: 'User', id: 'LIST' }],
 		}),
+		
 	}),
 });
 
-export const { useChangeInfoMutation, useChangeAvatarMutation } = authApiSlice;
+export const { useChangeInfoMutation, useChangeAvatarMutation,  } = authApiSlice;
 export default authApiSlice;

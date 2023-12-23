@@ -1,13 +1,16 @@
 import * as S from './AdPage.styles';
 import moment from 'moment/moment';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
-import { useCommentsQuery } from '../../store/slices/commentsSlice';
-import { useSpecificAdQuery } from '../../store/slices/specificAd';
+import { useCommentsQuery } from '../../store/api/rtkQueryApi';
+import {
+	useDeleteAdMutation,
+	useSpecificAdQuery,
+} from '../../store/api/rtkQueryApi';
 import { CommentsPage } from '../commentsPage/CommentsPage';
 import { Spinner } from '../../components/spinner/Spinner';
 import { AddAdPage } from '../addAd/AddAdPage';
-import { useDeleteAdMutation } from '../../store/slices/postAdSlice';
+import { EditAdPage } from '../editAdPage/EditAdPage';
 
 export const AdPage = ({ token }) => {
 	let { id } = useParams();
@@ -17,6 +20,8 @@ export const AdPage = ({ token }) => {
 	const { data: specificAd, isLoading } = useSpecificAdQuery({ id });
 	const { data: comments } = useCommentsQuery({ id });
 	const [activeAddAd, setActiveAddAd] = useState(null);
+	const [activeEditAd, setActiveEditAd] = useState(null);
+
 	const [deleteAd] = useDeleteAdMutation();
 	const navigate = useNavigate();
 
@@ -31,7 +36,10 @@ export const AdPage = ({ token }) => {
 		<>
 			<S.AdPageWrapper
 				style={
-					activeAddAd && { WebkitFilter: 'blur(5px)', filter: 'blur(5px)' }
+					(activeAddAd || activeEditAd) && {
+						WebkitFilter: 'blur(5px)',
+						filter: 'blur(5px)',
+					}
 				}
 			>
 				{isLoading ? (
@@ -195,16 +203,21 @@ export const AdPage = ({ token }) => {
 												</S.AdPageArticleLink>
 											</S.AdPageArticleInfo>
 											<S.AdPageArticlePrice>
-												{specificAd?.price
-													.toString()
-													.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
+												{specificAd?.price &&
+													specificAd?.price
+														.toString()
+														.replace(/(\d)(?=(\d{3})+$)/g, '$1 ')}{' '}
 												₽
 											</S.AdPageArticlePrice>
 											<S.AdPageBtnDiv>
 												{specificAd?.user?.id ==
 												localStorage.getItem('myId') ? (
 													<>
-														<S.AdPageEditBtn>Редактировать</S.AdPageEditBtn>
+														<S.AdPageEditBtn
+															onClick={() => setActiveEditAd(true)}
+														>
+															Редактировать
+														</S.AdPageEditBtn>
 														<S.AdPageDeleteBtn onClick={handleDeleteAd}>
 															Снять с публикации
 														</S.AdPageDeleteBtn>
@@ -270,6 +283,9 @@ export const AdPage = ({ token }) => {
 				/>
 			)}
 			{activeAddAd && <AddAdPage setActiveAddAd={setActiveAddAd} />}
+			{activeEditAd && (
+				<EditAdPage setActiveEditAd={setActiveEditAd} specificAd={specificAd} />
+			)}
 		</>
 	);
 };

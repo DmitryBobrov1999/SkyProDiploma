@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { setUrlImages } from '../../store/slices/authSlice';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { usePostAdMutation } from '../../store/api/rtkQueryApi';
 import * as S from './AddAdPage.styles';
 
@@ -11,19 +9,12 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 	const [price, setPrice] = useState(null);
 	const [postAd] = usePostAdMutation();
 	const { urlFiles } = useSelector(state => state.auth);
-	const dispatch = useDispatch();
-	const [files, setFiles] = useState([]);
 
 	const handlePost = async e => {
 		e.preventDefault();
-		await postAd({ title, description, price, files })
+		await postAd({ title, description, price })
 			.unwrap()
 			.then(() => setActiveAddAd(null));
-	};
-
-	const imageUpload = e => {
-		files.push(e.target.files[0]);
-		dispatch(setUrlImages(URL.createObjectURL(e.target.files[0])));
 	};
 
 	return (
@@ -62,13 +53,7 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 						<S.AddAdPageBarImg>
 							<S.AddAdPageImg>
 								<S.AddAdPageLabel htmlFor='adImg'>
-									<S.AddAdPageImgCover
-										onChange={e => imageUpload(e)}
-										accept='*/*'
-										id='adImg'
-										type='file'
-										multiple
-									/>
+									<S.AddAdPageImgCover accept='*/*' id='adImg' multiple />
 									<S.AddAdPageLabelDiv />
 								</S.AddAdPageLabel>
 								<img
@@ -84,13 +69,7 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 
 							<S.AddAdPageImg>
 								<S.AddAdPageLabel htmlFor='adImg2'>
-									<S.AddAdPageImgCover
-										onChange={e => imageUpload(e)}
-										accept='image/*'
-										id='adImg2'
-										type='file'
-										multiple
-									/>
+									<S.AddAdPageImgCover accept='image/*' id='adImg2' multiple />
 									<S.AddAdPageLabelDiv />
 								</S.AddAdPageLabel>
 								<img
@@ -105,13 +84,7 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 							</S.AddAdPageImg>
 							<S.AddAdPageImg>
 								<S.AddAdPageLabel htmlFor='adImg3'>
-									<S.AddAdPageImgCover
-										onChange={e => imageUpload(e)}
-										accept='image/*'
-										id='adImg3'
-										type='file'
-										multiple
-									/>
+									<S.AddAdPageImgCover accept='image/*' id='adImg3' multiple />
 									<S.AddAdPageLabelDiv />
 								</S.AddAdPageLabel>
 								<img
@@ -126,13 +99,7 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 							</S.AddAdPageImg>
 							<S.AddAdPageImg>
 								<S.AddAdPageLabel htmlFor='adImg4'>
-									<S.AddAdPageImgCover
-										onChange={e => imageUpload(e)}
-										accept='image/*'
-										id='adImg4'
-										type='file'
-										multiple
-									/>
+									<S.AddAdPageImgCover accept='image/*' id='adImg4' multiple />
 									<S.AddAdPageLabelDiv />
 								</S.AddAdPageLabel>
 								<img
@@ -147,13 +114,7 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 							</S.AddAdPageImg>
 							<S.AddAdPageImg>
 								<S.AddAdPageLabel htmlFor='adImg5'>
-									<S.AddAdPageImgCover
-										onChange={e => imageUpload(e)}
-										accept='image/*'
-										id='adImg5'
-										type='file'
-										multiple
-									/>
+									<S.AddAdPageImgCover accept='image/*' id='adImg5' multiple />
 									<S.AddAdPageLabelDiv />
 								</S.AddAdPageLabel>
 								<img
@@ -179,7 +140,7 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 						<S.AddAdPageNewArtInputPriceCover></S.AddAdPageNewArtInputPriceCover>
 					</S.AddAdPageNewArtBlockPrice>
 
-					<S.AddAdPageBtnPub onClick={handlePost}>
+					<S.AddAdPageBtnPub onClick={e => handlePost(e)}>
 						Опубликовать
 					</S.AddAdPageBtnPub>
 				</S.AddAdPageNewArt>

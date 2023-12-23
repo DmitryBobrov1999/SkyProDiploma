@@ -28,13 +28,10 @@ export const ProfilePage = ({ user, isLoading, isSuccess }) => {
 	const [changeInfo] = useChangeInfoMutation();
 	const [changeAvatar] = useChangeAvatarMutation();
 	const { data: dataAds } = useMyAdsQuery();
-	const [personalAds, setPersonalAds] = useState(null);
+	
 	const [activeAddAd, setActiveAddAd] = useState(null);
 
-	// useEffect(() => {
-	// 	myAds();
-	// 	setPersonalAds(dataAds);
-	// }, [dataAds, myAds]);
+	
 
 	useEffect(() => {
 		(async () => {

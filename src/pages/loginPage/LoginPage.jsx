@@ -7,7 +7,7 @@ import myApi from '../../store/slices/userApiSlice';
 
 import * as S from './LoginPage.styles';
 
-export const LoginPage = () => {
+export const LoginPage = ({ user }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [errMsg, setErrMsg] = useState('');
@@ -29,6 +29,7 @@ export const LoginPage = () => {
 
 				localStorage.setItem('access_token', userData.access_token);
 				localStorage.setItem('refresh_token', userData.refresh_token);
+				localStorage.setItem('myId', user?.id);
 				getLazyInfo();
 				setEmail('');
 				setPassword('');

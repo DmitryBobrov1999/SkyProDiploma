@@ -7,7 +7,6 @@ import { ProfilePage } from './pages/profilePage/MyProfilePage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import myApi from './store/slices/userApiSlice';
 
-
 import { AdPage } from './pages/AdPage/AdPage';
 import { SellerProfilePage } from './pages/sellerProfilePage/SellerProfilePage';
 
@@ -19,7 +18,6 @@ export const AppRoutes = () => {
 	useEffect(() => {
 		const token = localStorage.getItem('access_token');
 		setToken(token);
-		localStorage.setItem('myId', user?.id);
 	}, [user?.id]);
 
 	return (
@@ -44,7 +42,7 @@ export const AppRoutes = () => {
 					path='/seller/:id/:user_id'
 					element={<SellerProfilePage token={token} />}
 				/>
-				<Route path='/login' element={<LoginPage />} />
+				<Route path='/login' element={<LoginPage user={user} />} />
 				<Route path='/reg' element={<RegPage />} />
 			</Routes>
 		</BrowserRouter>
