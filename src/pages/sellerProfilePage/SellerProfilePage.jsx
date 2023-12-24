@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/Spinner';
 import { useSellerAdsQuery } from '../../store/slices/sellerAdsSlice';
-import { useSpecificAdQuery } from '../../store/slices/specificAd';
+import { useSpecificAdQuery } from '../../store/api/rtkQueryApi';
 import { AddAdPage } from '../addAd/AddAdPage';
 import * as S from './SellerProfilePage.styles';
 

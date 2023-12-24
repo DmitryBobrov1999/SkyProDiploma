@@ -1,8 +1,8 @@
 import * as S from './CommentsPage.styles';
 import moment from 'moment/moment';
 import { useState } from 'react';
-import { useAddCommentMutation } from '../../store/slices/commentsSlice';
-import { useSelector } from 'react-redux';
+import { useAddCommentMutation } from '../../store/api/rtkQueryApi';
+
 
 export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 	const [text, setText] = useState('');
@@ -11,13 +11,14 @@ export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 
 	const [hover, setHover] = useState(false);
 
-	const { token } = useSelector(state => state.auth);
+	const token = localStorage.getItem('access_token');
 
 	const handleAddComment = async e => {
 		e.preventDefault();
 		if (text) {
 			try {
 				await addComment({ text, specificAd });
+				setText('')
 			} catch (error) {
 				console.log(error);
 			}

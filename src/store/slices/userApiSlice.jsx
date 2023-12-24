@@ -32,7 +32,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
 			query: ({ file }) => {
 				const formData = new FormData();
 				formData.append('file', file);
-				console.log(file)
 				return {
 					url: '/user/avatar',
 					method: 'POST',

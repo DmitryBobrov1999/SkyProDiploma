@@ -7,14 +7,12 @@ import myApi from '../../store/slices/userApiSlice';
 
 import * as S from './LoginPage.styles';
 
-export const LoginPage = ({ user }) => {
+export const LoginPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [errMsg, setErrMsg] = useState('');
-
-	const [login, { isError }] = useLoginMutation();
-	const [getLazyInfo] = myApi.useLazyGetUserQuery();
-
+	const [login] = useLoginMutation();
+	const [getUser] = myApi.useLazyGetUserQuery();
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -25,24 +23,24 @@ export const LoginPage = ({ user }) => {
 		e.preventDefault();
 		if (email && password) {
 			try {
-				const userData = await login({ email, password }).unwrap();
+				const userData = await login({ email, password });
 
-				localStorage.setItem('access_token', userData.access_token);
-				localStorage.setItem('refresh_token', userData.refresh_token);
-				localStorage.setItem('myId', user?.id);
-				getLazyInfo();
+				localStorage.setItem('access_token', userData.data.access_token);
+				localStorage.setItem('refresh_token', userData.data.refresh_token);
+				const user = await getUser();
+			
+				localStorage.setItem('myId', user.data.id);
+
 				setEmail('');
 				setPassword('');
 				navigate('/');
 			} catch (error) {
 				if (!error?.response) {
-					setErrMsg('No Server Response');
-				} else if (error.response?.status === 400) {
-					setErrMsg('Missing Username or Password');
-				} else if (error.response?.status === 401) {
-					setErrMsg('Login Failed');
+					setErrMsg('Wrong Email or Password');
 				}
 			}
+		} else if (email === '' || password === '') {
+			setErrMsg('Missing Email or Password');
 		}
 	};
 
@@ -154,8 +152,8 @@ export const LoginPage = ({ user }) => {
 							name='password'
 							placeholder='Пароль'
 						/>
-						{isError && <h3 style={{ color: 'red' }}>ошибка</h3>}
-						<S.LoginPageModalBtnEnter onClick={event => handleLogin(event)}>
+						{errMsg && <h3 style={{ color: 'red' }}>{errMsg}</h3>}
+						<S.LoginPageModalBtnEnter onClick={e => handleLogin(e)}>
 							Войти
 						</S.LoginPageModalBtnEnter>
 						<NavLink to='/reg'>

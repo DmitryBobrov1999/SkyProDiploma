@@ -158,15 +158,11 @@ export const CommentsPageFormNewAreaTextArea = styled.textarea`
 export const CommentsPageFormBtnPub = styled.button`
 	width: 181px;
 	height: 50px;
-	border: 1px solid #d9d9d9;
+	border: 1px solid;
 	border-radius: 6px;
 	font-size: 16px;
 	line-height: 24px;
 	color: #ffffff;
-
-	&:hover {
-		background: #0080c1;
-	}
 `;
 
 export const CommentsPageModalReviews = styled.div`

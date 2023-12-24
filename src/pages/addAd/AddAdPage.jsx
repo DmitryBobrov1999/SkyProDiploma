@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+
 import { usePostAdMutation } from '../../store/api/rtkQueryApi';
 import * as S from './AddAdPage.styles';
 
@@ -8,13 +8,26 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 	const [description, setDescription] = useState(null);
 	const [price, setPrice] = useState(null);
 	const [postAd] = usePostAdMutation();
-	const { urlFiles } = useSelector(state => state.auth);
+	const [errMsg, setErrMsg] = useState(null);
+
+	useEffect(() => {
+		setErrMsg('');
+	}, [title]);
 
 	const handlePost = async e => {
 		e.preventDefault();
-		await postAd({ title, description, price })
-			.unwrap()
-			.then(() => setActiveAddAd(null));
+		try {
+			await postAd({ title, description, price })
+				.unwrap()
+				.then(() => {
+					setActiveAddAd(null);
+					setTitle(null);
+					setDescription(null);
+					setPrice(null);
+				});
+		} catch (error) {
+			setErrMsg('Заполните название');
+		}
 	};
 
 	return (
@@ -27,6 +40,9 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 				<S.AddAdPageNewArt id='formNewArt' action='#'>
 					<S.AddAdPageNewArtBlock>
 						<label htmlFor='name'>Название</label>
+						{errMsg && (
+							<h3 style={{ color: 'red', marginBottom: '6px' }}>{errMsg}</h3>
+						)}
 						<S.AddAdPageNewArtInput
 							type='text'
 							name='name'
@@ -46,95 +62,13 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 							onChange={e => setDescription(e.target.value)}
 						></S.AddAdPageTextArea>
 					</S.AddAdPageNewArtBlock>
-					<S.AddAdPageNewArtBlock>
-						<S.AddAdPageP>
-							Фотографии товара<span>не более 5 фотографий</span>
-						</S.AddAdPageP>
-						<S.AddAdPageBarImg>
-							<S.AddAdPageImg>
-								<S.AddAdPageLabel htmlFor='adImg'>
-									<S.AddAdPageImgCover accept='*/*' id='adImg' multiple />
-									<S.AddAdPageLabelDiv />
-								</S.AddAdPageLabel>
-								<img
-									style={
-										urlFiles?.[0]
-											? { visibility: 'visible' }
-											: { visibility: 'hidden' }
-									}
-									src={urlFiles?.[0]}
-									alt=''
-								/>
-							</S.AddAdPageImg>
-
-							<S.AddAdPageImg>
-								<S.AddAdPageLabel htmlFor='adImg2'>
-									<S.AddAdPageImgCover accept='image/*' id='adImg2' multiple />
-									<S.AddAdPageLabelDiv />
-								</S.AddAdPageLabel>
-								<img
-									style={
-										urlFiles?.[1]
-											? { visibility: 'visible' }
-											: { visibility: 'hidden' }
-									}
-									src={urlFiles?.[1]}
-									alt=''
-								/>
-							</S.AddAdPageImg>
-							<S.AddAdPageImg>
-								<S.AddAdPageLabel htmlFor='adImg3'>
-									<S.AddAdPageImgCover accept='image/*' id='adImg3' multiple />
-									<S.AddAdPageLabelDiv />
-								</S.AddAdPageLabel>
-								<img
-									style={
-										urlFiles?.[2]
-											? { visibility: 'visible' }
-											: { visibility: 'hidden' }
-									}
-									src={urlFiles?.[2]}
-									alt=''
-								/>
-							</S.AddAdPageImg>
-							<S.AddAdPageImg>
-								<S.AddAdPageLabel htmlFor='adImg4'>
-									<S.AddAdPageImgCover accept='image/*' id='adImg4' multiple />
-									<S.AddAdPageLabelDiv />
-								</S.AddAdPageLabel>
-								<img
-									style={
-										urlFiles?.[3]
-											? { visibility: 'visible' }
-											: { visibility: 'hidden' }
-									}
-									src={urlFiles?.[3]}
-									alt=''
-								/>
-							</S.AddAdPageImg>
-							<S.AddAdPageImg>
-								<S.AddAdPageLabel htmlFor='adImg5'>
-									<S.AddAdPageImgCover accept='image/*' id='adImg5' multiple />
-									<S.AddAdPageLabelDiv />
-								</S.AddAdPageLabel>
-								<img
-									style={
-										urlFiles?.[4]
-											? { visibility: 'visible' }
-											: { visibility: 'hidden' }
-									}
-									src={urlFiles?.[4]}
-									alt=''
-								/>
-							</S.AddAdPageImg>
-						</S.AddAdPageBarImg>
-					</S.AddAdPageNewArtBlock>
 					<S.AddAdPageNewArtBlockPrice>
 						<label htmlFor='price'>Цена</label>
 						<S.AddAdPageNewArtInputPrice
 							type='text'
 							name='price'
 							id='formName'
+							placeholder='0'
 							onChange={e => setPrice(e.target.value)}
 						/>
 						<S.AddAdPageNewArtInputPriceCover></S.AddAdPageNewArtInputPriceCover>

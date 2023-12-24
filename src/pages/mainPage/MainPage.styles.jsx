@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { device } from '../breakPoints';
 
 export const MainPageWrapper = styled.div`
 	width: 100%;
@@ -16,12 +17,23 @@ export const MainPageContainer = styled.div`
 	margin: 0 auto;
 	background-color: #ffffff;
 	backdrop-filter: blur(2px);
+	@media ${device.min} {
+		width: 100%;
+		min-height: 100vh;
+		background-color: #ffffff;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+	}
 `;
 
 export const MainPageHeader = styled.header`
 	background-color: #009ee4;
 	position: sticky;
 	top: 0;
+	@media ${device.min} {
+		display: none;
+	}
 `;
 
 export const MainPageHeaderNav = styled.nav`
@@ -48,7 +60,12 @@ export const MainPageHeaderBtnMainEnter = styled.button`
 	}
 `;
 
-export const MainPageMain = styled.main``;
+export const MainPageMain = styled.main`
+	@media ${device.min} {
+		width: 100%;
+		height: auto
+	}
+`;
 
 export const MainPageMainSearch = styled.div`
 	width: 100%;
@@ -63,6 +80,32 @@ export const MainPageMainSearch = styled.div`
 	top: 79px;
 	background: white;
 	opacity: 0.99;
+	@media ${device.min} {
+		${'' /* position: absolute; */}
+		top: 0;
+		width: 100%;
+		height: 55px;
+		background-color: #009ee4;
+		box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.05);
+		padding: 0;
+		z-index: 3;
+		display: flex;
+		justify-content: center;
+	}
+`;
+
+export const MainPageMainBigSvg = styled.div`
+	display: flex;
+	@media ${device.min} {
+		display: none;
+	}
+`;
+
+export const MainPageMainLittleSvg = styled.div`
+	display: none;
+	@media ${device.min} {
+		display: flex;
+	}
 `;
 
 export const MainPageMainLogoImg = styled.img`
@@ -72,9 +115,13 @@ export const MainPageMainLogoImg = styled.img`
 
 export const MainPageMainForm = styled.form`
 	margin-left: 60px;
-	max-width: 1044px;
-	width: 100%;
+	width: 1044px;
+	${'' /* width: 100%; */}
 	display: flex;
+	@media ${device.min} {
+		margin-left: 10px;
+		width: 243px;
+	}
 `;
 
 export const MainPageText = styled.input`
@@ -91,6 +138,7 @@ export const MainPageText = styled.input`
 	font-size: 16px;
 	line-height: 24px;
 	color: #000000;
+	display: flex;
 	&::placeholder {
 		background-color: transparent;
 		color: rgba(0, 0, 0, 0.3);
@@ -98,6 +146,40 @@ export const MainPageText = styled.input`
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 24px;
+	}
+	@media ${device.min} {
+		display: none;
+	}
+`;
+
+export const MainPageMiniText = styled.input`
+	display: none;
+	@media ${device.min} {
+		display: flex;
+		width: 243px;
+		height: 32px;
+		border-radius: 30px;
+		background: rgba(255, 255, 255, 1);
+		border-width: 1px;
+		border-style: solid;
+		border-color: rgba(0, 0, 0, 0.2);
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 21px;
+		letter-spacing: 0em;
+		text-align: left;
+		padding: 13px 19px;
+		font-style: normal;
+		color: #000000;
+		&::placeholder {
+			background-color: transparent;
+			color: rgba(0, 0, 0, 0.3);
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 21px;
+			letter-spacing: 0em;
+			text-align: left;
+		}
 	}
 `;
 
@@ -114,12 +196,23 @@ export const MainPageSearchBtn = styled.button`
 	&:hover {
 		background: rgba(0, 128, 193, 1);
 	}
+	@media ${device.min} {
+		display: none;
+	}
 `;
 
 export const MainPageMainContainer = styled.div`
 	max-width: 1158px;
 	margin: 0 auto;
 	padding: 0 0 37px 0;
+	@media ${device.min} {
+		${'' /* position: absolute; */}
+		padding: 0;
+		height: auto;
+		display: flex;
+		width: 100%;
+		justify-content: flex-start
+	}
 `;
 
 export const MainPageMainH2 = styled.h2`
@@ -132,6 +225,16 @@ export const MainPageMainH2 = styled.h2`
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
+	@media ${device.min} {
+		font-size: 24px;
+		line-height: 29px;
+		color: #000000;
+		text-align: center;
+		${'' /* position: absolute; */}
+		margin-top: 85px;
+		height: 29px;
+		top: 85px;
+	}
 `;
 
 export const MainPageMainContent = styled.div`
@@ -139,6 +242,15 @@ export const MainPageMainContent = styled.div`
 	margin: 0 auto;
 	display: flex;
 	justify-content: center;
+	@media ${device.min} {
+		width: 100%;
+		margin: 0 auto;
+		position: fixed;
+		right: 0;
+		left: 0;
+		top: 134px;
+		bottom: 84px;
+	}
 `;
 
 export const MainPageMainContentCards = styled.div`
@@ -150,28 +262,31 @@ export const MainPageMainContentCards = styled.div`
 	grid-gap: 40px 26px;
 	justify-content: center;
 
-	scrollbar-color: #ffffff #2e2e2e; // Firefox
-	scrollbar-width: thin; // Firefox
-	scrollbar-width: 0px; // Firefox
-
-	&::-webkit-scrollbar {
-		width: 0px;
-		background-color: #009ee4;
-	}
-
-	&::-webkit-scrollbar-thumb {
-		background-color: #0080c1;
-		border-radius: 3px;
+	@media ${device.min} {
+		display: grid;
+		grid-template-columns: repeat(2, 137px);
+		grid-gap: 10px 10px;
+		grid-auto-rows: 270px;
 	}
 `;
 
 export const MainPageMainCardsItemNav = styled(NavLink)`
 	color: rgba(0, 158, 228, 1);
 	text-decoration: none;
+	@media ${device.min} {
+		height: 293px;
+	}
 `;
 
 export const MainPageMainCardsItem = styled.div`
 	margin: 0;
+	@media ${device.min} {
+		margin: 0;
+		box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+		border-radius: 6px;
+		width: 137px;
+		height: auto;
+	}
 `;
 
 export const MainPageMainCardsCard = styled.div`
@@ -179,6 +294,12 @@ export const MainPageMainCardsCard = styled.div`
 	height: 441px;
 	display: flex;
 	flex-direction: column;
+	@media ${device.min} {
+		width: 137px;
+		height: auto;
+		display: flex;
+		flex-direction: column;
+	}
 `;
 
 export const MainPageMainCardImg = styled.div`
@@ -186,11 +307,27 @@ export const MainPageMainCardImg = styled.div`
 	height: 270px;
 	background-color: #f0f0f0;
 	margin-bottom: 20px;
+	@media ${device.min} {
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+		width: 137px;
+		height: 132px;
+		background-color: #d9d9d9;
+		margin-bottom: 0;
+	}
 `;
 
 export const MainPageCardImg = styled.img`
 	width: 100%;
 	height: 100%;
+	@media ${device.min} {
+		width: 100%;
+		height: 100%;
+		display: block;
+		object-fit: cover;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+	}
 `;
 
 export const MainPageA = styled.a``;
@@ -203,6 +340,10 @@ export const MainPageCardPrice = styled.p`
 	text-align: left;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	@media ${device.min} {
+		font-size: 16px;
+		line-height: 24px;
+	}
 `;
 
 export const MainPageCardTitle = styled.h3`
@@ -214,10 +355,21 @@ export const MainPageCardTitle = styled.h3`
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	@media ${device.min} {
+		height: 51px;
+		font-size: 14px;
+		line-height: 17px;
+		color: #009ee4;
+		margin-bottom: 10px;
+		margin-top: 10px;
+	}
 `;
 
 export const MainPageCardContent = styled.div`
 	height: 151px;
+	@media ${device.min} {
+		height: 161px;
+	}
 `;
 
 export const MainPageCardPlaceDate = styled.div``;
@@ -228,6 +380,11 @@ export const MainPageCardDate = styled.p`
 	line-height: 21px;
 	letter-spacing: 0em;
 	text-align: left;
+	@media ${device.min} {
+		font-size: 12px;
+		line-height: 16px;
+		color: #5f5f5f;
+	}
 `;
 
 export const MainPageCardPlace = styled.p`
@@ -236,4 +393,44 @@ export const MainPageCardPlace = styled.p`
 	line-height: 21px;
 	letter-spacing: 0em;
 	text-align: left;
+	@media ${device.min} {
+		font-size: 12px;
+		line-height: 16px;
+		color: #5f5f5f;
+	}
+`;
+
+export const MainPageFooter = styled.footer`
+	@media ${device.min} {
+		${'' /* position: absolute; */}
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		height: 54px;
+		width: 100%;
+		background-color: #ffffff;
+		box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
+		z-index: 10;
+		justify-content: center;
+	}
+`;
+
+export const MainPageFooterContainer = styled.div`
+	@media ${device.min} {
+		width: 225px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+`;
+
+export const MainPageFooterImgDiv = styled.div`
+	@media ${device.min} {
+		& svg {
+			width: 100%;
+			height: 100%;
+			display: block;
+			object-fit: cover;
+		}
+	}
 `;

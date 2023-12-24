@@ -14,7 +14,7 @@ import {
 import { AddAdPage } from '../addAd/AddAdPage';
 import * as S from './MyProfilePage.styles';
 
-export const ProfilePage = ({ user, isLoading, isSuccess }) => {
+export const ProfilePage = ({ user, isLoading }) => {
 	const [name, setName] = useState(null);
 	const [surname, setSurname] = useState(null);
 	const [phone, setPhone] = useState(null);
@@ -300,7 +300,7 @@ export const ProfilePage = ({ user, isLoading, isSuccess }) => {
 									<S.ProfilePageCards>
 										{dataAds &&
 											dataAds.map(myAd => {
-												const img = dataAds?.images?.[0]?.url;
+												const img = myAd?.images?.[0]?.url;
 												return (
 													<NavLink to={`/seller/${myAd?.id}`} key={myAd?.id}>
 														<S.ProfilePageCardsItem>

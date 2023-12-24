@@ -304,12 +304,12 @@ export const AddAdPageNewArtInputPrice = styled.input`
 	line-height: 1;
 
 	&::placeholder {
-		text-align: end;
+		font-family: 'Roboto', sans-serif;
 		font-style: normal;
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 24px;
-		color: #000000;
+		color: #0000004d;
 	}
 `;
 
