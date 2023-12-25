@@ -19,7 +19,8 @@ export const MainPageContainer = styled.div`
 	backdrop-filter: blur(2px);
 	@media ${device.min} {
 		width: 100%;
-		min-height: 100vh;
+		min-width: 320px;
+		height: auto;
 		background-color: #ffffff;
 		display: flex;
 		justify-content: center;
@@ -43,6 +44,12 @@ export const MainPageHeaderNav = styled.nav`
 	align-items: center;
 	max-width: 1158px;
 	justify-content: end;
+	@media ${device.max} {
+		justify-content: space-around;
+	}
+	@media ${device.average} {
+		justify-content: space-evenly;
+	}
 `;
 
 export const MainPageHeaderBtnMainEnter = styled.button`
@@ -63,7 +70,14 @@ export const MainPageHeaderBtnMainEnter = styled.button`
 export const MainPageMain = styled.main`
 	@media ${device.min} {
 		width: 100%;
-		height: auto
+		height: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 30px;
+	}
+	@media ${device.max} {
+		width: 100%;
 	}
 `;
 
@@ -80,8 +94,14 @@ export const MainPageMainSearch = styled.div`
 	top: 79px;
 	background: white;
 	opacity: 0.99;
+	@media ${device.max} {
+		display: flex;
+		justify-content: space-evenly;
+	}
+	@media ${device.average} {
+		justify-content: center;
+	}
 	@media ${device.min} {
-		${'' /* position: absolute; */}
 		top: 0;
 		width: 100%;
 		height: 55px;
@@ -90,7 +110,7 @@ export const MainPageMainSearch = styled.div`
 		padding: 0;
 		z-index: 3;
 		display: flex;
-		justify-content: center;
+		
 	}
 `;
 
@@ -116,11 +136,16 @@ export const MainPageMainLogoImg = styled.img`
 export const MainPageMainForm = styled.form`
 	margin-left: 60px;
 	width: 1044px;
-	${'' /* width: 100%; */}
 	display: flex;
-	@media ${device.min} {
+	@media ${device.max} {
+		max-width: 1044px;
+		width: 70%;
 		margin-left: 10px;
-		width: 243px;
+	}
+	@media ${device.average} {
+	}
+	@media ${device.min} {
+		min-width: 243px;
 	}
 `;
 
@@ -147,6 +172,8 @@ export const MainPageText = styled.input`
 		font-size: 16px;
 		line-height: 24px;
 	}
+	@media ${device.max} {
+	}
 	@media ${device.min} {
 		display: none;
 	}
@@ -156,7 +183,6 @@ export const MainPageMiniText = styled.input`
 	display: none;
 	@media ${device.min} {
 		display: flex;
-		width: 243px;
 		height: 32px;
 		border-radius: 30px;
 		background: rgba(255, 255, 255, 1);
@@ -179,6 +205,10 @@ export const MainPageMiniText = styled.input`
 			line-height: 21px;
 			letter-spacing: 0em;
 			text-align: left;
+		}
+		@media ${device.min} {
+			min-width: 243px;
+			width: 100%;
 		}
 	}
 `;
@@ -205,13 +235,30 @@ export const MainPageMainContainer = styled.div`
 	max-width: 1158px;
 	margin: 0 auto;
 	padding: 0 0 37px 0;
-	@media ${device.min} {
-		${'' /* position: absolute; */}
+	@media ${device.max} {
 		padding: 0;
 		height: auto;
-		display: flex;
+		display: grid;
+		flex-direction: column;
+		align-items: center;
+	}
+	@media ${device.min} {
 		width: 100%;
-		justify-content: flex-start
+	}
+`;
+
+export const MainPageMainH2Div = styled.div`
+	@media ${device.max} {
+		display: grid;
+		justify-content: space-evenly;
+		grid-template-columns: repeat(3, 270px);
+	}
+	@media ${device.average} {
+		grid-template-columns: repeat(2, 270px);
+	}
+	@media ${device.min} {
+		grid-template-columns: repeat(2, 137px);
+		grid-gap: 10px 10px;
 	}
 `;
 
@@ -225,27 +272,22 @@ export const MainPageMainH2 = styled.h2`
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
+
 	@media ${device.min} {
 		font-size: 24px;
 		line-height: 29px;
 		color: #000000;
 		text-align: center;
-		${'' /* position: absolute; */}
-		margin-top: 85px;
+		margin-top: 30px;
 		height: 29px;
-		top: 85px;
+		margin-bottom: 20px;
 	}
 `;
 
 export const MainPageMainContent = styled.div`
-	width: 100%;
-	margin: 0 auto;
-	display: flex;
-	justify-content: center;
 	@media ${device.min} {
 		width: 100%;
 		margin: 0 auto;
-		position: fixed;
 		right: 0;
 		left: 0;
 		top: 134px;
@@ -260,13 +302,21 @@ export const MainPageMainContentCards = styled.div`
 	grid-template-columns: repeat(4, 270px);
 	grid-auto-rows: 441px;
 	grid-gap: 40px 26px;
-	justify-content: center;
+
+	@media ${device.max} {
+		grid-template-columns: repeat(3, 270px);
+		justify-content: space-evenly;
+	}
+
+	@media ${device.average} {
+		grid-template-columns: repeat(2, 270px);
+		grid-auto-rows: 441px;
+	}
 
 	@media ${device.min} {
-		display: grid;
 		grid-template-columns: repeat(2, 137px);
 		grid-gap: 10px 10px;
-		grid-auto-rows: 270px;
+		grid-auto-rows: 293px;
 	}
 `;
 
@@ -275,6 +325,7 @@ export const MainPageMainCardsItemNav = styled(NavLink)`
 	text-decoration: none;
 	@media ${device.min} {
 		height: 293px;
+		width: 137px;
 	}
 `;
 
@@ -356,7 +407,6 @@ export const MainPageCardTitle = styled.h3`
 	overflow: hidden;
 	white-space: nowrap;
 	@media ${device.min} {
-		height: 51px;
 		font-size: 14px;
 		line-height: 17px;
 		color: #009ee4;
@@ -369,10 +419,13 @@ export const MainPageCardContent = styled.div`
 	height: 151px;
 	@media ${device.min} {
 		height: 161px;
+		padding: 10px 10px 20px 10px;
 	}
 `;
 
-export const MainPageCardPlaceDate = styled.div``;
+export const MainPageCardPlaceDate = styled.div`
+	overflow: hidden;
+`;
 
 export const MainPageCardDate = styled.p`
 	font-size: 16px;
@@ -401,9 +454,8 @@ export const MainPageCardPlace = styled.p`
 `;
 
 export const MainPageFooter = styled.footer`
+	display: none;
 	@media ${device.min} {
-		${'' /* position: absolute; */}
-		bottom: 0;
 		display: flex;
 		align-items: center;
 		height: 54px;
@@ -417,10 +469,11 @@ export const MainPageFooter = styled.footer`
 
 export const MainPageFooterContainer = styled.div`
 	@media ${device.min} {
-		width: 225px;
+		min-width: 225px;
+		width: 100%;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: space-evenly;
 	}
 `;
 
