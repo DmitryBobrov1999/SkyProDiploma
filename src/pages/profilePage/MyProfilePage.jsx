@@ -1,11 +1,9 @@
 import moment from 'moment/moment';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Footer } from '../../components/footer/Footer';
 import { Spinner } from '../../components/spinner/Spinner';
-import {
-	useLazyMyAdsQuery,
-	useMyAdsQuery,
-} from '../../store/api/rtkQueryApi';
+import { useLazyMyAdsQuery, useMyAdsQuery } from '../../store/api/rtkQueryApi';
 
 import {
 	useChangeAvatarMutation,
@@ -28,10 +26,8 @@ export const ProfilePage = ({ user, isLoading }) => {
 	const [changeInfo] = useChangeInfoMutation();
 	const [changeAvatar] = useChangeAvatarMutation();
 	const { data: dataAds } = useMyAdsQuery();
-	
-	const [activeAddAd, setActiveAddAd] = useState(null);
 
-	
+	const [activeAddAd, setActiveAddAd] = useState(null);
 
 	useEffect(() => {
 		(async () => {
@@ -88,6 +84,76 @@ export const ProfilePage = ({ user, isLoading }) => {
 					<S.ProfilePageContainer>
 						<S.ProfilePageHeader>
 							<S.ProfilePageHeaderNav>
+								<NavLink to='/'>
+									<S.MainPageMainLittleSvg>
+										<svg
+											width='32'
+											height='32'
+											viewBox='0 0 32 32'
+											fill='none'
+											xmlns='http://www.w3.org/2000/svg'
+										>
+											<rect width='32' height='32' rx='16' fill='white' />
+											<path
+												d='M8.55231 22.4652C7.06699 23.3231 6 22.6082 6 21.3364C6 19.9826 6 15.9206 6 15.9206C6 15.9206 6 11.8585 6 10.5047C6 9.23303 7.06633 8.51807 8.55231 9.37603C10.8657 10.7119 17.8051 14.721 17.8051 14.721C18.7278 15.254 18.7278 16.5866 17.8051 17.1195C17.8051 17.1201 10.8657 21.1292 8.55231 22.4652Z'
+												fill='#00C1FF'
+											/>
+											<path
+												d='M16.1903 22.4641C14.7049 23.322 13.6379 22.6071 13.6379 21.3353C13.6379 19.9815 13.6379 15.9195 13.6379 15.9195C13.6379 15.9195 13.6379 11.8574 13.6379 10.5036C13.6379 9.23194 14.7043 8.51697 16.1903 9.37493C18.4527 10.6817 25.2398 14.6028 25.2398 14.6028C26.2532 15.188 26.2532 16.651 25.2398 17.2362C25.2392 17.2362 18.4527 21.1573 16.1903 22.4641Z'
+												fill='#BCEC30'
+											/>
+											<mask
+												id='mask0_7_701'
+												style={{ maskType: 'alpha' }}
+												maskUnits='userSpaceOnUse'
+												x='13'
+												y='9'
+												width='14'
+												height='14'
+											>
+												<path
+													d='M16.1905 22.4641C14.7052 23.322 13.6382 22.6071 13.6382 21.3353C13.6382 19.9815 13.6382 15.9195 13.6382 15.9195C13.6382 15.9195 13.6382 11.8574 13.6382 10.5036C13.6382 9.23194 14.7045 8.51697 16.1905 9.37493C18.4529 10.6817 25.2401 14.6028 25.2401 14.6028C26.2535 15.188 26.2535 16.651 25.2401 17.2362C25.2394 17.2362 18.4529 21.1573 16.1905 22.4641Z'
+													fill='#6FE4FF'
+												/>
+											</mask>
+											<g mask='url(#mask0_7_701)'>
+												<g filter='url(#filter0_f_7_701)'>
+													<path
+														d='M8.5528 22.4653C7.06748 23.3232 6.00049 22.6083 6.00049 21.3366C6.00049 19.9828 6.00049 15.9207 6.00049 15.9207C6.00049 15.9207 6.00049 11.8587 6.00049 10.5049C6.00049 9.23316 7.06682 8.51819 8.5528 9.37615C10.8662 10.7121 17.8056 14.7212 17.8056 14.7212C18.7283 15.2541 18.7283 16.5867 17.8056 17.1196C17.8056 17.1203 10.8662 21.1294 8.5528 22.4653Z'
+														fill='#99D100'
+													/>
+												</g>
+											</g>
+											<defs>
+												<filter
+													id='filter0_f_7_701'
+													x='-2.92896'
+													y='0.0717678'
+													width='30.356'
+													height='31.6979'
+													filterUnits='userSpaceOnUse'
+													colorInterpolationFilters='sRGB'
+												>
+													<feFlood
+														floodOpacity='0'
+														result='BackgroundImageFix'
+													/>
+													<feBlend
+														mode='normal'
+														in='SourceGraphic'
+														in2='BackgroundImageFix'
+														result='shape'
+													/>
+													<feGaussianBlur
+														stdDeviation='4.46473'
+														result='effect1_foregroundBlur_7_701'
+													/>
+												</filter>
+											</defs>
+										</svg>
+									</S.MainPageMainLittleSvg>
+								</NavLink>
+
 								<S.ProfilePageHeaderBtnPutAd
 									onClick={() => setActiveAddAd(true)}
 								>
@@ -98,76 +164,78 @@ export const ProfilePage = ({ user, isLoading }) => {
 								</S.ProfilePageHeaderBtnLk>
 							</S.ProfilePageHeaderNav>
 						</S.ProfilePageHeader>
-						<main>
+						<S.ProfilePageMain>
 							<S.ProfilePageMainContainer>
-								<div>
+								<S.ProfilePageMainCenterBlock>
 									<S.ProfilePageMainMenu>
-										<S.ProfilePageHeaderLogo>
-											<svg
-												width='55'
-												height='40'
-												viewBox='0 0 55 40'
-												fill='none'
-												xmlns='http://www.w3.org/2000/svg'
-											>
-												<path
-													d='M7.01887 37.9993C2.93424 40.3586 0 38.3925 0 34.8953C0 31.1723 0 20.0017 0 20.0017C0 20.0017 0 8.831 0 5.10805C0 1.61085 2.93242 -0.355308 7.01887 2.00408C13.3806 5.67787 32.4641 16.7029 32.4641 16.7029C35.0015 18.1684 35.0015 21.8331 32.4641 23.2986C32.4641 23.3004 13.3806 34.3255 7.01887 37.9993Z'
-													fill='#00C1FF'
-												/>
-												<path
-													d='M28.0233 37.9958C23.9386 40.3552 21.0044 38.3891 21.0044 34.8919C21.0044 31.1689 21.0044 19.9983 21.0044 19.9983C21.0044 19.9983 21.0044 8.82758 21.0044 5.10463C21.0044 1.60743 23.9368 -0.358726 28.0233 2.00066C34.2449 5.59435 52.9097 16.3772 52.9097 16.3772C55.6965 17.9866 55.6965 22.0099 52.9097 23.6192C52.9079 23.6192 34.2449 34.4021 28.0233 37.9958Z'
-													fill='#BCEC30'
-												/>
-												<mask
-													id='mask0_7_221'
-													style={{ maskType: 'alpha' }}
-													maskUnits='userSpaceOnUse'
-													x='21'
-													y='0'
-													width='34'
+										<NavLink to='/'>
+											<S.ProfilePageHeaderLogo>
+												<svg
+													width='55'
 													height='40'
+													viewBox='0 0 55 40'
+													fill='none'
+													xmlns='http://www.w3.org/2000/svg'
 												>
 													<path
-														d='M28.0233 37.9958C23.9386 40.3552 21.0044 38.3891 21.0044 34.8919C21.0044 31.1689 21.0044 19.9983 21.0044 19.9983C21.0044 19.9983 21.0044 8.82758 21.0044 5.10463C21.0044 1.60743 23.9368 -0.358726 28.0233 2.00066C34.2449 5.59435 52.9097 16.3772 52.9097 16.3772C55.6965 17.9866 55.6965 22.0099 52.9097 23.6192C52.9079 23.6192 34.2449 34.4021 28.0233 37.9958Z'
-														fill='#6FE4FF'
+														d='M7.01887 37.9993C2.93424 40.3586 0 38.3925 0 34.8953C0 31.1723 0 20.0017 0 20.0017C0 20.0017 0 8.831 0 5.10805C0 1.61085 2.93242 -0.355308 7.01887 2.00408C13.3806 5.67787 32.4641 16.7029 32.4641 16.7029C35.0015 18.1684 35.0015 21.8331 32.4641 23.2986C32.4641 23.3004 13.3806 34.3255 7.01887 37.9993Z'
+														fill='#00C1FF'
 													/>
-												</mask>
-												<g mask='url(#mask0_7_221)'>
-													<g filter='url(#filter0_f_7_221)'>
-														<path
-															d='M7.01985 37.9992C2.93522 40.3586 0.000976562 38.3924 0.000976562 34.8952C0.000976562 31.1723 0.000976562 20.0016 0.000976562 20.0016C0.000976562 20.0016 0.000976562 8.83094 0.000976562 5.10799C0.000976562 1.61079 2.93339 -0.355369 7.01985 2.00402C13.3816 5.67781 32.4651 16.7028 32.4651 16.7028C35.0025 18.1684 35.0025 21.833 32.4651 23.2986C32.4651 23.3004 13.3816 34.3254 7.01985 37.9992Z'
-															fill='#99D100'
-														/>
-													</g>
-												</g>
-												<defs>
-													<filter
-														id='filter0_f_7_221'
-														x='-8.92848'
-														y='-7.95649'
-														width='52.2261'
-														height='55.9162'
-														filterUnits='userSpaceOnUse'
-														colorInterpolationFilters='sRGB'
+													<path
+														d='M28.0233 37.9958C23.9386 40.3552 21.0044 38.3891 21.0044 34.8919C21.0044 31.1689 21.0044 19.9983 21.0044 19.9983C21.0044 19.9983 21.0044 8.82758 21.0044 5.10463C21.0044 1.60743 23.9368 -0.358726 28.0233 2.00066C34.2449 5.59435 52.9097 16.3772 52.9097 16.3772C55.6965 17.9866 55.6965 22.0099 52.9097 23.6192C52.9079 23.6192 34.2449 34.4021 28.0233 37.9958Z'
+														fill='#BCEC30'
+													/>
+													<mask
+														id='mask0_7_221'
+														style={{ maskType: 'alpha' }}
+														maskUnits='userSpaceOnUse'
+														x='21'
+														y='0'
+														width='34'
+														height='40'
 													>
-														<feFlood
-															floodOpacity='0'
-															result='BackgroundImageFix'
+														<path
+															d='M28.0233 37.9958C23.9386 40.3552 21.0044 38.3891 21.0044 34.8919C21.0044 31.1689 21.0044 19.9983 21.0044 19.9983C21.0044 19.9983 21.0044 8.82758 21.0044 5.10463C21.0044 1.60743 23.9368 -0.358726 28.0233 2.00066C34.2449 5.59435 52.9097 16.3772 52.9097 16.3772C55.6965 17.9866 55.6965 22.0099 52.9097 23.6192C52.9079 23.6192 34.2449 34.4021 28.0233 37.9958Z'
+															fill='#6FE4FF'
 														/>
-														<feBlend
-															mode='normal'
-															in='SourceGraphic'
-															in2='BackgroundImageFix'
-															result='shape'
-														/>
-														<feGaussianBlur
-															stdDeviation='4.46473'
-															result='effect1_foregroundBlur_7_221'
-														/>
-													</filter>
-												</defs>
-											</svg>
-										</S.ProfilePageHeaderLogo>
+													</mask>
+													<g mask='url(#mask0_7_221)'>
+														<g filter='url(#filter0_f_7_221)'>
+															<path
+																d='M7.01985 37.9992C2.93522 40.3586 0.000976562 38.3924 0.000976562 34.8952C0.000976562 31.1723 0.000976562 20.0016 0.000976562 20.0016C0.000976562 20.0016 0.000976562 8.83094 0.000976562 5.10799C0.000976562 1.61079 2.93339 -0.355369 7.01985 2.00402C13.3816 5.67781 32.4651 16.7028 32.4651 16.7028C35.0025 18.1684 35.0025 21.833 32.4651 23.2986C32.4651 23.3004 13.3816 34.3254 7.01985 37.9992Z'
+																fill='#99D100'
+															/>
+														</g>
+													</g>
+													<defs>
+														<filter
+															id='filter0_f_7_221'
+															x='-8.92848'
+															y='-7.95649'
+															width='52.2261'
+															height='55.9162'
+															filterUnits='userSpaceOnUse'
+															colorInterpolationFilters='sRGB'
+														>
+															<feFlood
+																floodOpacity='0'
+																result='BackgroundImageFix'
+															/>
+															<feBlend
+																mode='normal'
+																in='SourceGraphic'
+																in2='BackgroundImageFix'
+																result='shape'
+															/>
+															<feGaussianBlur
+																stdDeviation='4.46473'
+																result='effect1_foregroundBlur_7_221'
+															/>
+														</filter>
+													</defs>
+												</svg>
+											</S.ProfilePageHeaderLogo>
+										</NavLink>
 
 										<NavLink to='/'>
 											<S.ProfilePageMenuBtn>
@@ -175,16 +243,20 @@ export const ProfilePage = ({ user, isLoading }) => {
 											</S.ProfilePageMenuBtn>
 										</NavLink>
 									</S.ProfilePageMainMenu>
-
-									<S.ProfilePageMainH2>
-										Здравствуйте, {user?.name}!
-									</S.ProfilePageMainH2>
+									<S.ProfilePageMainH2Div>
+										<S.ProfilePageMainH2>
+											Здравствуйте, {user?.name}!
+										</S.ProfilePageMainH2>
+									</S.ProfilePageMainH2Div>
 
 									<S.ProfilePageMainProfile>
 										<S.ProfilePageProfileContent>
-											<S.ProfilePageProfileTitle>
-												Настройки профиля
-											</S.ProfilePageProfileTitle>
+											<S.ProfilePageMainH2Div2>
+												<S.ProfilePageProfileTitle>
+													Настройки профиля
+												</S.ProfilePageProfileTitle>
+											</S.ProfilePageMainH2Div2>
+
 											<S.ProfilePageProfileSettings>
 												<S.ProfilePageSettingsLeft>
 													<S.ProfilePageSettingDiv>
@@ -291,11 +363,12 @@ export const ProfilePage = ({ user, isLoading }) => {
 											</S.ProfilePageProfileSettings>
 										</S.ProfilePageProfileContent>
 									</S.ProfilePageMainProfile>
-
-									<S.ProfilePageProfileTitle>
-										Мои товары
-									</S.ProfilePageProfileTitle>
-								</div>
+									<S.ProfilePageMainH2Div2>
+										<S.ProfilePageProfileTitle>
+											Мои товары
+										</S.ProfilePageProfileTitle>
+									</S.ProfilePageMainH2Div2>
+								</S.ProfilePageMainCenterBlock>
 								<S.ProfilePageProfileContent>
 									<S.ProfilePageCards>
 										{dataAds &&
@@ -311,7 +384,7 @@ export const ProfilePage = ({ user, isLoading }) => {
 																		alt='myAd'
 																	/>
 																</S.ProfilePageCardsImg>
-																<div>
+																<S.ProfilePageCardContent>
 																	<S.ProfilePageCardsTitle>
 																		{myAd?.title}
 																	</S.ProfilePageCardsTitle>
@@ -331,7 +404,7 @@ export const ProfilePage = ({ user, isLoading }) => {
 																	<S.ProfilePageCardsDate>
 																		{moment(myAd?.created_on).format('LLL')}
 																	</S.ProfilePageCardsDate>
-																</div>
+																</S.ProfilePageCardContent>
 															</S.ProfilePageCardsCard>
 														</S.ProfilePageCardsItem>
 													</NavLink>
@@ -340,7 +413,8 @@ export const ProfilePage = ({ user, isLoading }) => {
 									</S.ProfilePageCards>
 								</S.ProfilePageProfileContent>
 							</S.ProfilePageMainContainer>
-						</main>
+						</S.ProfilePageMain>
+						<Footer setActiveAddAd={setActiveAddAd} />
 					</S.ProfilePageContainer>
 				)}
 			</S.ProfilePageWrapper>

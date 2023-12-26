@@ -52,6 +52,32 @@ export const AddAdPageTitle = styled.h3`
 		position: relative;
 
 		&::before {
+			display: none;
+			content: '';
+			${'' /* display: block; */}
+			width: 12px;
+			height: 12px;
+			background-color: transparent;
+			border-top: 2px solid #000000;
+			border-left: 2px solid #000000;
+			transform: rotate(-45deg);
+			position: absolute;
+			top: 9px;
+			left: 0;
+			cursor: pointer;
+		}
+	}
+`;
+
+export const AltBtnClose = styled.h3`
+	display: none;
+	@media ${device.min} {
+		display: block;
+		font-size: 24px;
+		line-height: 29px;
+		padding: 0 0 0 26px;
+		position: relative;
+		&::before {
 			content: '';
 			display: block;
 			width: 12px;
@@ -61,7 +87,7 @@ export const AddAdPageTitle = styled.h3`
 			border-left: 2px solid #000000;
 			transform: rotate(-45deg);
 			position: absolute;
-			top: 9px;
+			top: -20px;
 			left: 0;
 			cursor: pointer;
 		}

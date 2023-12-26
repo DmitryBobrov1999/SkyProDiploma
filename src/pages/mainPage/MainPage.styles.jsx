@@ -6,6 +6,7 @@ export const MainPageWrapper = styled.div`
 	width: 100%;
 	min-height: 100%;
 	background-color: #f1f1f1;
+	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -68,16 +69,15 @@ export const MainPageHeaderBtnMainEnter = styled.button`
 `;
 
 export const MainPageMain = styled.main`
-	@media ${device.min} {
+	@media ${device.max} {
 		width: 100%;
+	}
+	@media ${device.min} {
 		height: auto;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		margin-bottom: 30px;
-	}
-	@media ${device.max} {
-		width: 100%;
 	}
 `;
 
@@ -110,7 +110,6 @@ export const MainPageMainSearch = styled.div`
 		padding: 0;
 		z-index: 3;
 		display: flex;
-		
 	}
 `;
 
@@ -450,40 +449,5 @@ export const MainPageCardPlace = styled.p`
 		font-size: 12px;
 		line-height: 16px;
 		color: #5f5f5f;
-	}
-`;
-
-export const MainPageFooter = styled.footer`
-	display: none;
-	@media ${device.min} {
-		display: flex;
-		align-items: center;
-		height: 54px;
-		width: 100%;
-		background-color: #ffffff;
-		box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
-		z-index: 10;
-		justify-content: center;
-	}
-`;
-
-export const MainPageFooterContainer = styled.div`
-	@media ${device.min} {
-		min-width: 225px;
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: space-evenly;
-	}
-`;
-
-export const MainPageFooterImgDiv = styled.div`
-	@media ${device.min} {
-		& svg {
-			width: 100%;
-			height: 100%;
-			display: block;
-			object-fit: cover;
-		}
 	}
 `;

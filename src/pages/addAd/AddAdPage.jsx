@@ -37,6 +37,7 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 				<S.AddAdPageBtnClose onClick={() => setActiveAddAd(null)}>
 					<S.AddAdPageBtnCloseLine></S.AddAdPageBtnCloseLine>
 				</S.AddAdPageBtnClose>
+				<S.AltBtnClose onClick={() => setActiveAddAd(null)} />
 				<S.AddAdPageNewArt id='formNewArt' action='#'>
 					<S.AddAdPageNewArtBlock>
 						<label htmlFor='name'>Название</label>
