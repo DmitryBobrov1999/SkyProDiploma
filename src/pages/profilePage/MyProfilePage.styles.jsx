@@ -27,44 +27,6 @@ export const ProfilePageContainer = styled.div`
 	}
 `;
 
-export const ProfilePageHeader = styled.header`
-	background-color: #009ee4;
-	@media ${device.min} {
-		width: 100%;
-		height: 55px;
-		box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.05);
-		position: fixed;
-		left: 0;
-		top: 0;
-		z-index: 3;
-	}
-`;
-
-export const ProfilePageHeaderNav = styled.nav`
-	max-width: 1178px;
-	margin: 0 auto;
-	padding: 0 10px;
-	height: 79px;
-	display: flex;
-	align-items: center;
-	justify-content: end;
-	@media ${device.max} {
-		display: grid;
-		grid-template-columns: repeat(3, 270px);
-		justify-content: space-evenly;
-	}
-	@media ${device.average} {
-		display: grid;
-		grid-template-columns: repeat(2, 270px);
-		justify-content: space-evenly;
-	}
-	@media ${device.min} {
-		height: 55px;
-		justify-content: start;
-		padding: 0 20px;
-	}
-`;
-
 export const ProfilePageHeaderLogo = styled.div`
 	display: block;
 	@media ${device.min} {
@@ -74,46 +36,10 @@ export const ProfilePageHeaderLogo = styled.div`
 
 export const MainPageMainLittleSvg = styled.div`
 	display: none;
+
 	@media ${device.min} {
 		display: flex;
 		z-index: 20;
-	}
-`;
-
-export const ProfilePageHeaderBtnPutAd = styled.button`
-	width: 232px;
-	height: 40px;
-	border: 1px solid #ffffff;
-	border-radius: 6px;
-	background-color: transparent;
-	color: #ffffff;
-	font-size: 16px;
-	line-height: 1;
-	&::hover {
-		background: rgba(255, 255, 255, 0.15);
-		border: 1px solid #ffffff;
-	}
-	@media ${device.min} {
-		display: none;
-	}
-`;
-
-export const ProfilePageHeaderBtnLk = styled.button`
-	width: 173px;
-	height: 40px;
-	margin-left: 10px;
-	border: 1px solid #ffffff;
-	border-radius: 6px;
-	background-color: transparent;
-	color: #ffffff;
-	font-size: 16px;
-	line-height: 1;
-	&::hover {
-		background: rgba(255, 255, 255, 0.15);
-		border: 1px solid #ffffff;
-	}
-	@media ${device.min} {
-		display: none;
 	}
 `;
 
@@ -126,7 +52,6 @@ export const ProfilePageMain = styled.main`
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-	
 	}
 `;
 
@@ -165,7 +90,7 @@ export const ProfilePageMainMenu = styled.div`
 	padding: 31px 10px 64px;
 	@media ${device.max} {
 		display: grid;
-		grid-template-columns: repeat(3, 270px);
+		grid-template-columns: repeat(2, 270px);
 		justify-content: space-evenly;
 	}
 	@media ${device.average} {
@@ -180,15 +105,13 @@ export const ProfilePageMainH2Div = styled.div`
 	@media ${device.max} {
 		display: grid;
 		justify-content: space-evenly;
-		grid-template-columns: repeat(3, 270px);
+		grid-template-columns: repeat(2, 270px);
 	}
 	@media ${device.average} {
 		grid-template-columns: repeat(2, 270px);
 	}
 	@media ${device.min} {
 		grid-template-columns: repeat(2, 137px);
-		
-		
 	}
 `;
 
@@ -196,18 +119,16 @@ export const ProfilePageMainH2Div2 = styled.div`
 	@media ${device.max} {
 		display: grid;
 		justify-content: space-evenly;
-		grid-template-columns: repeat(3, 270px);
+		grid-template-columns: repeat(2, 270px);
 	}
 	@media ${device.average} {
 		grid-template-columns: repeat(2, 270px);
 	}
 	@media ${device.min} {
 		grid-template-columns: repeat(1, 270px);
-		
+		justify-content: space-between;
 	}
 `;
-
-
 
 export const ProfilePageMainH2 = styled.h2`
 	font-style: normal;
@@ -264,7 +185,7 @@ export const ProfilePageProfileSettings = styled.div`
 	align-items: top;
 	@media ${device.max} {
 		flex-direction: column;
-		
+
 		flex-wrap: wrap;
 		align-items: center;
 	}
@@ -478,7 +399,6 @@ export const ProfilePageCards = styled.div`
 		grid-auto-rows: 293px;
 		grid-gap: 10px 10px;
 		padding-bottom: 30px;
-
 	}
 `;
 

@@ -5,6 +5,8 @@ import { Spinner } from '../../components/spinner/Spinner';
 import { useSellerAdsQuery } from '../../store/slices/sellerAdsSlice';
 import { useSpecificAdQuery } from '../../store/api/rtkQueryApi';
 import { AddAdPage } from '../addAd/AddAdPage';
+import { Header } from '../../components/header/Header';
+import { Footer } from '../../components/footer/Footer';
 import * as S from './SellerProfilePage.styles';
 
 export const SellerProfilePage = ({ token }) => {
@@ -14,7 +16,6 @@ export const SellerProfilePage = ({ token }) => {
 	const { data: specificAd } = useSpecificAdQuery({ id });
 	const [activeAddAd, setActiveAddAd] = useState(null);
 
-	
 	return (
 		<>
 			<S.SellerProfilePageWrapper
@@ -26,30 +27,7 @@ export const SellerProfilePage = ({ token }) => {
 					<Spinner />
 				) : (
 					<S.SellerProfilePageContainer>
-						<S.SellerProfilePageHeader>
-							<S.SellerProfilePageHeaderNav>
-								{token ? (
-									<>
-										<S.SellerProfilePageHeaderBtnPutAd
-											onClick={() => setActiveAddAd(true)}
-										>
-											Разместить объявление
-										</S.SellerProfilePageHeaderBtnPutAd>
-										<NavLink to='/profile'>
-											<S.SellerProfilePageHeaderBtnLk>
-												Личный кабинет
-											</S.SellerProfilePageHeaderBtnLk>
-										</NavLink>
-									</>
-								) : (
-									<NavLink to='/login'>
-										<S.SellerProfilePageHeaderBtnMainEnter>
-											Вход в личный кабинет
-										</S.SellerProfilePageHeaderBtnMainEnter>
-									</NavLink>
-								)}
-							</S.SellerProfilePageHeaderNav>
-						</S.SellerProfilePageHeader>
+						<Header />
 
 						<S.SellerProfilePageMain>
 							<S.SellerProfilePageMainContainer>
@@ -146,6 +124,9 @@ export const SellerProfilePage = ({ token }) => {
 														/>
 													</S.SellerProfilePageSellerImg>
 												</S.SellerProfilePageSellerLeft>
+												<NavLink to={`/seller/${specificAd?.id}`}>
+													<S.AltBtnClose />
+												</NavLink>
 												<S.SellerProfilePageSellerRight>
 													<S.SellerProfilePageSellerTitle>
 														{specificAd?.user?.name}
@@ -191,7 +172,7 @@ export const SellerProfilePage = ({ token }) => {
 																	alt='sellerPict'
 																/>
 															</S.SellerProfilePageCardsImg>
-															<div className='card__content'>
+															<S.SellerProfilePageCardsContent>
 																<S.SellerProfilePageCardsTitle>
 																	{sellerAd?.title}
 																</S.SellerProfilePageCardsTitle>
@@ -208,7 +189,7 @@ export const SellerProfilePage = ({ token }) => {
 																<S.SellerProfilePageCardsDate>
 																	{moment(sellerAd?.created_on).format('LL')}
 																</S.SellerProfilePageCardsDate>
-															</div>
+															</S.SellerProfilePageCardsContent>
 														</S.SellerProfilePageCardsCard>
 													</S.SellerProfilePageCardsItem>
 												</S.SellerProfilePageCardsCard>
@@ -217,6 +198,7 @@ export const SellerProfilePage = ({ token }) => {
 								</S.SellerProfilePageMainContent>
 							</S.SellerProfilePageMainContainer>
 						</S.SellerProfilePageMain>
+						<Footer />
 					</S.SellerProfilePageContainer>
 				)}
 			</S.SellerProfilePageWrapper>

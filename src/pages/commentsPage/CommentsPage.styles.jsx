@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../breakPoints';
 
 export const CommentsPageWrapper = styled.div`
 	width: 100%;
@@ -8,6 +9,7 @@ export const CommentsPageWrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	
 `;
 
 export const CommentsPageContainer = styled.div`
@@ -25,6 +27,19 @@ export const CommentsPageModalBlock = styled.div`
 	left: calc(50% - (800px / 2));
 	top: 60px;
 	opacity: 1;
+	@media ${device.max} {
+		top: 79px;
+		left: 0px;
+	}
+	@media ${device.min} {
+		position: absolute;
+		z-index: 5;
+		left: 0px;
+		top: 55px;
+		opacity: 1;
+		z-index: 20;
+		width: 100%;
+	}
 `;
 
 export const CommentsPageModalContent = styled.div`
@@ -37,6 +52,19 @@ export const CommentsPageModalContent = styled.div`
 	background-color: #ffffff;
 	border-radius: 12px;
 	border: 1px solid grey;
+	@media ${device.max} {
+		width: 100%;
+	} 
+	@media ${device.min} {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		width: 100%;
+		min-width: 320px;
+		height: 100vh 
+		padding: 30px 20px 30px;
+		border-radius: 0;
+	}
 `;
 
 export const CommentsPageModalTitle = styled.h3`
@@ -45,6 +73,40 @@ export const CommentsPageModalTitle = styled.h3`
 	font-weight: 500;
 	color: #000000;
 	margin-bottom: 15px;
+	@media ${device.min} {
+		font-size: 24px;
+		line-height: 29px;
+		padding: 0 0 0 26px;
+		position: relative;
+
+		
+	}
+`;
+
+export const AltBtnCloseCommentsMin = styled.div`
+	display: none;
+	@media ${device.min} {
+		display: flex;
+		font-size: 24px;
+		line-height: 29px;
+		padding: 0 0 0 26px;
+		position: relative;
+		&::before {
+			z-index: 20;
+			content: '';
+			display: flex;
+			width: 12px;
+			height: 12px;
+			background-color: transparent;
+			border-top: 2px solid #000000;
+			border-left: 2px solid #000000;
+			transform: rotate(-45deg);
+			position: absolute;
+			top: 10px;
+			left: 0;
+			cursor: pointer;
+		}
+	}
 `;
 
 export const CommentsPageModalBtnClose = styled.div`
@@ -55,6 +117,9 @@ export const CommentsPageModalBtnClose = styled.div`
 	right: 50px;
 	z-index: 3;
 	cursor: pointer;
+	@media ${device.min} {
+		display: none;
+	}
 `;
 
 export const CommentsPageModalBtnCloseLine = styled.div`
@@ -90,16 +155,16 @@ export const CommentsPageModalBtnCloseLine = styled.div`
 `;
 
 export const CommentsPageModalScroll = styled.div`
-	display: flex;
+	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	flex-direction: column;
 	align-items: flex-start;
 	width: 100%;
 	overflow-y: auto;
-	scrollbar-color: #ffffff #2e2e2e; // Firefox
-	scrollbar-width: thin; // Firefox
-	scrollbar-width: 0px; // Firefox
+	scrollbar-color: #ffffff #2e2e2e; 
+	scrollbar-width: thin; 
+	scrollbar-width: 0px; 
 
 	&::-webkit-scrollbar {
 		width: 0px;
@@ -131,6 +196,16 @@ export const CommentsPageModalNewArtBlock = styled.div`
 		font-weight: 600;
 		color: #000000;
 	}
+	@media ${device.min} {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 16px;
+	}
+
+	& label {
+		display: none;
+	}
 `;
 
 export const CommentsPageFormNewAreaTextArea = styled.textarea`
@@ -153,6 +228,23 @@ export const CommentsPageFormNewAreaTextArea = styled.textarea`
 		line-height: 24px;
 		color: #0000004d;
 	}
+	@media ${device.min} {
+		font-family: 'Roboto', sans-serif;
+		width: 100%;
+		max-height: 107px;
+		padding: 9px 17px;
+		background: #ffffff;
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		border-radius: 30px;
+		font-size: 16px;
+		line-height: 1;
+
+		&::placeholder {
+			font-size: 14px;
+			line-height: 21px;
+			color: #c4c4c4;
+		}
+	}
 `;
 
 export const CommentsPageFormBtnPub = styled.button`
@@ -163,11 +255,17 @@ export const CommentsPageFormBtnPub = styled.button`
 	font-size: 16px;
 	line-height: 24px;
 	color: #ffffff;
+	@media ${device.min} {
+		margin-top: 0px;
+		width: 100%;
+		height: 46px;
+		background-color: #009ee4;
+	}
 `;
 
 export const CommentsPageModalReviews = styled.div`
 	width: 100%;
-	height: 495px;
+	height: 100vh;
 `;
 
 export const CommentsPageReviewsItem = styled.div`
@@ -188,6 +286,7 @@ export const CommentsPageReviewImg = styled.div`
 	background-color: #f0f0f0;
 	margin-top: 30px;
 	& img {
+		border-radius: 50%;
 		display: block;
 		width: 100%;
 		height: auto;
@@ -211,10 +310,47 @@ export const CommentsPageReviewName = styled.div`
 		margin-left: 10px;
 		color: #5f5f5f;
 	}
+	@media ${device.min} {
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 28px;
+		letter-spacing: 0em;
+		text-align: left;
+		& span {
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 28px;
+			letter-spacing: 0em;
+			text-align: left;
+		}
+	}
 `;
 
 export const CommentsPageReviewTitle = styled.h5`
 	font-size: 16px;
 	line-height: 32px;
 	color: #000000;
+	@media ${device.min} {
+		font-size: 16px;
+		font-weight: 600;
+		line-height: 32px;
+		letter-spacing: 0em;
+		text-align: left;
+	}
+`;
+
+export const CommentsPageReviewText = styled.p`
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	letter-spacing: 0em;
+	text-align: left;
+
+	@media ${device.min} {
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24px;
+		letter-spacing: 0em;
+		text-align: left;
+	}
 `;

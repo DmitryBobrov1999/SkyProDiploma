@@ -11,11 +11,14 @@ import { CommentsPage } from '../commentsPage/CommentsPage';
 import { Spinner } from '../../components/spinner/Spinner';
 import { AddAdPage } from '../addAd/AddAdPage';
 import { EditAdPage } from '../editAdPage/EditAdPage';
+import { Header } from '../../components/header/Header';
+import { Footer } from '../../components/footer/Footer';
 
 export const AdPage = ({ token }) => {
 	let { id } = useParams();
 	const [showNumber, setShowNumber] = useState(false);
 	const [image, setImage] = useState(0);
+
 	const [activeModal, setActiveModal] = useState(null);
 	const { data: specificAd, isLoading } = useSpecificAdQuery({ id });
 	const { data: comments } = useCommentsQuery({ id });
@@ -46,28 +49,7 @@ export const AdPage = ({ token }) => {
 					<Spinner />
 				) : (
 					<S.AdPageContainer>
-						<S.AdPageHeader>
-							<S.AdPageHeaderNav>
-								{token ? (
-									<>
-										<S.AdPageHeaderBtnPutAd
-											onClick={() => setActiveAddAd(true)}
-										>
-											Разместить объявление
-										</S.AdPageHeaderBtnPutAd>
-										<NavLink to='/profile'>
-											<S.AdPageHeaderBtnLk>Личный кабинет</S.AdPageHeaderBtnLk>
-										</NavLink>
-									</>
-								) : (
-									<NavLink to='/login'>
-										<S.AdPageHeaderBtnMainEnter>
-											Вход в личный кабинет
-										</S.AdPageHeaderBtnMainEnter>
-									</NavLink>
-								)}
-							</S.AdPageHeaderNav>
-						</S.AdPageHeader>
+						<Header setActiveAddAd={setActiveAddAd} />
 
 						<S.AdPageMain>
 							<S.AdPageMainContainer>
@@ -149,6 +131,9 @@ export const AdPage = ({ token }) => {
 								<S.AdPageArcticleContent>
 									<S.AdPageArticleLeft>
 										<S.AdPageArticleImg>
+											<NavLink to='/'>
+												<S.AltBtnClose />
+											</NavLink>
 											<S.AdPageArticleFillImg>
 												<img
 													src={`http://localhost:8090/${specificAd?.images[image]?.url}`}
@@ -171,11 +156,19 @@ export const AdPage = ({ token }) => {
 												))}
 											</S.AdPageArticleImgBar>
 											<S.AdPageArticleImgBarMob>
-												<div className='img-bar-mob__circle circle-active'></div>
-												<div className='img-bar-mob__circle'></div>
-												<div className='img-bar-mob__circle'></div>
-												<div className='img-bar-mob__circle'></div>
-												<div className='img-bar-mob__circle'></div>
+												{specificAd?.images.slice(0, 5).map(img => (
+													<S.AdPageArticleImgBarMobCircleActive
+														onClick={() =>
+															setImage(specificAd?.images.indexOf(img))
+														}
+														style={
+															image === specificAd?.images.indexOf(img)
+																? { background: 'white' }
+																: { background: 'transparent' }
+														}
+														key={img.id}
+													/>
+												))}
 											</S.AdPageArticleImgBarMob>
 										</S.AdPageArticleImg>
 									</S.AdPageArticleLeft>
@@ -272,6 +265,7 @@ export const AdPage = ({ token }) => {
 								</S.AdPageMainContent>
 							</S.AdPageMainContainer>
 						</S.AdPageMain>
+						<Footer setActiveAddAd={setActiveAddAd} />
 					</S.AdPageContainer>
 				)}
 			</S.AdPageWrapper>

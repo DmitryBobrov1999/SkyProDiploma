@@ -54,7 +54,7 @@ export const AddAdPageTitle = styled.h3`
 		&::before {
 			display: none;
 			content: '';
-			${'' /* display: block; */}
+			
 			width: 12px;
 			height: 12px;
 			background-color: transparent;

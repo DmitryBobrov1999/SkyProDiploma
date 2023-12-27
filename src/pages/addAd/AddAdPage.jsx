@@ -34,9 +34,10 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 		<S.AddAdPageBlock>
 			<S.AddAdPageContent>
 				<S.AddAdPageTitle>Новое объявление</S.AddAdPageTitle>
-				<S.AddAdPageBtnClose onClick={() => setActiveAddAd(null)}>
-					<S.AddAdPageBtnCloseLine></S.AddAdPageBtnCloseLine>
-				</S.AddAdPageBtnClose>
+				<S.AddAdPageBtnClose
+					onClick={() => setActiveAddAd(null)}
+				></S.AddAdPageBtnClose>
+				<S.AddAdPageBtnCloseLine></S.AddAdPageBtnCloseLine>
 				<S.AltBtnClose onClick={() => setActiveAddAd(null)} />
 				<S.AddAdPageNewArt id='formNewArt' action='#'>
 					<S.AddAdPageNewArtBlock>

@@ -12,6 +12,9 @@ export const MainPageFooter = styled.footer`
 		box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
 		z-index: 10;
 		justify-content: center;
+		position: fixed;
+		bottom: 0;
+		z-index: 999;
 	}
 `;
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { NavLink, useNavigate } from 'react-router-dom';
+import { Footer } from '../../components/footer/Footer';
 import { useLoginMutation } from '../../store/slices/authApiSlice';
 
 import myApi from '../../store/slices/userApiSlice';

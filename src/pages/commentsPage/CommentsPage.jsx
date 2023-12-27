@@ -28,7 +28,11 @@ export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 	return (
 		<S.CommentsPageModalBlock>
 			<S.CommentsPageModalContent>
+				<S.AltBtnCloseCommentsMin onClick={() => setActiveModal(null)} >
+					
+				</S.AltBtnCloseCommentsMin>
 				<S.CommentsPageModalTitle>Отзывы о товаре</S.CommentsPageModalTitle>
+
 				<S.CommentsPageModalBtnClose onClick={() => setActiveModal(null)}>
 					<S.CommentsPageModalBtnCloseLine></S.CommentsPageModalBtnCloseLine>
 				</S.CommentsPageModalBtnClose>
@@ -86,7 +90,9 @@ export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 										<S.CommentsPageReviewTitle>
 											Комментарий
 										</S.CommentsPageReviewTitle>
-										<p className='review__text font-t'>{comment?.text}</p>
+										<S.CommentsPageReviewText>
+											{comment?.text}
+										</S.CommentsPageReviewText>
 									</S.CommentsPageReviewRight>
 								</S.CommentsPageReviewsItem>
 							))}
