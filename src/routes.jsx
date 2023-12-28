@@ -17,7 +17,7 @@ export const AppRoutes = () => {
 	const { data: user, isLoading, isSuccess } = api.useGetUserQuery();
 
 	useEffect(() => {
-		const token = localStorage.getItem('access_token');
+		const token = localStorage.getItem('access_token')
 		setToken(token);
 	}, [user?.id]);
 
