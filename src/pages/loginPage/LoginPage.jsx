@@ -1,20 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../store/slices/authApiSlice';
-import { setCredentials } from '../../store/slices/authSlice';
-import myApi from '../../store/slices/userApiSlice';
 
+import myApi from '../../store/slices/userApiSlice';
 import * as S from './LoginPage.styles';
 
 export const LoginPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [errMsg, setErrMsg] = useState('');
-
-	const [login, { isError, isSuccess }] = useLoginMutation();
-	const [getLazyInfo] = myApi.useLazyGetUserQuery();
-	const dispatch = useDispatch();
+	const [login] = useLoginMutation();
+	const [getUser] = myApi.useLazyGetUserQuery();
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -25,23 +21,24 @@ export const LoginPage = () => {
 		e.preventDefault();
 		if (email && password) {
 			try {
-				const userData = await login({ email, password }).unwrap();
-				dispatch(setCredentials({ userData }));
-				localStorage.setItem('access_token', userData.access_token);
-				localStorage.setItem('refresh_token', userData.refresh_token);
-				getLazyInfo();
+				const userData = await login({ email, password });
+
+				localStorage.setItem('access_token', userData.data.access_token);
+				localStorage.setItem('refresh_token', userData.data.refresh_token);
+				const user = await getUser();
+
+				localStorage.setItem('myId', user.data.id);
+
 				setEmail('');
 				setPassword('');
 				navigate('/');
 			} catch (error) {
 				if (!error?.response) {
-					setErrMsg('No Server Response');
-				} else if (error.response?.status === 400) {
-					setErrMsg('Missing Username or Password');
-				} else if (error.response?.status === 401) {
-					setErrMsg('Login Failed');
+					setErrMsg('Wrong Email or Password');
 				}
 			}
+		} else if (email === '' || password === '') {
+			setErrMsg('Missing Email or Password');
 		}
 	};
 
@@ -153,8 +150,8 @@ export const LoginPage = () => {
 							name='password'
 							placeholder='Пароль'
 						/>
-						{isError && <h3 style={{ color: 'red' }}>ошибка</h3>}
-						<S.LoginPageModalBtnEnter onClick={event => handleLogin(event)}>
+						{errMsg && <h3 style={{ color: 'red' }}>{errMsg}</h3>}
+						<S.LoginPageModalBtnEnter onClick={e => handleLogin(e)}>
 							Войти
 						</S.LoginPageModalBtnEnter>
 						<NavLink to='/reg'>

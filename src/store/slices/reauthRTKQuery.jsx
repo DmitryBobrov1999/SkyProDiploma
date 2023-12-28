@@ -1,7 +1,7 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { logOut, setCredentials } from '../slices/authSlice';
+import {  fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { logOut, setCredentials } from './authSlice';
 
-const baseQuery = fetchBaseQuery({
+export const baseQuery = fetchBaseQuery({
 	baseUrl: 'http://localhost:8090',
 	credentials: 'include',
 	prepareHeaders: (headers, { getState }) => {
@@ -14,12 +14,10 @@ const baseQuery = fetchBaseQuery({
 	},
 });
 
-const baseQueryWithReauth = async (args, api, extraOptions) => {
+export const baseQueryWithReauth = async (args, api, extraOptions) => {
 	let result = await baseQuery(args, api, extraOptions);
 
-	if (result.error && result.error.status === 401) {
-		
-
+	if (result?.error?.status === 401) {
 		const refreshResult = await baseQuery(
 			{
 				url: '/auth/login',
@@ -32,7 +30,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 			api,
 			extraOptions
 		);
-		
+
 		if (refreshResult?.data) {
 			api.dispatch(setCredentials(refreshResult.data));
 			localStorage.setItem('access_token', refreshResult?.data.access_token);
@@ -44,11 +42,3 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 	}
 	return result;
 };
-
-export const apiSlice = createApi({
-	baseQuery: baseQueryWithReauth,
-	endpoints: () => ({
-		
-	}),
-});
-

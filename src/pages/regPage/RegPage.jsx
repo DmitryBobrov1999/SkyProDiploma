@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import {  NavLink, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useRegisterMutation } from '../../store/slices/authApiSlice';
 import * as S from './RegPage.styles';
-import { regUser } from '../../store/api/api';
 
 export const RegPage = () => {
 	const [email, setEmail] = useState('');
@@ -10,28 +10,37 @@ export const RegPage = () => {
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
 	const [city, setCity] = useState('');
-	const [data, setData] = useState(null)
-
+	const [errMsg, setErrMsg] = useState('');
+	const [register] = useRegisterMutation();
 	const navigate = useNavigate();
 
-	const handleRegistration = async event => {
-		event.preventDefault();
-		try {
-			const data = await regUser(
-				email,
-				password,
-				repeatPassword,
-				name,
-				surname,
-				city
-			);
-			setData(data)
-		} catch (error) {
-			console.log(error);
-		} finally {
-			if(data) {
-				navigate('/login')
+	useEffect(() => {
+		setErrMsg('');
+	}, [email, password]);
+
+	const handleRegistration = async e => {
+		e.preventDefault();
+		if (email && password && repeatPassword) {
+			try {
+				 await register({
+					email,
+					password,
+					repeatPassword,
+					name,
+					surname,
+					city,
+				}).unwrap();
+				setEmail('');
+				setPassword('');
+				setRepeatPassword('');
+				navigate('/login');
+			} catch (error) {
+				if (!error?.response) {
+					console.log(error);
+				}
 			}
+		} else if (email === '' || password === '' || repeatPassword === '') {
+			setErrMsg('Missing Email or Password');
 		}
 	};
 
@@ -171,10 +180,8 @@ export const RegPage = () => {
 							name='city'
 							placeholder='Город (необязательно)'
 						/>
-
-						<S.RegPageModalBtnSignup
-							onClick={event => handleRegistration(event)}
-						>
+						{errMsg && <h3 style={{ color: 'red' }}>{errMsg}</h3>}
+						<S.RegPageModalBtnSignup onClick={e => handleRegistration(e)}>
 							Зарегистрироваться
 						</S.RegPageModalBtnSignup>
 					</S.RegPageModalForm>

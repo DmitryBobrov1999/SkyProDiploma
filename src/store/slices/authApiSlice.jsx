@@ -1,4 +1,4 @@
-import { apiSlice } from '../api/rtkQueryApi';
+import { apiSlice } from './apiSlice';
 
 export const authApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
@@ -9,7 +9,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				body: { ...credentials },
 			}),
 		}),
+		register: builder.mutation({
+			query: credentials => ({
+				url: '/auth/register',
+				method: 'POST',
+				body: { ...credentials },
+			}),
+		}),
 	}),
 });
 
-export const { useLoginMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation } = authApiSlice;

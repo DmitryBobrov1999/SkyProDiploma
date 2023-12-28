@@ -1,4 +1,4 @@
-import { apiSlice } from '../api/rtkQueryApi';
+import { apiSlice } from './apiSlice';
 
 export const authApiSlice = apiSlice.injectEndpoints({
 	tagTypes: ['User'],
@@ -45,5 +45,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
 		}),
 	}),
 });
+
 export const { useChangeInfoMutation, useChangeAvatarMutation } = authApiSlice;
 export default authApiSlice;

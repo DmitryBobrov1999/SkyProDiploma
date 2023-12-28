@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../breakPoints';
 
 export const RegPageWrapper = styled.div`
 	width: 100%;
@@ -19,6 +20,10 @@ export const RegPageModalBlock = styled.div`
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+	@media ${device.minAverage} {
+		left: calc(50% - (320px / 2));
+		top: 55px;
+	}
 `;
 
 export const RegPageModalForm = styled.form`
@@ -29,6 +34,12 @@ export const RegPageModalForm = styled.form`
 	flex-direction: column;
 	align-items: center;
 	padding: 43px 47px 47px 40px;
+	@media ${device.minAverage} {
+		width: 320px;
+		height: auto;
+		border-radius: 0px;
+		padding: 40px 20px;
+	}
 `;
 
 export const RegPageModalLogo = styled.div`
@@ -40,6 +51,17 @@ export const RegPageModalLogo = styled.div`
 	& img {
 		width: 140px;
 		height: auto;
+	}
+	@media ${device.minAverage} {
+		width: 120px;
+		height: 18px;
+		margin-bottom: 30px;
+		background-color: transparent;
+
+		& img {
+			width: 120px;
+			height: auto;
+		}
 	}
 `;
 
@@ -59,6 +81,19 @@ export const RegPageModalInput = styled.input`
 		line-height: 24px;
 		letter-spacing: -0.05px;
 		color: #d0cece;
+	}
+	@media ${device.minAverage} {
+		width: 100%;
+		border: 1px solid #d9d9d9;
+		border-radius: 30px;
+		padding: 9px 19px;
+		margin-bottom: 14px;
+
+		&::placeholder {
+			font-size: 14px;
+			line-height: 21px;
+			color: #b3b3b3;
+		}
 	}
 `;
 
@@ -95,5 +130,15 @@ export const RegPageModalBtnSignup = styled.button`
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+	@media ${device.minAverage} {
+		height: 46px;
+		border: none;
+		margin-top: 26px;
+
+		& a {
+			font-size: 16px;
+			line-height: 24px;
+		}
 	}
 `;
