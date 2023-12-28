@@ -8,7 +8,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import api from './store/slices/userApiSlice'
 
 
-import { AdPage } from './pages/AdPage/AdPage';
+import { AdPage } from './pages/adPage/AdPage';
 import { SellerProfilePage } from './pages/sellerProfilePage/SellerProfilePage';
 
 export const AppRoutes = () => {
