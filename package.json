@@ -1,6 +1,7 @@
 {
 	"name": "skypro_diploma",
 	"version": "0.1.0",
+	"homepage": "https://DmitryBobrov1999.github.io/SkyProDiploma",
 	"private": true,
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.0.0-rc.3",
@@ -21,6 +22,8 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
 		"start": "craco start",
 		"build": "craco build",
 		"test": "craco test",
@@ -48,6 +51,7 @@
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
 		"@craco/craco": "^7.1.0",
 		"eslint-config-prettier": "^9.1.0",
+		"gh-pages": "^6.1.1",
 		"identity-obj-proxy": "^3.0.0",
 		"prettier": "3.1.0"
 	}
