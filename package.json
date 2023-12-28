@@ -1,7 +1,7 @@
 {
 	"name": "skypro_diploma",
 	"version": "0.1.0",
-	"homepage": "https://DmitryBobrov1999.github.io/SkyProDiploma",
+	"homepage": "https://dmitrybobrov1999.github.io/SkyProDiploma",
 	"private": true,
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.0.0-rc.3",
