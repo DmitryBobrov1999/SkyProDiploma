@@ -9,7 +9,6 @@ export const CommentsPageWrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	
 `;
 
 export const CommentsPageContainer = styled.div`
@@ -29,7 +28,7 @@ export const CommentsPageModalBlock = styled.div`
 	opacity: 1;
 	@media ${device.max} {
 		top: 79px;
-		left: 0px;
+		
 	}
 	@media ${device.min} {
 		position: absolute;
@@ -47,21 +46,21 @@ export const CommentsPageModalContent = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	width: 800px;
-	height: auto;
+	height: 100vh;
 	padding: 20px 92px 57px 50px;
 	background-color: #ffffff;
 	border-radius: 12px;
 	border: 1px solid grey;
 	@media ${device.max} {
 		width: 100%;
-	} 
+		height: calc(100vh - 79px);
+	}
 	@media ${device.min} {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 		width: 100%;
 		min-width: 320px;
-		height: 100vh 
 		padding: 30px 20px 30px;
 		border-radius: 0;
 	}
@@ -78,8 +77,6 @@ export const CommentsPageModalTitle = styled.h3`
 		line-height: 29px;
 		padding: 0 0 0 26px;
 		position: relative;
-
-		
 	}
 `;
 
@@ -162,9 +159,9 @@ export const CommentsPageModalScroll = styled.div`
 	align-items: flex-start;
 	width: 100%;
 	overflow-y: auto;
-	scrollbar-color: #ffffff #2e2e2e; 
-	scrollbar-width: thin; 
-	scrollbar-width: 0px; 
+	scrollbar-color: #ffffff #2e2e2e;
+	scrollbar-width: thin;
+	scrollbar-width: 0px;
 
 	&::-webkit-scrollbar {
 		width: 0px;

@@ -15,6 +15,7 @@ export const AddAdPageBlock = styled.div`
 	@media ${device.min} {
 		top: 55px;
 		left: 0;
+		width: 100%;
 	}
 `;
 
@@ -54,7 +55,7 @@ export const AddAdPageTitle = styled.h3`
 		&::before {
 			display: none;
 			content: '';
-			
+
 			width: 12px;
 			height: 12px;
 			background-color: transparent;
@@ -136,6 +137,9 @@ export const AddAdPageBtnCloseLine = styled.div`
 		&::before {
 			background-color: #0080c1;
 		}
+	}
+	@media ${device.min} {
+		display: none
 	}
 `;
 
@@ -332,6 +336,10 @@ export const AddAdPageNewArtInputPrice = styled.input`
 		line-height: 24px;
 		color: #0000004d;
 	}
+	@media ${device.min} {
+		width: 100%;
+		min-width: 278px;
+	}
 `;
 
 export const AddAdPageNewArtInputPriceCover = styled.div`
@@ -355,6 +363,9 @@ export const AddAdPageNewArtInputPriceCover = styled.div`
 		color: #000000;
 		z-index: 2;
 	}
+	@media ${device.min} {
+		left: 90%;
+	}
 `;
 
 export const AddAdPageBtnPub = styled.button`
@@ -369,5 +380,8 @@ export const AddAdPageBtnPub = styled.button`
 	color: #ffffff;
 	&:hover {
 		background-color: #0080c1;
+	}
+	@media ${device.min} {
+		width: 100%;
 	}
 `;

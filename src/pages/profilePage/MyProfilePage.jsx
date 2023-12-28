@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Footer } from '../../components/footer/Footer';
 import { Header } from '../../components/header/Header';
 import { Spinner } from '../../components/spinner/Spinner';
-import {  useMyAdsQuery } from '../../store/api/rtkQueryApi';
+import { useMyAdsQuery } from '../../store/slices/apiSlice';
 
 import {
 	useChangeAvatarMutation,

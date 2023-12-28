@@ -4,7 +4,7 @@ import { Spinner } from '../../components/spinner/Spinner';
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import * as S from './MainPage.styles';
-import { useGetAdsQuery } from '../../store/api/rtkQueryApi';
+import { useGetAdsQuery } from '../../store/slices/apiSlice';
 import { AddAdPage } from '../addAd/AddAdPage';
 import { Footer } from '../../components/footer/Footer';
 

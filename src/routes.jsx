@@ -5,7 +5,8 @@ import { LoginPage } from './pages/loginPage/LoginPage';
 import { RegPage } from './pages/regPage/RegPage';
 import { ProfilePage } from './pages/profilePage/MyProfilePage';
 import { ProtectedRoute } from './components/ProtectedRoute';
-import myApi from './store/slices/userApiSlice';
+import api from './store/slices/userApiSlice'
+
 
 import { AdPage } from './pages/AdPage/AdPage';
 import { SellerProfilePage } from './pages/sellerProfilePage/SellerProfilePage';
@@ -13,7 +14,7 @@ import { SellerProfilePage } from './pages/sellerProfilePage/SellerProfilePage';
 export const AppRoutes = () => {
 	const [token, setToken] = useState(localStorage.getItem('access_token'));
 
-	const { data: user, isLoading, isSuccess } = myApi.useGetUserQuery();
+	const { data: user, isLoading, isSuccess } = api.useGetUserQuery();
 
 	useEffect(() => {
 		const token = localStorage.getItem('access_token');

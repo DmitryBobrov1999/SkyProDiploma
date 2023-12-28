@@ -110,6 +110,11 @@ export const SellerProfilePageMainContainer = styled.div`
 
 export const SellerProfilePageMainCenterBlock = styled.div`
 	margin: 0 auto;
+	@media ${device.max} {
+		display: flex;
+		flex-direction: column;
+		padding: 0 0 0 30px;
+	}
 	@media ${device.min} {
 		margin: 0 auto;
 		padding: 0 20px;
@@ -146,7 +151,7 @@ export const SellerProfilePageTitle = styled.h2`
 		font-size: 24px;
 		line-height: 29px;
 		color: #000000;
-		padding: 0 0 0 26px;
+		padding: 0;
 		margin-bottom: 20px;
 		position: relative;
 	}
@@ -234,7 +239,7 @@ export const SellerProfilePageSellerRight = styled.div`
 		max-width: 320px;
 		display: flex;
 		flex-direction: column;
-		
+
 		&:last-child {
 			align-items: flex-start;
 			padding-bottom: 30px;

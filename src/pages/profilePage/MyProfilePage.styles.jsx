@@ -103,12 +103,11 @@ export const ProfilePageMainMenu = styled.div`
 
 export const ProfilePageMainH2Div = styled.div`
 	@media ${device.max} {
-		display: grid;
-		justify-content: space-evenly;
-		grid-template-columns: repeat(2, 270px);
+		
+		padding: 0 0 0 30px;
 	}
 	@media ${device.average} {
-		grid-template-columns: repeat(2, 270px);
+		
 	}
 	@media ${device.min} {
 		grid-template-columns: repeat(2, 137px);
@@ -117,9 +116,8 @@ export const ProfilePageMainH2Div = styled.div`
 
 export const ProfilePageMainH2Div2 = styled.div`
 	@media ${device.max} {
-		display: grid;
-		justify-content: space-evenly;
-		grid-template-columns: repeat(2, 270px);
+		
+		padding: 0 0 0 30px;
 	}
 	@media ${device.average} {
 		grid-template-columns: repeat(2, 270px);
@@ -127,6 +125,7 @@ export const ProfilePageMainH2Div2 = styled.div`
 	@media ${device.min} {
 		grid-template-columns: repeat(1, 270px);
 		justify-content: space-between;
+		padding: 0;
 	}
 `;
 

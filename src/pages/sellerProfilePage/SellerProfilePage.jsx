@@ -2,14 +2,14 @@ import moment from 'moment/moment';
 import { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/Spinner';
-import { useSellerAdsQuery } from '../../store/slices/sellerAdsSlice';
-import { useSpecificAdQuery } from '../../store/api/rtkQueryApi';
+import { useSellerAdsQuery } from '../../store/slices/apiSlice';
+import { useSpecificAdQuery } from '../../store/slices/apiSlice';
 import { AddAdPage } from '../addAd/AddAdPage';
 import { Header } from '../../components/header/Header';
 import { Footer } from '../../components/footer/Footer';
 import * as S from './SellerProfilePage.styles';
 
-export const SellerProfilePage = ({ token }) => {
+export const SellerProfilePage = () => {
 	const [showNumber, setShowNumber] = useState(false);
 	let { id, user_id } = useParams();
 	const { data: sellerAds, isLoading } = useSellerAdsQuery({ user_id });

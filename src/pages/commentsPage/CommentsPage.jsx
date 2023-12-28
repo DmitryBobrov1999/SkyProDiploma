@@ -1,8 +1,7 @@
 import * as S from './CommentsPage.styles';
 import moment from 'moment/moment';
 import { useState } from 'react';
-import { useAddCommentMutation } from '../../store/api/rtkQueryApi';
-
+import { useAddCommentMutation } from '../../store/slices/apiSlice';
 
 export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 	const [text, setText] = useState('');
@@ -18,7 +17,7 @@ export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 		if (text) {
 			try {
 				await addComment({ text, specificAd });
-				setText('')
+				setText('');
 			} catch (error) {
 				console.log(error);
 			}
@@ -28,9 +27,9 @@ export const CommentsPage = ({ setActiveModal, specificAd, comments }) => {
 	return (
 		<S.CommentsPageModalBlock>
 			<S.CommentsPageModalContent>
-				<S.AltBtnCloseCommentsMin onClick={() => setActiveModal(null)} >
-					
-				</S.AltBtnCloseCommentsMin>
+				<S.AltBtnCloseCommentsMin
+					onClick={() => setActiveModal(null)}
+				></S.AltBtnCloseCommentsMin>
 				<S.CommentsPageModalTitle>Отзывы о товаре</S.CommentsPageModalTitle>
 
 				<S.CommentsPageModalBtnClose onClick={() => setActiveModal(null)}>

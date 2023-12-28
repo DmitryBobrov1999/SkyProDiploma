@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-
 import {
 	useDeleteImgMutation,
 	useEditAdMutation,
 	usePostImgMutation,
-} from '../../store/api/rtkQueryApi';
+} from '../../store/slices/apiSlice';
 import * as S from './EditAdPage.styles';
+import { useMediaQuery } from '@uidotdev/usehooks';
 
 export const EditAdPage = ({ setActiveEditAd, specificAd }) => {
 	const [title, setTitle] = useState(null);
@@ -16,10 +16,12 @@ export const EditAdPage = ({ setActiveEditAd, specificAd }) => {
 	const [deleteImg] = useDeleteImgMutation();
 	const [changer, setChanger] = useState(false);
 	const [hover, setHover] = useState(false);
+	const [arrayLength, setArrayLength] = useState(5);
 	const titleInput = document.getElementById('formName');
 	const descriptionInput = document.getElementById('formArea');
 	const priceInput = document.getElementById('formPrice');
-	
+	const isMobile = useMediaQuery('(max-width: 590px)');
+
 	useEffect(() => {
 		setTitle(specificAd?.title);
 		setDescription(specificAd?.description);
@@ -45,6 +47,14 @@ export const EditAdPage = ({ setActiveEditAd, specificAd }) => {
 		price,
 	]);
 
+	useEffect(() => {
+		if (isMobile) {
+			setArrayLength(3);
+		} else {
+			setArrayLength(5);
+		}
+	}, [isMobile]);
+
 	const handleEdit = async e => {
 		e.preventDefault();
 
@@ -64,10 +74,10 @@ export const EditAdPage = ({ setActiveEditAd, specificAd }) => {
 		}
 	};
 
-	const ImagesBlock = () => {
+	const ImagesBlock = ({ arrayLength }) => {
 		const imageBlocks = [];
-	
-		for (let i = 0; i < 5; i++) {
+
+		for (let i = 0; i < arrayLength; i++) {
 			imageBlocks.push(
 				<S.AddAdPageImg key={i}>
 					<S.AddAdPageLabel htmlFor={`html${i}`}>
@@ -94,7 +104,7 @@ export const EditAdPage = ({ setActiveEditAd, specificAd }) => {
 							<S.AddAdPageDeleteDiv
 								onClick={() => {
 									const files = specificAd?.images?.[i];
-									console.log(files);
+
 									deleteImg({ specificAd, files });
 								}}
 							/>
@@ -109,7 +119,10 @@ export const EditAdPage = ({ setActiveEditAd, specificAd }) => {
 	return (
 		<S.AddAdPageBlock>
 			<S.AddAdPageContent>
-				<S.AddAdPageTitle>Редактировать объявление</S.AddAdPageTitle>
+				<S.AltBtnCloseCommentsMin onClick={() => setActiveEditAd(null)} />
+				<S.AddAdPageTitle>
+					{arrayLength === 3 ? 'Редактировать' : 'Редактировать объявление'}
+				</S.AddAdPageTitle>
 				<S.AddAdPageBtnClose onClick={() => setActiveEditAd(null)}>
 					<S.AddAdPageBtnCloseLine></S.AddAdPageBtnCloseLine>
 				</S.AddAdPageBtnClose>
@@ -142,7 +155,7 @@ export const EditAdPage = ({ setActiveEditAd, specificAd }) => {
 							Фотографии товара<span>не более 5 фотографий</span>
 						</S.AddAdPageP>
 						<S.AddAdPageBarImg>
-							<ImagesBlock />
+							<ImagesBlock arrayLength={arrayLength} />
 						</S.AddAdPageBarImg>
 					</S.AddAdPageNewArtBlock>
 					<S.AddAdPageNewArtBlockPrice>

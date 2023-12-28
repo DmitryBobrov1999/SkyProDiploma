@@ -2,11 +2,12 @@ import * as S from './AdPage.styles';
 import moment from 'moment/moment';
 import { useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
-import { useCommentsQuery } from '../../store/api/rtkQueryApi';
+
 import {
 	useDeleteAdMutation,
 	useSpecificAdQuery,
-} from '../../store/api/rtkQueryApi';
+	useCommentsQuery,
+} from '../../store/slices/apiSlice';
 import { CommentsPage } from '../commentsPage/CommentsPage';
 import { Spinner } from '../../components/spinner/Spinner';
 import { AddAdPage } from '../addAd/AddAdPage';

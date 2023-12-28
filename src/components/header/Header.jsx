@@ -75,7 +75,9 @@ export const Header = ({ setActiveAddAd }) => {
 				<S.ProfilePageHeaderBtnPutAd onClick={() => setActiveAddAd(true)}>
 					Разместить объявление
 				</S.ProfilePageHeaderBtnPutAd>
-				<S.ProfilePageHeaderBtnLk>Личный кабинет</S.ProfilePageHeaderBtnLk>
+				<NavLink to='/profile'>
+					<S.ProfilePageHeaderBtnLk>Личный кабинет</S.ProfilePageHeaderBtnLk>
+				</NavLink>
 			</S.ProfilePageHeaderNav>
 		</S.ProfilePageHeader>
 	);

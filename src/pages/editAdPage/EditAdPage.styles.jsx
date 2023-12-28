@@ -1,23 +1,5 @@
 import styled from 'styled-components';
-
-export const AddAdPageWrapper = styled.div`
-	width: 100%;
-	min-height: 100%;
-	background: rgba(255, 255, 255, 1);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-`;
-
-export const AddAdPageContainer = styled.div`
-	max-width: 100%;
-	margin: 0 auto;
-	position: absolute;
-	background-color: #f4f5f6;
-	top: 0;
-	left: 50%;
-`;
+import { device } from '../breakPoints';
 
 export const AddAdPageBlock = styled.div`
 	position: fixed;
@@ -25,6 +7,16 @@ export const AddAdPageBlock = styled.div`
 	left: calc(50% - (600px / 2));
 	top: 60px;
 	opacity: 1;
+	@media ${device.max} {
+		top: 79px;
+		opacity: 1;
+		z-index: 5;
+	}
+	@media ${device.min} {
+		top: 55px;
+		left: 0;
+		width: 100%;
+	}
 `;
 
 export const AddAdPageContent = styled.div`
@@ -37,6 +29,12 @@ export const AddAdPageContent = styled.div`
 	background-color: #ffffff;
 	border-radius: 12px;
 	border: 1px solid grey;
+	@media ${device.min} {
+		width: 100%;
+		min-width: 320px;
+		height: auto;
+		padding: 30px 20px 30px;
+	}
 `;
 
 export const AddAdPageTitle = styled.h3`
@@ -48,6 +46,54 @@ export const AddAdPageTitle = styled.h3`
 		border-top: 2px solid #0080c1;
 		border-left: 2px solid #0080c1;
 	}
+	@media ${device.min} {
+		font-size: 24px;
+		line-height: 29px;
+		padding: 0 0 0 26px;
+		position: relative;
+
+		&::before {
+			display: none;
+			content: '';
+
+			width: 12px;
+			height: 12px;
+			background-color: transparent;
+			border-top: 2px solid #000000;
+			border-left: 2px solid #000000;
+			transform: rotate(-45deg);
+			position: absolute;
+			top: 9px;
+			left: 0;
+			cursor: pointer;
+		}
+	}
+`;
+
+export const AltBtnCloseCommentsMin = styled.div`
+	display: none;
+	@media ${device.min} {
+		display: flex;
+		font-size: 24px;
+		line-height: 29px;
+		padding: 0 0 0 26px;
+		position: relative;
+		&::before {
+			z-index: 20;
+			content: '';
+			display: flex;
+			width: 12px;
+			height: 12px;
+			background-color: transparent;
+			border-top: 2px solid #000000;
+			border-left: 2px solid #000000;
+			transform: rotate(-45deg);
+			position: absolute;
+			top: 10px;
+			left: 0;
+			cursor: pointer;
+		}
+	}
 `;
 
 export const AddAdPageBtnClose = styled.div`
@@ -58,6 +104,9 @@ export const AddAdPageBtnClose = styled.div`
 	right: 50px;
 	z-index: 3;
 	cursor: pointer;
+	@media ${device.min} {
+		display: none;
+	}
 `;
 
 export const AddAdPageBtnCloseLine = styled.div`
@@ -174,7 +223,11 @@ export const AddAdPageBarImg = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 10px;
-
+	overflow: hidden;
+	@media ${device.min} {
+		width: 100%;
+		justify-content: space-around;
+	}
 `;
 
 export const AddAdPageImg = styled.div`
@@ -249,8 +302,6 @@ export const AddAdPageLabelDiv = styled.div`
 export const AddAdPageImgCover = styled.input`
 	cursor: pointer;
 	visibility: hidden;
-	width: 90px;
-
 `;
 
 export const AddAdPageNewArtBlockPrice = styled.div`
@@ -280,12 +331,16 @@ export const AddAdPageNewArtInputPrice = styled.input`
 	line-height: 1;
 
 	&::placeholder {
-		text-align: end;
+		font-family: 'Roboto', sans-serif;
 		font-style: normal;
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 24px;
-		color: #000000;
+		color: #0000004d;
+	}
+	@media ${device.min} {
+		width: 100%;
+		min-width: 278px;
 	}
 `;
 
@@ -310,21 +365,39 @@ export const AddAdPageNewArtInputPriceCover = styled.div`
 		color: #000000;
 		z-index: 2;
 	}
+	@media ${device.min} {
+		left: 90%;
+
+		&::after {
+			content: '₽';
+			width: 24px;
+			height: 24px;
+			position: absolute;
+			font-size: 16px;
+			line-height: 24px;
+			color: #000000;
+			z-index: 2;
+		}
+	}
 `;
 
 export const AddAdPageBtnPub = styled.button`
 	margin-top: 10px;
 	width: 181px;
 	height: 50px;
-	${'' /* background: #d9d9d9; */}
-	${'' /* border: 1px solid #d9d9d9; */}
+	background: #d9d9d9;
+	border: 1px solid #d9d9d9;
 	border-radius: 6px;
 	font-size: 16px;
 	line-height: 24px;
 	color: #ffffff;
-	${'' /* &:hover {
+	&:hover {
 		background-color: #0080c1;
-	} */}
+	}
+	@media ${device.min} {
+		min-width: 278px;
+		width: 100%;
+	}
 `;
 
 export const AddAdPageDeleteDiv = styled.div`
@@ -348,5 +421,3 @@ export const AddAdPageDeleteDiv = styled.div`
 		transform: rotate(-45deg);
 	}
 `;
-
-

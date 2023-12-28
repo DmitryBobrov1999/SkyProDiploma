@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { usePostAdMutation } from '../../store/api/rtkQueryApi';
+import { usePostAdMutation } from '../../store/slices/apiSlice';
 import * as S from './AddAdPage.styles';
 
 export const AddAdPage = ({ setActiveAddAd }) => {
@@ -34,10 +34,10 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 		<S.AddAdPageBlock>
 			<S.AddAdPageContent>
 				<S.AddAdPageTitle>Новое объявление</S.AddAdPageTitle>
-				<S.AddAdPageBtnClose
+
+				<S.AddAdPageBtnCloseLine
 					onClick={() => setActiveAddAd(null)}
-				></S.AddAdPageBtnClose>
-				<S.AddAdPageBtnCloseLine></S.AddAdPageBtnCloseLine>
+				></S.AddAdPageBtnCloseLine>
 				<S.AltBtnClose onClick={() => setActiveAddAd(null)} />
 				<S.AddAdPageNewArt id='formNewArt' action='#'>
 					<S.AddAdPageNewArtBlock>
@@ -73,7 +73,7 @@ export const AddAdPage = ({ setActiveAddAd }) => {
 							placeholder='0'
 							onChange={e => setPrice(e.target.value)}
 						/>
-						<S.AddAdPageNewArtInputPriceCover></S.AddAdPageNewArtInputPriceCover>
+						<S.AddAdPageNewArtInputPriceCover />
 					</S.AddAdPageNewArtBlockPrice>
 
 					<S.AddAdPageBtnPub onClick={e => handlePost(e)}>

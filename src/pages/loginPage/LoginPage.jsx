@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react';
-
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Footer } from '../../components/footer/Footer';
 import { useLoginMutation } from '../../store/slices/authApiSlice';
 
 import myApi from '../../store/slices/userApiSlice';
-
 import * as S from './LoginPage.styles';
 
 export const LoginPage = () => {
@@ -29,7 +26,7 @@ export const LoginPage = () => {
 				localStorage.setItem('access_token', userData.data.access_token);
 				localStorage.setItem('refresh_token', userData.data.refresh_token);
 				const user = await getUser();
-			
+
 				localStorage.setItem('myId', user.data.id);
 
 				setEmail('');

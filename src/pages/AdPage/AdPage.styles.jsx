@@ -17,7 +17,7 @@ export const AdPageContainer = styled.div`
 	background-color: #ffffff;
 	@media ${device.max} {
 	}
-	
+
 	@media ${device.min} {
 		width: 100%;
 		min-width: 320px;
@@ -60,6 +60,8 @@ export const AdPageMain = styled.div`
 	margin: 0 auto;
 	@media ${device.max} {
 		width: 100%;
+	
+	
 	}
 `;
 
@@ -74,8 +76,9 @@ export const AdPageMainContainer = styled.div`
 	margin: 0 auto;
 	padding: 0px 5px;
 	@media ${device.max} {
-		padding: 0px 0px 0px 30px
-	} @media ${device.min} {
+		padding: 0px 0px 0px 30px;
+	}
+	@media ${device.min} {
 		padding: 0 20px 0;
 		max-width: 320px;
 	}
@@ -89,7 +92,8 @@ export const AdPageMainMenu = styled.div`
 	padding: 43px 5px 77px;
 	@media ${device.max} {
 		justify-content: space-evenly;
-	} @media ${device.min} {
+	}
+	@media ${device.min} {
 		display: none;
 	}
 `;
@@ -136,7 +140,8 @@ export const AdPageArcticleContent = styled.div`
 	@media ${device.max} {
 		align-items: center;
 		flex-wrap: wrap;
-	} @media ${device.min} {
+	}
+	@media ${device.min} {
 		width: 100%;
 		margin: 0 auto;
 		padding: 0;
@@ -236,7 +241,7 @@ export const AdPageArticleRight = styled.div`
 		width: 100%;
 		padding: 0 20px;
 		display: flex;
-		justify-content: center
+		justify-content: center;
 	}
 `;
 
@@ -504,7 +509,7 @@ export const AdPageArticleImgBarDiv = styled.div`
 
 export const AdPageArticleImgBarMob = styled.div`
 	display: none;
-	@media ${device.min} {	
+	@media ${device.min} {
 		width: 68px;
 		height: 8px;
 		position: absolute;
@@ -512,7 +517,7 @@ export const AdPageArticleImgBarMob = styled.div`
 		display: flex;
 		gap: 7px;
 		justify-content: center;
-		z-index: 10
+		z-index: 10;
 	}
 `;
 
@@ -524,7 +529,6 @@ export const AdPageArticleImgBarMobCircleActive = styled.div`
 		height: 8px;
 		border-radius: 50%;
 		border: 1px solid black;
-		
 	}
 `;
 
@@ -534,6 +538,5 @@ export const AdPageBtnDiv = styled.div`
 		flex-direction: column;
 		align-items: center;
 		gap: 10px;
-		
 	}
 `;
